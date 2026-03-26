@@ -5,14 +5,14 @@ import { QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { I18nProvider } from "@lingui/react"
 import { queryClient } from "@/api/query"
-import { i18n, loadCatalog, getStoredLocale } from "@/i18n"
+import { i18n, getStoredLocale, setLocale } from "@/i18n"
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const [i18nReady, setI18nReady] = useState(false)
 
   useEffect(() => {
     const locale = getStoredLocale()
-    loadCatalog(locale).then(() => setI18nReady(true))
+    setLocale(locale).then(() => setI18nReady(true))
   }, [])
 
   if (!i18nReady) return <></>

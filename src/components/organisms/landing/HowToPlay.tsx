@@ -1,3 +1,4 @@
+import { LandingHero } from "@/components/templates/LandingHero"
 import { msg } from "@lingui/core/macro"
 import { useLingui } from "@lingui/react/macro"
 
@@ -33,7 +34,7 @@ export function HowToPlay() {
   const { t, i18n } = useLingui()
 
   return (
-    <section id="how-to-play" className="py-24 px-4">
+    <LandingHero bgInverse>
       <div className="max-w-4xl mx-auto">
         <h2 className="text-3xl font-bold mb-12 text-center tracking-tight">
           {t`How to Play`}
@@ -47,7 +48,7 @@ export function HowToPlay() {
               <span className="text-3xl font-black text-[var(--color-accent)]/40 font-mono tabular-nums shrink-0 leading-none pt-1">
                 {step.number}
               </span>
-              <div>
+              <div className="flex flex-col items-center w-full px-4">
                 <h3 className="font-semibold mb-1">{i18n._(step.title)}</h3>
                 <p className="text-sm text-[var(--color-muted)] leading-relaxed">
                   {i18n._(step.desc)}
@@ -57,6 +58,6 @@ export function HowToPlay() {
           ))}
         </div>
       </div>
-    </section>
+    </LandingHero>
   )
 }

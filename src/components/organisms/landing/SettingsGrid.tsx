@@ -1,3 +1,4 @@
+import { LandingHero } from "@/components/templates/LandingHero"
 import { msg } from "@lingui/core/macro"
 import { useLingui } from "@lingui/react/macro"
 
@@ -50,7 +51,7 @@ export function SettingsGrid() {
   const { t, i18n } = useLingui()
 
   return (
-    <section className="py-24 px-4 bg-[var(--color-surface)]/40">
+    <LandingHero>
       <div className="max-w-5xl mx-auto">
         <h2 className="text-3xl font-bold mb-3 text-center tracking-tight">
           {t`Scenarios`}
@@ -83,6 +84,6 @@ export function SettingsGrid() {
           ))}
         </div>
       </div>
-    </section>
+    </LandingHero>
   )
 }

@@ -50,6 +50,7 @@ export function Button({
       onClick={onClick}
       disabled={disabled || loading}
       className={cn(
+        "cursor-pointer",
         "inline-flex items-center justify-center gap-2 font-medium rounded border transition-colors",
         "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]/50",
         "disabled:opacity-40 disabled:cursor-not-allowed",

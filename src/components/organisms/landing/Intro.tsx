@@ -5,9 +5,12 @@ import { useLingui } from "@lingui/react/macro"
 import { Button } from "@/components/atoms/Button"
 import { Input } from "@/components/atoms/Input"
 import { CreateGameModal } from "./CreateGameModal"
+import { LandingHero } from "@/components/templates/LandingHero"
+import { LocalesButtons } from "@/components/molecules/LocalesButtons"
+import { setLocale, SupportedLocale } from "@/i18n"
 
-export function Hero() {
-  const { t } = useLingui()
+export function Intro() {
+  const { t, i18n } = useLingui()
   const [codeInput, setCodeInput] = useState("")
   const [showCreate, setShowCreate] = useState(false)
 
@@ -20,11 +23,17 @@ export function Hero() {
 
   return (
     <>
-      <section className="relative min-h-[90vh] flex flex-col items-center justify-center px-4 text-center overflow-hidden">
+      <LandingHero>
         {/* Atmospheric background */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[var(--color-accent)]/5 blur-[120px]" />
         </div>
+
+        <LocalesButtons
+          className="absolute top-5 right-5"
+          activeLocales={[i18n.locale as SupportedLocale]}
+          onChange={(code) => void setLocale(code)}
+        />
 
         <div className="relative z-10 max-w-3xl mx-auto">
           <span className="inline-block mb-4 px-3 py-1 text-xs font-mono text-[var(--color-accent)] border border-[var(--color-accent)]/30 rounded-full tracking-wider uppercase">
@@ -70,7 +79,7 @@ export function Hero() {
             </div>
           </div>
         </div>
-      </section>
+      </LandingHero>
 
       <CreateGameModal open={showCreate} onClose={() => setShowCreate(false)} />
     </>

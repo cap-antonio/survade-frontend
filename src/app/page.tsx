@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Hero } from "@/components/organisms/landing/Hero"
+import { Intro } from "@/components/organisms/landing/Intro"
 import { HowToPlay } from "@/components/organisms/landing/HowToPlay"
 import { SettingsGrid } from "@/components/organisms/landing/SettingsGrid"
 
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function LandingPage() {
   return (
     <main className="min-h-screen bg-[var(--color-bg)]">
-      <Hero />
+      <Intro />
       <HowToPlay />
       <SettingsGrid />
       <footer className="border-t border-[var(--color-border)] py-8 text-center text-xs text-[var(--color-muted)] font-mono">

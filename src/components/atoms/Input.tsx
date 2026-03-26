@@ -12,6 +12,8 @@ type InputProps = {
   maxLength?: number
   min?: number
   max?: number
+  required?: boolean
+  label?: string
 }
 
 export function Input({
@@ -26,26 +28,39 @@ export function Input({
   maxLength,
   min,
   max,
+  required,
+  label,
 }: InputProps) {
   return (
-    <input
-      id={id}
-      name={name}
-      type={type}
-      value={value}
-      placeholder={placeholder}
-      disabled={disabled}
-      maxLength={maxLength}
-      min={min}
-      max={max}
-      onChange={(e) => onChange(e.target.value)}
-      className={cn(
-        "w-full bg-[var(--color-surface-2)] border border-[var(--color-border)] rounded px-3 py-2",
-        "text-sm text-[var(--color-text)] placeholder:text-[var(--color-muted)]",
-        "focus:outline-none focus:border-[var(--color-accent)]/50",
-        "disabled:opacity-40",
-        className,
+    <div className="flex flex-col gap-2">
+      {label && (
+        <label className="block text-xs text-[var(--color-muted)] tracking-wider">
+          {label}
+
+          {required ? (
+            <span className="text-[var(--color-accent)] ml-1">*</span>
+          ) : null}
+        </label>
       )}
-    />
+      <input
+        id={id}
+        name={name}
+        type={type}
+        value={value}
+        placeholder={placeholder}
+        disabled={disabled}
+        maxLength={maxLength}
+        min={min}
+        max={max}
+        onChange={(e) => onChange(e.target.value)}
+        className={cn(
+          "w-full bg-[var(--color-surface-2)] border border-[var(--color-border)] rounded px-3 py-2",
+          "text-sm text-[var(--color-text)] placeholder:text-[var(--color-muted)]",
+          "focus:outline-none focus:border-[var(--color-accent)]/50",
+          "disabled:opacity-40",
+          className,
+        )}
+      />
+    </div>
   )
 }

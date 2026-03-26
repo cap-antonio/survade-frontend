@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import "./globals.css"
 import { Providers } from "./providers"
+import { initLingui } from "@/initLingui"
 
 export const metadata: Metadata = {
   title: "Survade — Survival Discussion Game",
@@ -18,6 +19,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  initLingui()
+
   return (
     <html lang="en">
       <body>

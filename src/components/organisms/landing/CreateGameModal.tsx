@@ -9,6 +9,8 @@ import { Input } from "@/components/atoms/Input"
 import { AdPlaceholder } from "@/components/atoms/AdPlaceholder"
 import { useCreateGame } from "@/api/hooks/games"
 import { useLingui } from "@lingui/react/macro"
+import { LANGS_DICT, SupportedLocale } from "@/i18n"
+import { LocalesButtons } from "@/components/molecules/LocalesButtons"
 
 const SETTINGS = [
   { key: "mars", emoji: "🔴", label: "Mars", free: true },
@@ -17,18 +19,6 @@ const SETTINGS = [
   { key: "ship", emoji: "🚢", label: "Ship", free: false },
   { key: "pandemic", emoji: "🦠", label: "Pandemic", free: false },
   { key: "portal", emoji: "⏳", label: "Portal", free: false },
-] as const
-
-const LANGS = [
-  { code: "ru", label: "RU" },
-  { code: "en", label: "EN" },
-  { code: "pl", label: "PL" },
-  { code: "de", label: "DE" },
-  { code: "fr", label: "FR" },
-  { code: "es", label: "ES" },
-  { code: "tr", label: "TR" },
-  { code: "zh", label: "ZH" },
-  { code: "uk", label: "UK" },
 ] as const
 
 const FREE_ATTRS = [
@@ -71,13 +61,13 @@ export function CreateGameModal({ open, onClose }: CreateGameModalProps) {
 
   const [settingKey, setSettingKey] = useState<string>("mars")
   const [saboteurMode, setSaboteurMode] = useState(false)
-  const [langs, setLangs] = useState<string[]>(["en"])
+  const [langs, setLangs] = useState<SupportedLocale[]>(["en"])
   const [attrs, setAttrs] = useState<string[]>([...FREE_ATTRS])
   const [playerCount, setPlayerCount] = useState(6)
   const [hostName, setHostName] = useState("")
   const [loadingPhraseIdx, setLoadingPhraseIdx] = useState(0)
 
-  const toggleLang = (code: string): void => {
+  const toggleLang = (code: SupportedLocale): void => {
     setLangs((prev) => {
       if (prev.includes(code)) {
         if (prev.length === 1) return prev // at least one
@@ -221,26 +211,10 @@ export function CreateGameModal({ open, onClose }: CreateGameModalProps) {
               {t`Languages`}
               <span className="normal-case">(max 3)</span>
             </label>
-            <div className="flex flex-wrap gap-2">
-              {LANGS.map((l) => (
-                <button
-                  key={l.code}
-                  type="button"
-                  onClick={() => toggleLang(l.code)}
-                  className={cn(
-                    "px-3 py-1.5 rounded border text-xs font-mono transition-colors",
-                    langs.includes(l.code)
-                      ? "border-[var(--color-accent)] bg-[var(--color-accent-dim)] text-[var(--color-text)]"
-                      : "border-[var(--color-border)] bg-[var(--color-surface-2)] text-[var(--color-muted)]",
-                    !langs.includes(l.code) &&
-                      langs.length >= 3 &&
-                      "opacity-40 cursor-not-allowed",
-                  )}
-                >
-                  {l.label}
-                </button>
-              ))}
-            </div>
+            <LocalesButtons
+              activeLocales={langs}
+              onChange={(code) => toggleLang(code)}
+            />
           </div>
 
           {/* Attributes */}
@@ -292,18 +266,14 @@ export function CreateGameModal({ open, onClose }: CreateGameModalProps) {
             </div>
           </div>
 
-          {/* Host name */}
-          <div>
-            <label className="block text-xs text-[var(--color-muted)] uppercase tracking-wider mb-2">
-              {t`Your name in game`}
-            </label>
-            <Input
-              value={hostName}
-              onChange={setHostName}
-              placeholder={t`Enter your name`}
-              maxLength={30}
-            />
-          </div>
+          <Input
+            value={hostName}
+            onChange={setHostName}
+            placeholder={t`Enter your name`}
+            maxLength={30}
+            label={t`Your name in game`}
+            required
+          />
 
           {isError && (
             <p className="text-xs text-red-400">
