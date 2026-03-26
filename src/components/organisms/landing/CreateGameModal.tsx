@@ -9,7 +9,7 @@ import { Input } from "@/components/atoms/Input"
 import { AdPlaceholder } from "@/components/atoms/AdPlaceholder"
 import { useCreateGame } from "@/api/hooks/games"
 import { useLingui } from "@lingui/react/macro"
-import { LANGS_DICT, SupportedLocale } from "@/i18n"
+import { getLocalizedPath, LANGS_DICT, SupportedLocale } from "@/i18n"
 import { LocalesButtons } from "@/components/molecules/LocalesButtons"
 
 const SETTINGS = [
@@ -55,7 +55,7 @@ type CreateGameModalProps = {
 }
 
 export function CreateGameModal({ open, onClose }: CreateGameModalProps) {
-  const { t } = useLingui()
+  const { t, i18n } = useLingui()
   const router = useRouter()
   const { createGame, isPending, isError } = useCreateGame()
 
@@ -115,7 +115,9 @@ export function CreateGameModal({ open, onClose }: CreateGameModalProps) {
             `player_id_${data.game_code}`,
             String(data.player_id),
           )
-          router.push(`/${data.game_code}`)
+          router.push(
+            getLocalizedPath(i18n.locale as SupportedLocale, data.game_code),
+          )
         },
         onError: () => {
           clearInterval(phraseInterval)

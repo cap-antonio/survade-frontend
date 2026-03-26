@@ -1,3 +1,5 @@
+"use client"
+
 import { LandingHero } from "@/components/templates/LandingHero"
 import { msg } from "@lingui/core/macro"
 import { useLingui } from "@lingui/react/macro"

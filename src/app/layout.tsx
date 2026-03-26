@@ -1,9 +1,8 @@
 import type { Metadata } from "next"
 import "./globals.css"
-import { Providers } from "./providers"
-import { initLingui } from "@/initLingui"
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://survade.io"),
   title: "Survade — Survival Discussion Game",
   description:
     "A discussion game where your group must decide who survives the apocalypse. Role cards, dark secrets, and one possible saboteur.",
@@ -19,12 +18,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  initLingui()
-
   return (
     <html lang="en">
       <body>
-        <Providers>{children}</Providers>
+        {children}
       </body>
     </html>
   )

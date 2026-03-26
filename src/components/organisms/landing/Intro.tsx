@@ -1,23 +1,28 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { useLingui } from "@lingui/react/macro"
 import { Button } from "@/components/atoms/Button"
 import { Input } from "@/components/atoms/Input"
 import { CreateGameModal } from "./CreateGameModal"
 import { LandingHero } from "@/components/templates/LandingHero"
 import { LocalesButtons } from "@/components/molecules/LocalesButtons"
-import { setLocale, SupportedLocale } from "@/i18n"
+import { getLocalizedPath, setLocale, SupportedLocale } from "@/i18n"
 
 export function Intro() {
   const { t, i18n } = useLingui()
+  const router = useRouter()
   const [codeInput, setCodeInput] = useState("")
   const [showCreate, setShowCreate] = useState(false)
 
   const handleJoin = (): void => {
     const code = codeInput.trim().toUpperCase()
     if (code.length >= 4) {
-      window.location.href = `/${code}`
+      window.location.href = getLocalizedPath(
+        i18n.locale as SupportedLocale,
+        code,
+      )
     }
   }
 
@@ -32,7 +37,10 @@ export function Intro() {
         <LocalesButtons
           className="absolute top-5 right-5"
           activeLocales={[i18n.locale as SupportedLocale]}
-          onChange={(code) => void setLocale(code)}
+          onChange={(code) => {
+            void setLocale(code)
+            router.push(getLocalizedPath(code))
+          }}
         />
 
         <div className="relative z-10 max-w-3xl mx-auto">

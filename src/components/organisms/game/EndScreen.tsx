@@ -7,13 +7,15 @@ import { useRateGame } from "@/api/hooks/games"
 import { Button } from "@/components/atoms/Button"
 import { AdPlaceholder } from "@/components/atoms/AdPlaceholder"
 import { Badge } from "@/components/atoms/Badge"
+import { getLocalizedPath, type SupportedLocale } from "@/i18n"
 import { GameHistory } from "./GameHistory"
 
 type EndScreenProps = {
   code: string
+  locale: SupportedLocale
 }
 
-export function EndScreen({ code }: EndScreenProps) {
+export function EndScreen({ code, locale }: EndScreenProps) {
   const { t } = useLingui()
   const { game, myPlayerId, myToken, adsEnabled } = useGameStore()
   const { rateGame, isPending: isPendingRateGame } = useRateGame()
@@ -197,7 +199,10 @@ export function EndScreen({ code }: EndScreenProps) {
         )}
 
         <div className="text-center">
-          <a href="/" className="text-sm text-[var(--color-accent)] underline">
+          <a
+            href={getLocalizedPath(locale)}
+            className="text-sm text-[var(--color-accent)] underline"
+          >
             {t`Create a new game`}
           </a>
         </div>

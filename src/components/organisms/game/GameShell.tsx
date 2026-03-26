@@ -9,12 +9,14 @@ import { Lobby } from "./Lobby"
 import { ActiveGame } from "./ActiveGame"
 import { EndScreen } from "./EndScreen"
 import { JoinScreen } from "./JoinScreen"
+import { getLocalizedPath, type SupportedLocale } from "@/i18n"
 
 type GameShellProps = {
   code: string
+  locale: SupportedLocale
 }
 
-export function GameShell({ code }: GameShellProps) {
+export function GameShell({ code, locale }: GameShellProps) {
   const { game, myPlayerId, myToken, hostToken, setGame, setSession } =
     useGameStore()
   const [sessionChecked, setSessionChecked] = useState(false)
@@ -65,7 +67,7 @@ export function GameShell({ code }: GameShellProps) {
           <p className="text-2xl font-bold mb-2">404</p>
           <p className="text-[var(--color-muted)]">Game not found</p>
           <a
-            href="/"
+            href={getLocalizedPath(locale)}
             className="mt-4 inline-block text-sm text-[var(--color-accent)] underline"
           >
             Back to home
@@ -89,12 +91,12 @@ export function GameShell({ code }: GameShellProps) {
   }
 
   if (game.status === "lobby") {
-    return <Lobby code={code} />
+    return <Lobby code={code} locale={locale} />
   }
 
   if (game.status === "active") {
     return <ActiveGame code={code} />
   }
 
-  return <EndScreen code={code} />
+  return <EndScreen code={code} locale={locale} />
 }

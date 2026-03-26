@@ -7,12 +7,14 @@ import { Button } from "@/components/atoms/Button"
 import { Badge } from "@/components/atoms/Badge"
 import { AdPlaceholder } from "@/components/atoms/AdPlaceholder"
 import { useLingui } from "@lingui/react/macro"
+import { getLocalizedPath, type SupportedLocale } from "@/i18n"
 
 type LobbyProps = {
   code: string
+  locale: SupportedLocale
 }
 
-export function Lobby({ code }: LobbyProps) {
+export function Lobby({ code, locale }: LobbyProps) {
   const { t } = useLingui()
   const { game, isHost, hostToken, adsEnabled } = useGameStore()
   const { startGame, isPending } = useStartGame()
@@ -21,8 +23,8 @@ export function Lobby({ code }: LobbyProps) {
 
   const gameUrl =
     typeof window !== "undefined"
-      ? `${window.location.origin}/${code}`
-      : `https://survade.io/${code}`
+      ? `${window.location.origin}${getLocalizedPath(locale, code)}`
+      : `https://survade.io${getLocalizedPath(locale, code)}`
   const activePlayers = game.players.filter((p) => !p.is_eliminated)
   const canStart = activePlayers.length >= 3
 

@@ -58,46 +58,46 @@ msgstr ""
 msgid "⚡ {0}"
 msgstr ""
 
-#: src/components/organisms/landing/SettingsGrid.tsx:10
+#: src/components/organisms/landing/SettingsGrid.tsx:12
 msgid "A catastrophic malfunction threatens the habitat dome. Oxygen is running out."
 msgstr ""
 
-#: src/components/organisms/landing/SettingsGrid.tsx:38
+#: src/components/organisms/landing/SettingsGrid.tsx:40
 msgid "A lethal virus spreads. The safe place's medical resources are critically limited."
 msgstr ""
 
-#: src/components/organisms/landing/SettingsGrid.tsx:45
+#: src/components/organisms/landing/SettingsGrid.tsx:47
 msgid "A rift in time opens. Only select individuals can pass through to the other side."
 msgstr ""
 
-#: src/components/organisms/landing/HowToPlay.tsx:18
+#: src/components/organisms/landing/HowToPlay.tsx:20
 msgid "Argue & Reveal"
 msgstr ""
 
-#: src/components/organisms/landing/Intro.tsx:49
+#: src/components/organisms/landing/Intro.tsx:58
 msgid "Argue, reveal secrets, vote — and survive."
 msgstr ""
 
 #: src/components/molecules/RewardedVideoModal.tsx:57
 #: src/components/organisms/game/KickConfirmModal.tsx:31
 #: src/components/organisms/game/PowerModal.tsx:80
-#: src/components/organisms/landing/CreateGameModal.tsx:286
+#: src/components/organisms/landing/CreateGameModal.tsx:288
 msgid "Cancel"
 msgstr ""
 
-#: src/components/organisms/landing/CreateGameModal.tsx:223
+#: src/components/organisms/landing/CreateGameModal.tsx:225
 msgid "Card Attributes"
 msgstr ""
 
-#: src/components/organisms/landing/SettingsGrid.tsx:60
+#: src/components/organisms/landing/SettingsGrid.tsx:62
 msgid "Choose the world your group will fight to survive in."
 msgstr ""
 
-#: src/components/organisms/landing/CreateGameModal.tsx:182
+#: src/components/organisms/landing/CreateGameModal.tsx:184
 msgid "Classic"
 msgstr ""
 
-#: src/components/organisms/game/Lobby.tsx:60
+#: src/components/organisms/game/Lobby.tsx:62
 msgid "Copy Link"
 msgstr ""
 
@@ -105,33 +105,33 @@ msgstr ""
 msgid "Could not join. The game may be full or already started."
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:201
+#: src/components/organisms/game/EndScreen.tsx:206
 msgid "Create a new game"
 msgstr ""
 
-#: src/components/organisms/landing/CreateGameModal.tsx:146
-#: src/components/organisms/landing/CreateGameModal.tsx:294
-#: src/components/organisms/landing/Intro.tsx:59
+#: src/components/organisms/landing/CreateGameModal.tsx:148
+#: src/components/organisms/landing/CreateGameModal.tsx:296
+#: src/components/organisms/landing/Intro.tsx:68
 msgid "Create Game"
 msgstr ""
 
-#: src/components/organisms/landing/HowToPlay.tsx:8
+#: src/components/organisms/landing/HowToPlay.tsx:10
 msgid "Create or Join"
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:125
+#: src/components/organisms/game/EndScreen.tsx:127
 msgid "Detected!"
 msgstr ""
 
-#: src/components/organisms/landing/HowToPlay.tsx:14
+#: src/components/organisms/landing/HowToPlay.tsx:16
 msgid "Each player receives a unique character card — profession, health, skills, and a dark secret."
 msgstr ""
 
-#: src/components/organisms/landing/HowToPlay.tsx:24
+#: src/components/organisms/landing/HowToPlay.tsx:26
 msgid "Each round the group votes to eliminate one person. Who gets kicked out?"
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:94
+#: src/components/organisms/game/EndScreen.tsx:96
 msgid "Eliminated"
 msgstr ""
 
@@ -139,15 +139,15 @@ msgstr ""
 msgid "End Voting"
 msgstr ""
 
-#: src/components/organisms/landing/CreateGameModal.tsx:272
+#: src/components/organisms/landing/CreateGameModal.tsx:274
 msgid "Enter your name"
 msgstr ""
 
-#: src/components/organisms/landing/CreateGameModal.tsx:280
+#: src/components/organisms/landing/CreateGameModal.tsx:282
 msgid "Failed to create game. Please try again."
 msgstr ""
 
-#: src/components/organisms/landing/SettingsGrid.tsx:75
+#: src/components/organisms/landing/SettingsGrid.tsx:77
 msgid "Free"
 msgstr ""
 
@@ -155,7 +155,7 @@ msgstr ""
 msgid "Game"
 msgstr ""
 
-#: src/components/organisms/landing/Intro.tsx:66
+#: src/components/organisms/landing/Intro.tsx:75
 msgid "Game code (e.g. XKTMW)"
 msgstr ""
 
@@ -163,23 +163,23 @@ msgstr ""
 msgid "Game ended"
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:171
+#: src/components/organisms/game/EndScreen.tsx:173
 msgid "Game Experience"
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:151
+#: src/components/organisms/game/EndScreen.tsx:153
 msgid "Game History"
 msgstr ""
 
-#: src/components/organisms/landing/CreateGameModal.tsx:178
+#: src/components/organisms/landing/CreateGameModal.tsx:180
 msgid "Game Mode"
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:63
+#: src/components/organisms/game/EndScreen.tsx:65
 msgid "Game Over"
 msgstr ""
 
-#: src/components/organisms/landing/HowToPlay.tsx:13
+#: src/components/organisms/landing/HowToPlay.tsx:15
 msgid "Get Your Card"
 msgstr ""
 
@@ -188,15 +188,15 @@ msgid "hidden"
 msgstr ""
 
 #: src/components/organisms/game/HostControls.tsx:25
-#: src/components/organisms/game/Lobby.tsx:75
+#: src/components/organisms/game/Lobby.tsx:77
 msgid "Host"
 msgstr ""
 
-#: src/components/organisms/landing/HowToPlay.tsx:40
+#: src/components/organisms/landing/HowToPlay.tsx:42
 msgid "How to Play"
 msgstr ""
 
-#: src/components/organisms/landing/Intro.tsx:76
+#: src/components/organisms/landing/Intro.tsx:85
 msgid "Join"
 msgstr ""
 
@@ -208,15 +208,15 @@ msgstr ""
 msgid "Join the Game"
 msgstr ""
 
-#: src/components/organisms/landing/CreateGameModal.tsx:211
+#: src/components/organisms/landing/CreateGameModal.tsx:213
 msgid "Languages"
 msgstr ""
 
-#: src/components/organisms/landing/SettingsGrid.tsx:9
+#: src/components/organisms/landing/SettingsGrid.tsx:11
 msgid "Mars Colony"
 msgstr ""
 
-#: src/components/organisms/game/Lobby.tsx:86
+#: src/components/organisms/game/Lobby.tsx:88
 msgid "Need at least 3 players to start"
 msgstr ""
 
@@ -228,15 +228,15 @@ msgstr ""
 msgid "No events this round"
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:135
+#: src/components/organisms/game/EndScreen.tsx:137
 msgid "No saboteur in this game"
 msgstr ""
 
-#: src/components/organisms/landing/HowToPlay.tsx:9
+#: src/components/organisms/landing/HowToPlay.tsx:11
 msgid "One player creates a game and shares the code. Everyone else joins via the link or code."
 msgstr ""
 
-#: src/components/organisms/landing/SettingsGrid.tsx:16
+#: src/components/organisms/landing/SettingsGrid.tsx:18
 msgid "Orbit"
 msgstr ""
 
@@ -244,11 +244,11 @@ msgstr ""
 msgid "Out"
 msgstr ""
 
-#: src/components/organisms/landing/HowToPlay.tsx:19
+#: src/components/organisms/landing/HowToPlay.tsx:21
 msgid "Over several rounds, reveal your attributes to convince others you deserve a spot in the safe place."
 msgstr ""
 
-#: src/components/organisms/landing/SettingsGrid.tsx:37
+#: src/components/organisms/landing/SettingsGrid.tsx:39
 msgid "Pandemic"
 msgstr ""
 
@@ -256,8 +256,8 @@ msgstr ""
 msgid "Player {id}"
 msgstr ""
 
-#: src/components/organisms/game/Lobby.tsx:68
-#: src/components/organisms/landing/CreateGameModal.tsx:253
+#: src/components/organisms/game/Lobby.tsx:70
+#: src/components/organisms/landing/CreateGameModal.tsx:255
 msgid "Players"
 msgstr ""
 
@@ -265,7 +265,7 @@ msgstr ""
 msgid "Prev"
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:163
+#: src/components/organisms/game/EndScreen.tsx:165
 msgid "Rate the Game"
 msgstr ""
 
@@ -295,29 +295,29 @@ msgstr ""
 msgid "Round {0} started"
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:113
+#: src/components/organisms/game/EndScreen.tsx:115
 msgid "Saboteur"
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:166
+#: src/components/organisms/game/EndScreen.tsx:168
 #: src/components/organisms/game/ScenarioPanel.tsx:27
-#: src/components/organisms/landing/CreateGameModal.tsx:151
+#: src/components/organisms/landing/CreateGameModal.tsx:153
 msgid "Scenario"
 msgstr ""
 
-#: src/components/organisms/landing/SettingsGrid.tsx:57
+#: src/components/organisms/landing/SettingsGrid.tsx:59
 msgid "Scenarios"
 msgstr ""
 
-#: src/components/organisms/landing/SettingsGrid.tsx:30
+#: src/components/organisms/landing/SettingsGrid.tsx:32
 msgid "Shipwreck"
 msgstr ""
 
-#: src/components/organisms/landing/SettingsGrid.tsx:23
+#: src/components/organisms/landing/SettingsGrid.tsx:25
 msgid "Siege"
 msgstr ""
 
-#: src/components/organisms/game/Lobby.tsx:99
+#: src/components/organisms/game/Lobby.tsx:101
 msgid "Start Game"
 msgstr ""
 
@@ -325,23 +325,23 @@ msgstr ""
 msgid "Start Voting"
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:190
+#: src/components/organisms/game/EndScreen.tsx:192
 msgid "Submit Rating"
 msgstr ""
 
-#: src/components/organisms/landing/Intro.tsx:39
+#: src/components/organisms/landing/Intro.tsx:48
 msgid "Survival Discussion Game"
 msgstr ""
 
-#: src/components/organisms/landing/HowToPlay.tsx:28
+#: src/components/organisms/landing/HowToPlay.tsx:30
 msgid "Survive"
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:129
+#: src/components/organisms/game/EndScreen.tsx:131
 msgid "Survived!"
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:71
+#: src/components/organisms/game/EndScreen.tsx:73
 msgid "Survivors"
 msgstr ""
 
@@ -349,31 +349,31 @@ msgstr ""
 msgid "Target (optional)"
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:195
+#: src/components/organisms/game/EndScreen.tsx:197
 msgid "Thanks for rating!"
 msgstr ""
 
-#: src/components/organisms/landing/SettingsGrid.tsx:24
+#: src/components/organisms/landing/SettingsGrid.tsx:26
 msgid "The fortress walls are breached. The inner keep shelters are filling up."
 msgstr ""
 
-#: src/components/organisms/landing/SettingsGrid.tsx:17
+#: src/components/organisms/landing/SettingsGrid.tsx:19
 msgid "The orbital station is losing altitude. Only the escape pod can hold a few."
 msgstr ""
 
-#: src/components/organisms/landing/HowToPlay.tsx:29
+#: src/components/organisms/landing/HowToPlay.tsx:31
 msgid "The remaining players make it into the safe place. But beware — there may be a saboteur among you."
 msgstr ""
 
-#: src/components/organisms/landing/Intro.tsx:48
+#: src/components/organisms/landing/Intro.tsx:57
 msgid "The safe place has limited space. Your group must decide who gets in."
 msgstr "Безопасных мест ограниченное количество. Ваша группа должна решить, кто выживет."
 
-#: src/components/organisms/landing/SettingsGrid.tsx:31
+#: src/components/organisms/landing/SettingsGrid.tsx:33
 msgid "The vessel is sinking fast. The lifeboat fits only so many survivors."
 msgstr ""
 
-#: src/components/organisms/landing/SettingsGrid.tsx:44
+#: src/components/organisms/landing/SettingsGrid.tsx:46
 msgid "Time Portal"
 msgstr ""
 
@@ -385,7 +385,7 @@ msgstr ""
 msgid "Use Power"
 msgstr ""
 
-#: src/components/organisms/landing/HowToPlay.tsx:23
+#: src/components/organisms/landing/HowToPlay.tsx:25
 msgid "Vote"
 msgstr ""
 
@@ -401,15 +401,15 @@ msgstr ""
 msgid "Voting in progress…"
 msgstr ""
 
-#: src/components/organisms/game/Lobby.tsx:106
+#: src/components/organisms/game/Lobby.tsx:108
 msgid "Waiting for host to start the game…"
 msgstr ""
 
-#: src/components/organisms/game/Lobby.tsx:35
+#: src/components/organisms/game/Lobby.tsx:37
 msgid "Waiting for players"
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:121
+#: src/components/organisms/game/EndScreen.tsx:123
 msgid "was the saboteur"
 msgstr ""
 
@@ -421,11 +421,11 @@ msgstr ""
 msgid "Watch Ad"
 msgstr ""
 
-#: src/components/organisms/landing/CreateGameModal.tsx:186
+#: src/components/organisms/landing/CreateGameModal.tsx:188
 msgid "With Saboteur"
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:82
+#: src/components/organisms/game/EndScreen.tsx:84
 msgid "you"
 msgstr ""
 
@@ -441,6 +441,6 @@ msgstr ""
 msgid "Your name"
 msgstr ""
 
-#: src/components/organisms/landing/CreateGameModal.tsx:274
+#: src/components/organisms/landing/CreateGameModal.tsx:276
 msgid "Your name in game"
 msgstr ""
