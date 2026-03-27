@@ -1,0 +1,13 @@
+# Changelog
+
+<a name="0.1.0"></a>
+## 0.1.0 (2026-03-27)
+
+### Changed
+
+- 🌐 fix lang slug
+
+### Fixed
+
+- 🐛 fix scrolling under modal
+- 🐛 fix translations
