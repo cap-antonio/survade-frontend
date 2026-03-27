@@ -57,6 +57,12 @@ export function Modal({ open, onClose, children, className }: ModalProps) {
         )}
         onClick={(e) => e.stopPropagation()}
       >
+        <button
+          className="absolute top-2 right-4 hover:scale-125 cursor-pointer"
+          onClick={onClose}
+        >
+          ✕
+        </button>
         {children}
       </div>
     </div>

@@ -18,7 +18,6 @@ export const LocalesButtons = ({
       {LANGS_DICT.map((l) => (
         <Button
           key={l.code}
-          type="button"
           onClick={() => onChange(l.code)}
           className={classNames(
             "px-3 py-1.5 rounded border text-xs font-mono transition-colors",

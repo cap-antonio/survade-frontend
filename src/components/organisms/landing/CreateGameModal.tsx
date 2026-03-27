@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import cn from "classnames"
-import { Modal } from "@/components/atoms/Modal"
+import { Modal } from "@/components/templates/Modal"
 import { Button } from "@/components/atoms/Button"
 import { Input } from "@/components/atoms/Input"
 import { AdPlaceholder } from "@/components/atoms/AdPlaceholder"

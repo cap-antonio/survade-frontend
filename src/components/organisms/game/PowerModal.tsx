@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { useLingui } from "@lingui/react/macro"
-import { Modal } from "@/components/atoms/Modal"
+import { Modal } from "@/components/templates/Modal"
 import { Button } from "@/components/atoms/Button"
 import type { Player } from "@/api/generated/schema"
 

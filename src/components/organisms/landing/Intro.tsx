@@ -58,17 +58,17 @@ export function Intro() {
             {t`Argue, reveal secrets, vote — and survive.`}
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-stretch sm:items-center mb-8">
+          <div className="flex flex-col gap-4 justify-center items-stretch sm:items-center">
             <Button
               size="lg"
               variant="primary"
               onClick={() => setShowCreate(true)}
-              className="sm:min-w-[180px]"
+              className="sm:min-w-[180px] uppercase font-bold"
             >
               {t`Create Game`}
             </Button>
 
-            <div className="flex gap-2">
+            <div className="flex gap-2 self-center">
               <Input
                 value={codeInput}
                 onChange={setCodeInput}

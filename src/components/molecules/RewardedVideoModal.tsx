@@ -1,6 +1,6 @@
 "use client"
 
-import { Modal } from "@/components/atoms/Modal"
+import { Modal } from "@/components/templates/Modal"
 import { Button } from "@/components/atoms/Button"
 import { useUnlockRewarded } from "@/api/hooks/games"
 import { UnlockRewardedRequest } from "@/api/services"
