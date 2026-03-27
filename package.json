@@ -1,6 +1,6 @@
 {
   "name": "survade-frontend",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "private": true,
   "scripts": {
     "dev": "npm run lingui:extract && next dev",
@@ -25,6 +25,7 @@
     "@tanstack/react-query-devtools": "^5.67.3",
     "axios": "^1.13.6",
     "classnames": "^2.3.2",
+    "lucide-react": "^1.7.0",
     "negotiator": "^1.0.0",
     "next": "15.3.1",
     "openapi-typescript": "^7.6.1",

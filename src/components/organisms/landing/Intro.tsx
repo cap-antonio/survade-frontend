@@ -8,6 +8,7 @@ import { Input } from "@/components/atoms/Input"
 import { CreateGameModal } from "./CreateGameModal"
 import { LandingHero } from "@/components/templates/LandingHero"
 import { LocalesButtons } from "@/components/molecules/LocalesButtons"
+import { AuthMenu } from "../../molecules/AuthMenu"
 import { getLocalizedPath, setLocale, SupportedLocale } from "@/i18n"
 
 export function Intro() {
@@ -34,14 +35,16 @@ export function Intro() {
           <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[var(--color-accent)]/5 blur-[120px]" />
         </div>
 
-        <LocalesButtons
-          className="absolute top-5 right-5"
-          activeLocales={[i18n.locale as SupportedLocale]}
-          onChange={(code) => {
-            void setLocale(code)
-            router.push(getLocalizedPath(code))
-          }}
-        />
+        <div className="absolute top-5 right-5 z-20 flex items-center gap-3">
+          <LocalesButtons
+            activeLocales={[i18n.locale as SupportedLocale]}
+            onChange={(code) => {
+              void setLocale(code)
+              router.push(getLocalizedPath(code))
+            }}
+          />
+          <AuthMenu locale={i18n.locale as SupportedLocale} />
+        </div>
 
         <div className="relative z-10 max-w-3xl mx-auto">
           <span className="inline-block mb-4 px-3 py-1 text-xs font-mono text-[var(--color-accent)] border border-[var(--color-accent)]/30 rounded-full tracking-wider uppercase">
@@ -49,8 +52,8 @@ export function Intro() {
           </span>
 
           <h1 className="text-6xl sm:text-8xl font-black tracking-tighter mb-4 leading-none">
-            <span className="text-[var(--color-text)]">SUR</span>
-            <span className="text-[var(--color-accent)]">VADE</span>
+            <span className="text-[var(--color-text)]">SURV</span>
+            <span className="text-[var(--color-accent)]">ADE</span>
           </h1>
 
           <p className="text-lg sm:text-xl text-[var(--color-muted)] mb-10 max-w-xl mx-auto leading-relaxed">

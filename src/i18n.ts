@@ -15,10 +15,10 @@ export const SUPPORTED_LOCALES = [
 export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number]
 
 export const LANGS_DICT: { code: SupportedLocale; label: string }[] = [
-  { code: "ru", label: "RU" },
   { code: "en", label: "EN" },
-  { code: "pl", label: "PL" },
+  { code: "ru", label: "RU" },
   { code: "de", label: "DE" },
+  { code: "pl", label: "PL" },
   { code: "fr", label: "FR" },
   { code: "es", label: "ES" },
   { code: "tr", label: "TR" },
@@ -33,10 +33,7 @@ export function isSupportedLocale(locale: string): locale is SupportedLocale {
   return (SUPPORTED_LOCALES as readonly string[]).includes(locale)
 }
 
-export function getLocalizedPath(
-  locale: SupportedLocale,
-  path = "",
-): string {
+export function getLocalizedPath(locale: SupportedLocale, path = ""): string {
   const normalizedPath = path.replace(/^\/+|\/+$/g, "")
 
   if (locale === DEFAULT_LOCALE) {
