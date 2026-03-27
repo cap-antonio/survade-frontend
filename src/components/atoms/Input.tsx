@@ -34,7 +34,7 @@ export function Input({
   return (
     <div className="flex flex-col gap-2">
       {label && (
-        <label className="block text-xs text-[var(--color-muted)] tracking-wider">
+        <label className="block text-xs text-[var(--color-muted)] uppercase tracking-wider">
           {label}
 
           {required ? (

@@ -11,6 +11,7 @@ import { useCreateGame } from "@/api/hooks/games"
 import { useLingui } from "@lingui/react/macro"
 import { getLocalizedPath, LANGS_DICT, SupportedLocale } from "@/i18n"
 import { LocalesButtons } from "@/components/molecules/LocalesButtons"
+import { msg } from "@lingui/core/macro"
 
 const SETTINGS = [
   { key: "mars", emoji: "🔴", label: "Mars", free: true },
@@ -41,12 +42,14 @@ const ATTR_LABELS: Record<string, string> = {
   personality_trait: "🎭 Trait",
 }
 
+const fallbackLoadingPhrase = msg`Almost ready...`
+
 const LOADING_PHRASES = [
-  "Generating scenario...",
-  "Assigning character cards...",
-  "Sealing the safe place...",
-  "Hiding secrets...",
-  "Almost ready...",
+  msg`Generating scenario...`,
+  msg`Assigning character cards...`,
+  msg`Sealing the safe place...`,
+  msg`Hiding secrets...`,
+  fallbackLoadingPhrase,
 ]
 
 type CreateGameModalProps = {
@@ -136,7 +139,7 @@ export function CreateGameModal({ open, onClose }: CreateGameModalProps) {
         <div className="flex flex-col items-center justify-center gap-6 p-8 min-h-[360px]">
           <div className="w-12 h-12 rounded-full border-2 border-[var(--color-accent)] border-t-transparent animate-spin" />
           <p className="text-sm text-[var(--color-muted)] font-mono animate-pulse">
-            {LOADING_PHRASES[loadingPhraseIdx]}
+            {i18n._(LOADING_PHRASES[loadingPhraseIdx] ?? fallbackLoadingPhrase)}
           </p>
           <div className="w-full h-1 bg-[var(--color-surface-2)] rounded-full overflow-hidden">
             <div className="h-full bg-[var(--color-accent)] animate-[progress_10s_linear_forwards] rounded-full" />
@@ -186,22 +189,20 @@ export function CreateGameModal({ open, onClose }: CreateGameModalProps) {
                   key: true,
                   emoji: "☠️",
                   label: t`With Saboteur`,
-                  premium: true,
                 },
               ].map((m) => (
                 <button
                   key={String(m.key)}
                   type="button"
-                  onClick={() => !m.premium && setSaboteurMode(m.key)}
+                  onClick={() => setSaboteurMode(m.key)}
                   className={cn(
                     "flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded border text-sm transition-colors",
                     saboteurMode === m.key
                       ? "border-[var(--color-accent)] bg-[var(--color-accent-dim)]"
                       : "border-[var(--color-border)] bg-[var(--color-surface-2)] text-[var(--color-muted)]",
-                    m.premium && "opacity-50 cursor-not-allowed",
                   )}
                 >
-                  {m.emoji} {m.label} {m.premium && "🔒"}
+                  {m.emoji} {m.label}
                 </button>
               ))}
             </div>
