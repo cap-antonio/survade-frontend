@@ -18,18 +18,13 @@ export class PaymentsService {
      * @throws ApiError
      */
     public createCheckoutApiPaymentsCreateCheckoutPost({
-        authorization,
         requestBody,
     }: {
-        authorization: string,
         requestBody: CreateCheckoutRequest,
     }): CancelablePromise<CheckoutResponse> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/payments/create-checkout',
-            headers: {
-                'authorization': authorization,
-            },
             body: requestBody,
             mediaType: 'application/json',
             errors: {

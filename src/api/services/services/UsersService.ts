@@ -13,6 +13,21 @@ export class UsersService {
     constructor(public readonly httpRequest: BaseHttpRequest) {}
 
     /**
+     * Get Me
+     * @returns UserPublicProfile Successful Response
+     * @throws ApiError
+     */
+    public getMeApiUsersMeGet(): CancelablePromise<UserPublicProfile> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/api/users/me',
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+
+    /**
      * Get User
      * @returns UserPublicProfile Successful Response
      * @throws ApiError

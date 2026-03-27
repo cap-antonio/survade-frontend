@@ -5,6 +5,5 @@
 
 export type JoinGameRequest = {
     display_name: string;
-    user_id?: (string | null);
 };
 

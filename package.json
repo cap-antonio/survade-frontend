@@ -1,6 +1,6 @@
 {
   "name": "survade-frontend",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "private": true,
   "scripts": {
     "dev": "npm run lingui:extract && next dev",
@@ -15,7 +15,6 @@
     "release:bump": "node scripts/release-bump.mjs",
     "lingui:extract": "lingui extract",
     "lingui:compile": "lingui compile",
-    "generate:api": "npx openapi-typescript http://localhost:8000/api/openapi.v1.yaml -o src/api/generated/schema.d.ts",
     "get:api": "openapi -i http://localhost:8000/api/openapi.v1.yaml -o ./src/api/services/ --name apigen --client axios --useOptions"
   },
   "dependencies": {
