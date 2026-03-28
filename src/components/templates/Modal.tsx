@@ -3,14 +3,17 @@
 import { useEffect } from "react"
 import cn from "classnames"
 
-type ModalProps = {
+export type ModalProps = {
   open: boolean
   onClose: () => void
-  children: React.ReactNode
-  className?: string
 }
 
-export function Modal({ open, onClose, children, className }: ModalProps) {
+type Props = {
+  children: React.ReactNode
+  className?: string
+} & ModalProps
+
+export function Modal({ open, onClose, children, className }: Props) {
   useEffect(() => {
     const handleKey = (e: KeyboardEvent): void => {
       if (e.key === "Escape") onClose()

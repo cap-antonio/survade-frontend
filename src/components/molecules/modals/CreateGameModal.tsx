@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import cn from "classnames"
-import { Modal } from "@/components/templates/Modal"
+import { Modal, ModalProps } from "@/components/templates/Modal"
 import { Button } from "@/components/atoms/Button"
 import { Input } from "@/components/atoms/Input"
 import { AdPlaceholder } from "@/components/atoms/AdPlaceholder"
@@ -12,35 +12,53 @@ import { useLingui } from "@lingui/react/macro"
 import { getLocalizedPath, LANGS_DICT, SupportedLocale } from "@/i18n"
 import { LocalesButtons } from "@/components/molecules/LocalesButtons"
 import { msg } from "@lingui/core/macro"
+import { IconButton } from "@/components/atoms/IconButton"
+import { MinusIcon, PlusIcon } from "lucide-react"
+import { ToggleButton } from "@/components/atoms/ToggleButton"
+import { MessageDescriptor } from "@lingui/core"
 
-const SETTINGS = [
-  { key: "mars", emoji: "🔴", label: "Mars", free: true },
-  { key: "orbit", emoji: "🚀", label: "Orbit", free: false },
-  { key: "siege", emoji: "⚔️", label: "Siege", free: false },
-  { key: "ship", emoji: "🚢", label: "Ship", free: false },
-  { key: "pandemic", emoji: "🦠", label: "Pandemic", free: false },
-  { key: "portal", emoji: "⏳", label: "Portal", free: false },
-] as const
+type GameParamType = {
+  free: boolean
+  label: MessageDescriptor
+} & Record<"key" | "emoji", string>
 
-const FREE_ATTRS = [
-  "role",
-  "gender",
-  "health",
-  "dark_secret",
-  "special_skill",
-] as const
-const PREMIUM_ATTRS = ["phobia", "inventory_item", "personality_trait"] as const
-
-const ATTR_LABELS: Record<string, string> = {
-  role: "👤 Profession",
-  gender: "⚧ Gender",
-  health: "❤️ Health",
-  dark_secret: "🔒 Dark Secret",
-  special_skill: "⚡ Skill",
-  phobia: "😨 Phobia",
-  inventory_item: "🎒 Item",
-  personality_trait: "🎭 Trait",
+const DEFAULT_SCENARIO: GameParamType = {
+  key: "mars",
+  emoji: "🔴",
+  label: msg`Mars`,
+  free: true,
 }
+const SCENARIOS: GameParamType[] = [
+  DEFAULT_SCENARIO,
+  { key: "orbit", emoji: "🚀", label: msg`Orbit`, free: false },
+  { key: "siege", emoji: "⚔️", label: msg`Siege`, free: false },
+  { key: "ship", emoji: "🚢", label: msg`Ship`, free: false },
+  { key: "pandemic", emoji: "🦠", label: msg`Pandemic`, free: false },
+  { key: "portal", emoji: "⏳", label: msg`Portal`, free: false },
+]
+
+const ATTRS: GameParamType[] = [
+  { key: "role", emoji: "👤", label: msg`Profession`, free: true },
+  { key: "gender", emoji: "⚧", label: msg`Gender`, free: true },
+  { key: "health", emoji: "❤️", label: msg`Health`, free: true },
+  { key: "dark_secret", emoji: "🔒", label: msg`Dark Secret`, free: true },
+  { key: "special_skill", emoji: "⚡", label: msg`Skill`, free: true },
+  { key: "phobia", emoji: "😨", label: msg`Phobia`, free: true },
+  { key: "inventory_item", emoji: "🎒", label: msg`Item`, free: false },
+  { key: "personality_trait", emoji: "🎭", label: msg`Trait`, free: true },
+]
+
+const DEFAUT_TYPE: GameParamType = {
+  key: "classic",
+  emoji: "🏕",
+  label: msg`Classic`,
+  free: true,
+}
+const SABOTEUR_KEY = "with_saboteur"
+const TYPE: GameParamType[] = [
+  DEFAUT_TYPE,
+  { key: SABOTEUR_KEY, emoji: "☠️", label: msg`With Saboteur`, free: false },
+]
 
 const fallbackLoadingPhrase = msg`Almost ready...`
 
@@ -52,38 +70,40 @@ const LOADING_PHRASES = [
   fallbackLoadingPhrase,
 ]
 
-type CreateGameModalProps = {
-  open: boolean
-  onClose: () => void
-}
+const MIN_PLAYERS = 4
+const MAX_PLAYERS = 10
+const MIN_LANGS = 1
+const MAX_LANGS = 3
 
-export function CreateGameModal({ open, onClose }: CreateGameModalProps) {
+export function CreateGameModal({ open, onClose }: ModalProps) {
   const { t, i18n } = useLingui()
   const router = useRouter()
   const { createGame, isPending, isError } = useCreateGame()
 
-  const [settingKey, setSettingKey] = useState<string>("mars")
-  const [saboteurMode, setSaboteurMode] = useState(false)
+  const [settingKey, setSettingKey] = useState<GameParamType>(DEFAULT_SCENARIO)
   const [langs, setLangs] = useState<SupportedLocale[]>(["en"])
-  const [attrs, setAttrs] = useState<string[]>([...FREE_ATTRS])
-  const [playerCount, setPlayerCount] = useState(6)
+  const [attrs, setAttrs] = useState<GameParamType[]>(ATTRS.slice(0, 6))
+  const [gameType, setGameType] = useState<GameParamType>(DEFAUT_TYPE)
+  const [playerCount, setPlayerCount] = useState(4)
   const [hostName, setHostName] = useState("")
   const [loadingPhraseIdx, setLoadingPhraseIdx] = useState(0)
 
   const toggleLang = (code: SupportedLocale): void => {
     setLangs((prev) => {
       if (prev.includes(code)) {
-        if (prev.length === 1) return prev // at least one
+        if (prev.length === MIN_LANGS) return prev // at least one
         return prev.filter((l) => l !== code)
       }
-      if (prev.length >= 3) return prev // max 3
+      if (prev.length >= MAX_LANGS) return prev // max 3
       return [...prev, code]
     })
   }
 
-  const toggleAttr = (attr: string): void => {
+  const toggleAttr = (attr: GameParamType): void => {
     setAttrs((prev) =>
-      prev.includes(attr) ? prev.filter((a) => a !== attr) : [...prev, attr],
+      prev.includes(attr)
+        ? prev.filter((a) => a.key !== attr.key)
+        : [...prev, attr],
     )
   }
 
@@ -98,10 +118,10 @@ export function CreateGameModal({ open, onClose }: CreateGameModalProps) {
     createGame(
       {
         requestBody: {
-          setting_key: settingKey,
-          saboteur_mode: saboteurMode,
+          setting_key: settingKey.key,
+          saboteur_mode: gameType.key === SABOTEUR_KEY,
           langs,
-          attrs,
+          attrs: attrs.map(({ key }) => key),
           player_count: playerCount,
           host_display_name: hostName.trim(),
         },
@@ -156,23 +176,17 @@ export function CreateGameModal({ open, onClose }: CreateGameModalProps) {
               {t`Scenario`}
             </label>
             <div className="grid grid-cols-3 gap-2">
-              {SETTINGS.map((s) => (
-                <button
+              {SCENARIOS.map((s) => (
+                <ToggleButton
                   key={s.key}
-                  type="button"
-                  onClick={() => s.free && setSettingKey(s.key)}
-                  className={cn(
-                    "flex items-center gap-2 px-3 py-2 rounded border text-sm transition-colors",
-                    settingKey === s.key
-                      ? "border-[var(--color-accent)] bg-[var(--color-accent-dim)] text-[var(--color-text)]"
-                      : "border-[var(--color-border)] bg-[var(--color-surface-2)] text-[var(--color-muted)]",
-                    !s.free && "opacity-50 cursor-not-allowed",
-                  )}
+                  onClick={() => setSettingKey(s)}
+                  isActive={settingKey.key === s.key}
                 >
-                  <span>{s.emoji}</span>
-                  <span className="truncate">{s.label}</span>
-                  {!s.free && <span className="ml-auto text-xs">🔒</span>}
-                </button>
+                  <div className="flex gap-2 text-sm">
+                    <span>{s.emoji}</span>
+                    <span className="truncate">{i18n._(s.label)}</span>
+                  </div>
+                </ToggleButton>
               ))}
             </div>
           </div>
@@ -183,27 +197,13 @@ export function CreateGameModal({ open, onClose }: CreateGameModalProps) {
               {t`Game Mode`}
             </label>
             <div className="flex gap-2">
-              {[
-                { key: false, emoji: "🏕", label: t`Classic` },
-                {
-                  key: true,
-                  emoji: "☠️",
-                  label: t`With Saboteur`,
-                },
-              ].map((m) => (
-                <button
+              {TYPE.map((m) => (
+                <ToggleButton
                   key={String(m.key)}
-                  type="button"
-                  onClick={() => setSaboteurMode(m.key)}
-                  className={cn(
-                    "flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded border text-sm transition-colors",
-                    saboteurMode === m.key
-                      ? "border-[var(--color-accent)] bg-[var(--color-accent-dim)]"
-                      : "border-[var(--color-border)] bg-[var(--color-surface-2)] text-[var(--color-muted)]",
-                  )}
-                >
-                  {m.emoji} {m.label}
-                </button>
+                  className="flex-1 px-3 py-2 !text-sm"
+                  isActive={gameType.key === m.key}
+                  onClick={() => setGameType(m)}
+                >{`${m.emoji} ${i18n._(m.label)}`}</ToggleButton>
               ))}
             </div>
           </div>
@@ -226,25 +226,15 @@ export function CreateGameModal({ open, onClose }: CreateGameModalProps) {
               {t`Card Attributes`}
             </label>
             <div className="flex flex-wrap gap-2">
-              {([...FREE_ATTRS, ...PREMIUM_ATTRS] as string[]).map((attr) => {
-                const isPremium = (PREMIUM_ATTRS as readonly string[]).includes(
-                  attr,
-                )
+              {ATTRS.map((attr) => {
                 return (
-                  <button
-                    key={attr}
-                    type="button"
-                    onClick={() => !isPremium && toggleAttr(attr)}
-                    className={cn(
-                      "px-3 py-1.5 rounded border text-xs transition-colors",
-                      attrs.includes(attr)
-                        ? "border-[var(--color-accent)] bg-[var(--color-accent-dim)] text-[var(--color-text)]"
-                        : "border-[var(--color-border)] bg-[var(--color-surface-2)] text-[var(--color-muted)]",
-                      isPremium && "opacity-50 cursor-not-allowed",
-                    )}
+                  <ToggleButton
+                    key={attr.key}
+                    onClick={() => toggleAttr(attr)}
+                    isActive={attrs.some(({ key }) => key === attr.key)}
                   >
-                    {ATTR_LABELS[attr] ?? attr} {isPremium && "🔒"}
-                  </button>
+                    {`${attr.emoji} ${i18n._(attr.label)}`}
+                  </ToggleButton>
                 )
               })}
             </div>
@@ -253,19 +243,38 @@ export function CreateGameModal({ open, onClose }: CreateGameModalProps) {
           {/* Player count */}
           <div>
             <label className="block text-xs text-[var(--color-muted)] uppercase tracking-wider mb-2">
-              {`${t`Players`}: ${playerCount}`}
+              {t`Players`}
             </label>
-            <input
-              type="range"
-              min={4}
-              max={10}
-              value={playerCount}
-              onChange={(e) => setPlayerCount(Number(e.target.value))}
-              className="w-full accent-[var(--color-accent)]"
-            />
-            <div className="flex justify-between text-xs text-[var(--color-muted)] mt-1">
-              <span>4</span>
-              <span>10</span>
+            <div className="flex justify-center items-center gap-4">
+              <IconButton
+                variant="primary"
+                Icon={<MinusIcon />}
+                disabled={playerCount === MIN_PLAYERS}
+                onClick={() =>
+                  setPlayerCount((prev) => {
+                    if (prev > MIN_PLAYERS) {
+                      return (prev -= 1)
+                    }
+                    return prev
+                  })
+                }
+              />
+              <span className="text-[var(--color-accent)] font-bold text-3xl">
+                {playerCount}
+              </span>
+              <IconButton
+                variant="primary"
+                Icon={<PlusIcon />}
+                disabled={playerCount === MAX_PLAYERS}
+                onClick={() =>
+                  setPlayerCount((prev) => {
+                    if (prev < MAX_PLAYERS) {
+                      return (prev += 1)
+                    }
+                    return prev
+                  })
+                }
+              />
             </div>
           </div>
 

@@ -1,21 +1,23 @@
 "use client"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
 import { useLingui } from "@lingui/react/macro"
 import { Button } from "@/components/atoms/Button"
 import { Input } from "@/components/atoms/Input"
-import { CreateGameModal } from "./CreateGameModal"
+import { CreateGameModal } from "../../molecules/modals/CreateGameModal"
 import { LandingHero } from "@/components/templates/LandingHero"
-import { LocalesButtons } from "@/components/molecules/LocalesButtons"
 import { AuthMenu } from "../../molecules/AuthMenu"
-import { getLocalizedPath, setLocale, SupportedLocale } from "@/i18n"
+import { getLocalizedPath, SupportedLocale } from "@/i18n"
+import { AuthModal } from "@/components/molecules/modals/AuthModal"
+import { useAuthStore } from "@/stores/authStore"
+
+type ModalType = "craete-game" | "sign-up"
 
 export function Intro() {
   const { t, i18n } = useLingui()
-  const router = useRouter()
   const [codeInput, setCodeInput] = useState("")
-  const [showCreate, setShowCreate] = useState(false)
+  const [modalType, setModalType] = useState<ModalType | undefined>()
+  const isAuth = useAuthStore((state) => state.isAuth)
 
   const handleJoin = (): void => {
     const code = codeInput.trim().toUpperCase()
@@ -35,15 +37,8 @@ export function Intro() {
           <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[var(--color-accent)]/5 blur-[120px]" />
         </div>
 
-        <div className="absolute top-5 right-5 z-20 flex items-center gap-3">
-          <LocalesButtons
-            activeLocales={[i18n.locale as SupportedLocale]}
-            onChange={(code) => {
-              void setLocale(code)
-              router.push(getLocalizedPath(code))
-            }}
-          />
-          <AuthMenu locale={i18n.locale as SupportedLocale} />
+        <div className="absolute top-5 right-5 z-20">
+          <AuthMenu />
         </div>
 
         <div className="relative z-10 max-w-3xl mx-auto">
@@ -56,6 +51,10 @@ export function Intro() {
             <span className="text-[var(--color-accent)]">ADE</span>
           </h1>
 
+          <p className="text-lg sm:text-xl text-[var(--color-muted)] mb-4 max-w-xl mx-auto leading-relaxed uppercase">
+            {t`Survave and parsuade`}
+          </p>
+
           <p className="text-lg sm:text-xl text-[var(--color-muted)] mb-10 max-w-xl mx-auto leading-relaxed">
             {t`The safe place has limited space. Your group must decide who gets in.`}
             {t`Argue, reveal secrets, vote — and survive.`}
@@ -65,7 +64,7 @@ export function Intro() {
             <Button
               size="lg"
               variant="primary"
-              onClick={() => setShowCreate(true)}
+              onClick={() => setModalType("craete-game")}
               className="sm:min-w-[180px] uppercase font-bold"
             >
               {t`Create Game`}
@@ -89,10 +88,31 @@ export function Intro() {
               </Button>
             </div>
           </div>
+
+          {!isAuth && (
+            <div className="flex flex-col gap-2 justify-center items-stretch sm:items-center mt-10">
+              <span className="text-sm text-[var(--color-muted)]">{t`Want to see your stats, streaks, and saboteur performance?`}</span>
+
+              <Button
+                size="sm"
+                variant="primary"
+                onClick={() => setModalType("sign-up")}
+                className="uppercase font-bold"
+              >
+                {t`Sign up for free`}
+              </Button>
+            </div>
+          )}
         </div>
       </LandingHero>
-
-      <CreateGameModal open={showCreate} onClose={() => setShowCreate(false)} />
+      <AuthModal
+        open={modalType === "sign-up"}
+        onClose={() => setModalType(undefined)}
+      />
+      <CreateGameModal
+        open={modalType === "craete-game"}
+        onClose={() => setModalType(undefined)}
+      />
     </>
   )
 }

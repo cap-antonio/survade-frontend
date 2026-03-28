@@ -2,12 +2,12 @@
 
 import cn from "classnames"
 
-type IconButtonVariant = "secondary" | "ghost"
+type IconButtonVariant = "secondary" | "ghost" | "primary"
 type IconButtonSize = "sm" | "md" | "lg"
 
 type IconButtonProps = {
   Icon: React.ReactNode
-  label: string
+  label?: string
   onClick?: () => void
   type?: "button" | "submit" | "reset"
   variant?: IconButtonVariant
@@ -17,6 +17,8 @@ type IconButtonProps = {
 }
 
 const variantClasses: Record<IconButtonVariant, string> = {
+  primary:
+    "bg-[var(--color-surface-2)] hover:bg-[var(--color-surface)] text-[var(--color-accent)] border-[var(--color-accent)]",
   secondary:
     "bg-[var(--color-surface-2)] hover:bg-[var(--color-surface)] text-[var(--color-text)] border-[var(--color-border)]",
   ghost:

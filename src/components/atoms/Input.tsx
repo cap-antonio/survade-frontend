@@ -16,6 +16,27 @@ type InputProps = {
   label?: string
 }
 
+const PARASITIC_CHARS_REGEX = /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F\u200B-\u200D\u2060\uFEFF]/g
+
+const sanitizeInputValue = (
+  nextValue: string,
+  type: InputProps["type"],
+): string => {
+  const valueWithoutParasiticChars = nextValue.replace(PARASITIC_CHARS_REGEX, "")
+
+  if (type === "password") {
+    return valueWithoutParasiticChars
+  }
+
+  const singleLineValue = valueWithoutParasiticChars.replace(/[\r\n\t]+/g, " ")
+
+  if (type === "email") {
+    return singleLineValue.replace(/\s+/g, "")
+  }
+
+  return singleLineValue
+}
+
 export function Input({
   value,
   onChange,
@@ -52,7 +73,7 @@ export function Input({
         maxLength={maxLength}
         min={min}
         max={max}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => onChange(sanitizeInputValue(e.target.value, type))}
         className={cn(
           "w-full bg-[var(--color-surface-2)] border border-[var(--color-border)] rounded px-3 py-2",
           "text-sm text-[var(--color-text)] placeholder:text-[var(--color-muted)]",

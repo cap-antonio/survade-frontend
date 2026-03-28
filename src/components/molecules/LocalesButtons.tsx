@@ -1,4 +1,5 @@
 import { Button } from "@/components/atoms/Button"
+import { ToggleButton } from "@/components/atoms/ToggleButton"
 import { LANGS_DICT, SupportedLocale } from "@/i18n"
 import classNames from "classnames"
 
@@ -16,21 +17,18 @@ export const LocalesButtons = ({
   return (
     <div className={classNames("flex flex-wrap gap-2", className)}>
       {LANGS_DICT.map((l) => (
-        <Button
+        <ToggleButton
           key={l.code}
           onClick={() => onChange(l.code)}
+          isActive={activeLocales.includes(l.code)}
           className={classNames(
-            "px-3 py-1.5 rounded border text-xs font-mono transition-colors",
-            activeLocales.includes(l.code)
-              ? "border-[var(--color-accent)] bg-[var(--color-accent-dim)] text-[var(--color-text)]"
-              : "border-[var(--color-border)] bg-[var(--color-surface-2)] text-[var(--color-muted)]",
             !activeLocales.includes(l.code) &&
               activeLocales.length >= 3 &&
               "opacity-40 cursor-not-allowed",
           )}
         >
           {l.label}
-        </Button>
+        </ToggleButton>
       ))}
     </div>
   )

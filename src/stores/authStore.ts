@@ -6,6 +6,7 @@ type AuthStore = {
   setTokens: (accessToken: string, refreshToken: string) => void
   setAccessToken: (accessToken: string) => void
   clear: () => void
+  isAuth: boolean
 }
 
 const AUTH_SESSION_STORAGE_KEY = "auth_tokens"
@@ -63,23 +64,24 @@ const initialTokens = readTokensFromSessionStorage()
 export const useAuthStore = create<AuthStore>((set, get) => ({
   accessToken: initialTokens.accessToken,
   refreshToken: initialTokens.refreshToken,
+  isAuth: false,
 
   setTokens: (accessToken, refreshToken) =>
     set(() => {
       writeTokensToSessionStorage(accessToken, refreshToken)
-      return { accessToken, refreshToken }
+      return { accessToken, refreshToken, isAuth: true }
     }),
 
   setAccessToken: (accessToken) =>
     set(() => {
       const refreshToken = get().refreshToken
       writeTokensToSessionStorage(accessToken, refreshToken)
-      return { accessToken }
+      return { accessToken, isAuth: true }
     }),
 
   clear: () =>
     set(() => {
       writeTokensToSessionStorage(null, null)
-      return { accessToken: null, refreshToken: null }
+      return { accessToken: null, refreshToken: null, isAuth: false }
     }),
 }))

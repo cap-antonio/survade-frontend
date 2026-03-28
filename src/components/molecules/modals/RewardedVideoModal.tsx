@@ -1,18 +1,16 @@
 "use client"
 
-import { Modal } from "@/components/templates/Modal"
+import { Modal, ModalProps } from "@/components/templates/Modal"
 import { Button } from "@/components/atoms/Button"
 import { useUnlockRewarded } from "@/api/hooks/games"
 import { UnlockRewardedRequest } from "@/api/services"
 import { useLingui } from "@lingui/react/macro"
 
 type RewardedVideoModalProps = {
-  open: boolean
-  onClose: () => void
   gameCode: string
   hostToken: string
   feature: UnlockRewardedRequest.feature
-}
+} & ModalProps
 
 export function RewardedVideoModal({
   open,
