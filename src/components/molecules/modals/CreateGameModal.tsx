@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import cn from "classnames"
 import { Modal, ModalProps } from "@/components/templates/Modal"
 import { Button } from "@/components/atoms/Button"
 import { Input } from "@/components/atoms/Input"
@@ -18,7 +17,7 @@ import { ToggleButton } from "@/components/atoms/ToggleButton"
 import { MessageDescriptor } from "@lingui/core"
 
 type GameParamType = {
-  free: boolean
+  withAd: boolean
   label: MessageDescriptor
 } & Record<"key" | "emoji", string>
 
@@ -26,38 +25,39 @@ const DEFAULT_SCENARIO: GameParamType = {
   key: "mars",
   emoji: "🔴",
   label: msg`Mars`,
-  free: true,
+  withAd: false,
 }
 const SCENARIOS: GameParamType[] = [
   DEFAULT_SCENARIO,
-  { key: "orbit", emoji: "🚀", label: msg`Orbit`, free: false },
-  { key: "siege", emoji: "⚔️", label: msg`Siege`, free: false },
-  { key: "ship", emoji: "🚢", label: msg`Ship`, free: false },
-  { key: "pandemic", emoji: "🦠", label: msg`Pandemic`, free: false },
-  { key: "portal", emoji: "⏳", label: msg`Portal`, free: false },
+  { key: "orbit", emoji: "🚀", label: msg`Orbit`, withAd: true },
+  { key: "siege", emoji: "⚔️", label: msg`Siege`, withAd: true },
+  { key: "ship", emoji: "🚢", label: msg`Ship`, withAd: true },
+  { key: "pandemic", emoji: "🦠", label: msg`Pandemic`, withAd: true },
+  { key: "portal", emoji: "⏳", label: msg`Portal`, withAd: true },
 ]
 
 const ATTRS: GameParamType[] = [
-  { key: "role", emoji: "👤", label: msg`Profession`, free: true },
-  { key: "gender", emoji: "⚧", label: msg`Gender`, free: true },
-  { key: "health", emoji: "❤️", label: msg`Health`, free: true },
-  { key: "dark_secret", emoji: "🔒", label: msg`Dark Secret`, free: true },
-  { key: "special_skill", emoji: "⚡", label: msg`Skill`, free: true },
-  { key: "phobia", emoji: "😨", label: msg`Phobia`, free: true },
-  { key: "inventory_item", emoji: "🎒", label: msg`Item`, free: false },
-  { key: "personality_trait", emoji: "🎭", label: msg`Trait`, free: true },
+  { key: "role", emoji: "👤", label: msg`Profession`, withAd: false },
+  { key: "gender", emoji: "⚧", label: msg`Gender`, withAd: false },
+  { key: "health", emoji: "❤️", label: msg`Health`, withAd: false },
+  { key: "dark_secret", emoji: "🔒", label: msg`Dark Secret`, withAd: false },
+  { key: "special_skill", emoji: "⚡", label: msg`Skill`, withAd: false },
+  { key: "phobia", emoji: "😨", label: msg`Phobia`, withAd: false },
+  { key: "inventory_item", emoji: "🎒", label: msg`Item`, withAd: false },
+  { key: "personality_trait", emoji: "🎭", label: msg`Trait`, withAd: false },
+  { key: "hobby", emoji: "🎨", label: msg`Hobby`, withAd: false },
 ]
 
 const DEFAUT_TYPE: GameParamType = {
   key: "classic",
   emoji: "🏕",
   label: msg`Classic`,
-  free: true,
+  withAd: false,
 }
 const SABOTEUR_KEY = "with_saboteur"
 const TYPE: GameParamType[] = [
   DEFAUT_TYPE,
-  { key: SABOTEUR_KEY, emoji: "☠️", label: msg`With Saboteur`, free: false },
+  { key: SABOTEUR_KEY, emoji: "☠️", label: msg`With Saboteur`, withAd: true },
 ]
 
 const fallbackLoadingPhrase = msg`Almost ready...`
@@ -71,9 +71,25 @@ const LOADING_PHRASES = [
 ]
 
 const MIN_PLAYERS = 4
-const MAX_PLAYERS = 10
+const MAX_PLAYERS = 16
 const MIN_LANGS = 1
 const MAX_LANGS = 3
+
+const saboteurCountByPlayers: Record<number, number> = {
+  4: 1,
+  5: 1,
+  6: 1,
+  7: 2,
+  8: 2,
+  9: 2,
+  10: 2,
+  11: 2,
+  12: 2,
+  13: 2,
+  14: 2,
+  15: 2,
+  16: 2,
+}
 
 export function CreateGameModal({ open, onClose }: ModalProps) {
   const { t, i18n } = useLingui()
@@ -82,11 +98,13 @@ export function CreateGameModal({ open, onClose }: ModalProps) {
 
   const [settingKey, setSettingKey] = useState<GameParamType>(DEFAULT_SCENARIO)
   const [langs, setLangs] = useState<SupportedLocale[]>(["en"])
-  const [attrs, setAttrs] = useState<GameParamType[]>(ATTRS.slice(0, 6))
+  const [attrs, setAttrs] = useState<GameParamType[]>(ATTRS)
   const [gameType, setGameType] = useState<GameParamType>(DEFAUT_TYPE)
   const [playerCount, setPlayerCount] = useState(4)
   const [hostName, setHostName] = useState("")
   const [loadingPhraseIdx, setLoadingPhraseIdx] = useState(0)
+
+  const isSaboteurMode = gameType.key === SABOTEUR_KEY
 
   const toggleLang = (code: SupportedLocale): void => {
     setLangs((prev) => {
@@ -119,7 +137,7 @@ export function CreateGameModal({ open, onClose }: ModalProps) {
       {
         requestBody: {
           setting_key: settingKey.key,
-          saboteur_mode: gameType.key === SABOTEUR_KEY,
+          saboteur_mode: isSaboteurMode,
           langs,
           attrs: attrs.map(({ key }) => key),
           player_count: playerCount,
@@ -230,8 +248,9 @@ export function CreateGameModal({ open, onClose }: ModalProps) {
                 return (
                   <ToggleButton
                     key={attr.key}
-                    onClick={() => toggleAttr(attr)}
-                    isActive={attrs.some(({ key }) => key === attr.key)}
+                    // onClick={() => toggleAttr(attr)}
+                    // isActive={attrs.some(({ key }) => key === attr.key)}
+                    isActive={true}
                   >
                     {`${attr.emoji} ${i18n._(attr.label)}`}
                   </ToggleButton>
@@ -275,6 +294,12 @@ export function CreateGameModal({ open, onClose }: ModalProps) {
                   })
                 }
               />
+            </div>
+            <div className="flex gap-2 justify-center mt-3">
+              {isSaboteurMode && (
+                <ToggleButton>{` ☠️ ${t`Saboteurs in game`}: ${saboteurCountByPlayers[playerCount] ?? 1}`}</ToggleButton>
+              )}
+              <ToggleButton>{`${t`Max survivors count`}: ${Math.floor(playerCount / 2)}`}</ToggleButton>
             </div>
           </div>
 
