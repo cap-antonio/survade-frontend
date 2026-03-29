@@ -4,6 +4,7 @@ import { queryClient } from "../query"
 import { CACHE_KEYS } from "../CACHE_KEYS"
 
 import { ApiParams, TQueryProps } from "@/api/hooks/api.types"
+import type { GameHistorySummary } from "@/api/services"
 
 export const useGameQuery = (
   payload: ApiParams<typeof api.games.getGameApiGamesGameCodeGet>,
@@ -32,6 +33,23 @@ export const useGameHistory = (
     queryKey: [...CACHE_KEYS.game.history, payload],
     queryFn: ({ signal }) => {
       const promise = api.games.getHistoryApiGamesGameCodeHistoryGet(payload)
+
+      signal?.addEventListener("abort", () => {
+        promise.cancel()
+      })
+
+      return promise
+    },
+    ...options,
+  })
+
+export const useGameHistoryList = (
+  options?: TQueryProps<GameHistorySummary[]>,
+) =>
+  useQuery({
+    queryKey: CACHE_KEYS.game.historyList,
+    queryFn: ({ signal }) => {
+      const promise = api.games.listGameHistoriesApiGamesHistoryGet()
 
       signal?.addEventListener("abort", () => {
         promise.cancel()

@@ -96,11 +96,20 @@ msgid "Assigning character cards..."
 msgstr ""
 
 #: src/components/organisms/profile/ProfilePage.tsx:150
-msgid "Back"
+#~ msgid "Back"
+#~ msgstr ""
+
+#: src/components/organisms/profile/GameHistoryPage.tsx:82
+#: src/components/organisms/profile/ProfilePage.tsx:82
+msgid "Back to home"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:83
-msgid "Back to home"
+#: src/components/organisms/profile/LeaderboardPage.tsx:219
+msgid "Best players by overall classic performance."
+msgstr ""
+
+#: src/components/organisms/profile/LeaderboardPage.tsx:220
+msgid "Best saboteur specialists based on role-specific results."
 msgstr ""
 
 #: src/components/molecules/modals/CreateGameModal.tsx:323
@@ -115,8 +124,8 @@ msgstr ""
 msgid "Card Attributes"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:191
-#: src/components/organisms/profile/ProfilePage.tsx:247
+#: src/components/organisms/profile/ProfilePage.tsx:186
+#: src/components/organisms/profile/ProfilePage.tsx:242
 msgid "Change current password"
 msgstr ""
 
@@ -124,8 +133,17 @@ msgstr ""
 msgid "Choose the world your group will fight to survive in."
 msgstr ""
 
+#: src/components/organisms/profile/LeaderboardPage.tsx:107
+msgid "Civilian win rate"
+msgstr ""
+
 #: src/components/molecules/modals/CreateGameModal.tsx:54
+#: src/components/organisms/profile/LeaderboardPage.tsx:186
 msgid "Classic"
+msgstr ""
+
+#: src/components/organisms/profile/GameHistoryPage.tsx:136
+msgid "Code"
 msgstr ""
 
 #: src/components/molecules/modals/AuthModal.tsx:312
@@ -133,7 +151,7 @@ msgstr ""
 msgid "Code sent to"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:214
+#: src/components/organisms/profile/ProfilePage.tsx:209
 msgid "Confirm new password"
 msgstr ""
 
@@ -149,7 +167,15 @@ msgstr ""
 msgid "Could not join. The game may be full or already started."
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:102
+#: src/components/organisms/profile/GameHistoryPage.tsx:101
+msgid "Could not load game history"
+msgstr ""
+
+#: src/components/organisms/profile/LeaderboardPage.tsx:208
+msgid "Could not load leaderboard"
+msgstr ""
+
+#: src/components/organisms/profile/ProfilePage.tsx:101
 msgid "Could not load statistics"
 msgstr ""
 
@@ -177,13 +203,13 @@ msgstr ""
 
 #: src/components/molecules/modals/AuthModal.tsx:328
 #: src/components/molecules/modals/PasswordResetModal.tsx:203
-#: src/components/organisms/profile/ProfilePage.tsx:210
+#: src/components/organisms/profile/ProfilePage.tsx:205
 msgid "Create password"
 msgstr ""
 
 #: src/components/molecules/modals/DeleteAccountModal.tsx:81
-#: src/components/organisms/profile/ProfilePage.tsx:188
-#: src/components/organisms/profile/ProfilePage.tsx:198
+#: src/components/organisms/profile/ProfilePage.tsx:183
+#: src/components/organisms/profile/ProfilePage.tsx:193
 msgid "Current password"
 msgstr ""
 
@@ -197,15 +223,15 @@ msgstr ""
 
 #: src/components/molecules/modals/DeleteAccountModal.tsx:66
 #: src/components/molecules/modals/DeleteAccountModal.tsx:111
-#: src/components/organisms/profile/ProfilePage.tsx:273
+#: src/components/organisms/profile/ProfilePage.tsx:268
 msgid "Delete account"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:279
+#: src/components/organisms/profile/ProfilePage.tsx:274
 msgid "Delete your account and wipe all saved profile statistics from Survade."
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:349
+#: src/components/organisms/profile/ProfilePage.tsx:344
 msgid "Detected"
 msgstr ""
 
@@ -238,6 +264,10 @@ msgstr ""
 msgid "End Voting"
 msgstr ""
 
+#: src/components/organisms/profile/GameHistoryPage.tsx:142
+msgid "Ended"
+msgstr ""
+
 #: src/components/molecules/modals/AuthModal.tsx:319
 #: src/components/molecules/modals/PasswordResetModal.tsx:194
 msgid "Enter code"
@@ -245,7 +275,7 @@ msgstr ""
 
 #: src/components/molecules/modals/AuthModal.tsx:295
 #: src/components/molecules/modals/DeleteAccountModal.tsx:85
-#: src/components/organisms/profile/ProfilePage.tsx:202
+#: src/components/organisms/profile/ProfilePage.tsx:197
 msgid "Enter password"
 msgstr ""
 
@@ -265,7 +295,7 @@ msgstr ""
 msgid "Failed to create game. Please try again."
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:175
+#: src/components/organisms/profile/ProfilePage.tsx:170
 msgid "Favourite setting"
 msgstr ""
 
@@ -293,6 +323,8 @@ msgstr ""
 msgid "Game Experience"
 msgstr ""
 
+#: src/components/organisms/profile/GameHistoryPage.tsx:73
+#: src/components/organisms/profile/GameHistoryPage.tsx:119
 #: src/components/templates/Header.tsx:24
 msgid "Game history"
 msgstr ""
@@ -309,7 +341,9 @@ msgstr ""
 msgid "Game Over"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:309
+#: src/components/organisms/profile/LeaderboardPage.tsx:54
+#: src/components/organisms/profile/LeaderboardPage.tsx:103
+#: src/components/organisms/profile/ProfilePage.tsx:304
 msgid "Games"
 msgstr ""
 
@@ -337,7 +371,7 @@ msgstr ""
 msgid "Hiding secrets..."
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:363
+#: src/components/organisms/profile/ProfilePage.tsx:358
 msgid "Higher survival rate means the group trusts your arguments. Higher saboteur win rate means you can manipulate the table when the pressure rises."
 msgstr ""
 
@@ -346,20 +380,24 @@ msgid "Hobby"
 msgstr ""
 
 #: src/components/templates/Header.tsx:43
-msgid "Home"
-msgstr ""
+#~ msgid "Home"
+#~ msgstr ""
 
 #: src/components/organisms/game/HostControls.tsx:25
 #: src/components/organisms/game/Lobby.tsx:77
 msgid "Host"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:346
+#: src/components/organisms/profile/ProfilePage.tsx:341
 msgid "How often your sabotage plan worked."
 msgstr ""
 
 #: src/components/organisms/landing/HowToPlay.tsx:42
 msgid "How to Play"
+msgstr ""
+
+#: src/components/organisms/profile/GameHistoryPage.tsx:171
+msgid "In progress"
 msgstr ""
 
 #: src/components/molecules/modals/CreateGameModal.tsx:46
@@ -378,7 +416,7 @@ msgstr ""
 msgid "Join the Game"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:370
+#: src/components/organisms/profile/ProfilePage.tsx:365
 msgid "Keep playing"
 msgstr ""
 
@@ -390,11 +428,20 @@ msgstr ""
 msgid "Languages"
 msgstr ""
 
+#: src/components/organisms/profile/LeaderboardPage.tsx:177
 #: src/components/templates/Header.tsx:28
 msgid "Leaderboard"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:93
+#: src/components/organisms/profile/GameHistoryPage.tsx:92
+msgid "Loading game history..."
+msgstr ""
+
+#: src/components/organisms/profile/LeaderboardPage.tsx:202
+msgid "Loading leaderboard..."
+msgstr ""
+
+#: src/components/organisms/profile/ProfilePage.tsx:92
 msgid "Loading statistics..."
 msgstr ""
 
@@ -410,7 +457,7 @@ msgstr ""
 msgid "Max survivors count"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:296
+#: src/components/organisms/profile/ProfilePage.tsx:291
 msgid "My statistics"
 msgstr ""
 
@@ -419,11 +466,11 @@ msgid "Need at least 3 players to start"
 msgstr ""
 
 #: src/components/molecules/modals/PasswordResetModal.tsx:199
-#: src/components/organisms/profile/ProfilePage.tsx:206
+#: src/components/organisms/profile/ProfilePage.tsx:201
 msgid "New password"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:224
+#: src/components/organisms/profile/ProfilePage.tsx:219
 msgid "New passwords do not match."
 msgstr ""
 
@@ -435,19 +482,31 @@ msgstr ""
 msgid "No events this round"
 msgstr ""
 
+#: src/components/organisms/profile/GameHistoryPage.tsx:183
+msgid "No games yet"
+msgstr ""
+
+#: src/components/organisms/profile/LeaderboardPage.tsx:234
+msgid "No leaderboard data yet"
+msgstr ""
+
 #: src/components/organisms/game/EndScreen.tsx:137
 msgid "No saboteur in this game"
+msgstr ""
+
+#: src/components/organisms/profile/LeaderboardPage.tsx:237
+msgid "Once enough matches are played, the best players will appear here."
 msgstr ""
 
 #: src/components/organisms/landing/HowToPlay.tsx:11
 msgid "One player creates a game and shares the code. Everyone else joins via the link or code."
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:287
+#: src/components/organisms/profile/ProfilePage.tsx:282
 msgid "Open account deletion"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:267
+#: src/components/organisms/profile/ProfilePage.tsx:262
 msgid "Open password reset"
 msgstr ""
 
@@ -455,7 +514,11 @@ msgstr ""
 #~ msgid "Open the account menu on the landing page and sign in to see your stats."
 #~ msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:80
+#: src/components/organisms/profile/GameHistoryPage.tsx:79
+msgid "Open the user menu and sign in to see your recent games."
+msgstr ""
+
+#: src/components/organisms/profile/ProfilePage.tsx:79
 msgid "Open the user menu on the landing page and sign in to see your stats."
 msgstr ""
 
@@ -472,6 +535,14 @@ msgstr ""
 msgid "Over several rounds, reveal your attributes to convince others you deserve a spot in the safe place."
 msgstr ""
 
+#: src/components/organisms/profile/LeaderboardPage.tsx:104
+msgid "Overall win rate"
+msgstr ""
+
+#: src/components/organisms/profile/GameHistoryPage.tsx:116
+msgid "Overview"
+msgstr ""
+
 #: src/components/molecules/modals/CreateGameModal.tsx:35
 #: src/components/organisms/landing/SettingsGrid.tsx:39
 msgid "Pandemic"
@@ -482,7 +553,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:136
+#: src/components/organisms/profile/ProfilePage.tsx:135
 msgid "Password changed successfully."
 msgstr ""
 
@@ -494,8 +565,13 @@ msgstr ""
 msgid "Phobia"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:373
+#: src/components/organisms/profile/ProfilePage.tsx:368
 msgid "Play more rounds to sharpen your profile and discover your strongest role."
+msgstr ""
+
+#: src/components/organisms/profile/LeaderboardPage.tsx:53
+#: src/components/organisms/profile/LeaderboardPage.tsx:102
+msgid "Player"
 msgstr ""
 
 #: src/components/organisms/game/GameHistory.tsx:33
@@ -504,10 +580,16 @@ msgstr ""
 
 #: src/components/molecules/modals/CreateGameModal.tsx:265
 #: src/components/organisms/game/Lobby.tsx:70
+#: src/components/organisms/profile/GameHistoryPage.tsx:139
 msgid "Players"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:105
+#: src/components/organisms/profile/LeaderboardPage.tsx:211
+msgid "Please refresh the page and try again."
+msgstr ""
+
+#: src/components/organisms/profile/GameHistoryPage.tsx:104
+#: src/components/organisms/profile/ProfilePage.tsx:104
 msgid "Please refresh the page or sign in again."
 msgstr ""
 
@@ -524,16 +606,25 @@ msgid "Profession"
 msgstr ""
 
 #: src/components/molecules/UserMenu.tsx:92
-#: src/components/organisms/profile/ProfilePage.tsx:155
+#: src/components/organisms/profile/ProfilePage.tsx:150
 msgid "Profile"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:360
+#: src/components/organisms/profile/ProfilePage.tsx:355
 msgid "Quick read"
+msgstr ""
+
+#: src/components/organisms/profile/LeaderboardPage.tsx:52
+#: src/components/organisms/profile/LeaderboardPage.tsx:101
+msgid "Rank"
 msgstr ""
 
 #: src/components/organisms/game/EndScreen.tsx:165
 msgid "Rate the Game"
+msgstr ""
+
+#: src/components/organisms/profile/GameHistoryPage.tsx:128
+msgid "Recent matches you have played in Survade."
 msgstr ""
 
 #: src/components/molecules/modals/AuthModal.tsx:124
@@ -553,15 +644,15 @@ msgstr ""
 msgid "Remove player?"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:276
+#: src/components/organisms/profile/ProfilePage.tsx:271
 msgid "Remove profile and statistics"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:218
+#: src/components/organisms/profile/ProfilePage.tsx:213
 msgid "Repeat new password"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:260
+#: src/components/organisms/profile/ProfilePage.tsx:255
 msgid "Request a code by email, then confirm it with your new password in a separate modal."
 msgstr ""
 
@@ -577,12 +668,12 @@ msgstr ""
 msgid "Resend code"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:257
+#: src/components/organisms/profile/ProfilePage.tsx:252
 msgid "Reset by email code"
 msgstr ""
 
 #: src/components/molecules/modals/PasswordResetModal.tsx:164
-#: src/components/organisms/profile/ProfilePage.tsx:254
+#: src/components/organisms/profile/ProfilePage.tsx:249
 msgid "Reset password"
 msgstr ""
 
@@ -600,32 +691,38 @@ msgstr ""
 msgid "Round {0} started"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:351
+#: src/components/organisms/profile/ProfilePage.tsx:346
 msgid "Rounds where the group exposed you."
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:316
+#: src/components/organisms/profile/ProfilePage.tsx:311
 msgid "Rounds where you made it into the safe place."
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:336
+#: src/components/organisms/profile/ProfilePage.tsx:331
 msgid "Rounds where you played as the saboteur."
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:341
+#: src/components/organisms/profile/ProfilePage.tsx:336
 msgid "Rounds you sabotaged successfully."
 msgstr ""
 
 #: src/components/organisms/game/EndScreen.tsx:115
-#: src/components/organisms/profile/ProfilePage.tsx:329
+#: src/components/organisms/profile/LeaderboardPage.tsx:191
+#: src/components/organisms/profile/ProfilePage.tsx:324
 msgid "Saboteur"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:334
+#: src/components/organisms/profile/ProfilePage.tsx:329
 msgid "Saboteur games"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:339
+#: src/components/organisms/profile/LeaderboardPage.tsx:106
+msgid "Saboteur win rate"
+msgstr ""
+
+#: src/components/organisms/profile/LeaderboardPage.tsx:105
+#: src/components/organisms/profile/ProfilePage.tsx:334
 msgid "Saboteur wins"
 msgstr ""
 
@@ -640,6 +737,7 @@ msgstr ""
 #: src/components/molecules/modals/CreateGameModal.tsx:194
 #: src/components/organisms/game/EndScreen.tsx:168
 #: src/components/organisms/game/ScenarioPanel.tsx:27
+#: src/components/organisms/profile/GameHistoryPage.tsx:137
 msgid "Scenario"
 msgstr ""
 
@@ -656,7 +754,11 @@ msgstr ""
 msgid "Send code"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:163
+#: src/components/organisms/profile/GameHistoryPage.tsx:138
+msgid "Setting"
+msgstr ""
+
+#: src/components/organisms/profile/ProfilePage.tsx:158
 msgid "Settings"
 msgstr ""
 
@@ -681,7 +783,8 @@ msgstr ""
 msgid "Sign in"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:77
+#: src/components/organisms/profile/GameHistoryPage.tsx:76
+#: src/components/organisms/profile/ProfilePage.tsx:76
 msgid "Sign in required"
 msgstr ""
 
@@ -709,7 +812,11 @@ msgstr ""
 msgid "Start with your email and we'll send you a verification code."
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:74
+#: src/components/organisms/profile/GameHistoryPage.tsx:141
+msgid "Started"
+msgstr ""
+
+#: src/components/organisms/profile/ProfilePage.tsx:73
 msgid "Statistics"
 msgstr ""
 
@@ -717,7 +824,7 @@ msgstr ""
 msgid "Submit Rating"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:319
+#: src/components/organisms/profile/ProfilePage.tsx:314
 msgid "Success rate"
 msgstr ""
 
@@ -725,7 +832,7 @@ msgstr ""
 msgid "Survave and parsuade"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:304
+#: src/components/organisms/profile/ProfilePage.tsx:299
 msgid "Survival"
 msgstr ""
 
@@ -737,7 +844,7 @@ msgstr ""
 msgid "Survive"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:314
+#: src/components/organisms/profile/ProfilePage.tsx:309
 msgid "Survived"
 msgstr ""
 
@@ -746,6 +853,7 @@ msgid "Survived!"
 msgstr ""
 
 #: src/components/organisms/game/EndScreen.tsx:73
+#: src/components/organisms/profile/GameHistoryPage.tsx:140
 msgid "Survivors"
 msgstr ""
 
@@ -801,7 +909,11 @@ msgstr ""
 msgid "Time Portal"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:311
+#: src/components/organisms/profile/LeaderboardPage.tsx:174
+msgid "Top players"
+msgstr ""
+
+#: src/components/organisms/profile/ProfilePage.tsx:306
 msgid "Total survival rounds played."
 msgstr ""
 
@@ -817,7 +929,7 @@ msgstr ""
 msgid "Use Power"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:194
+#: src/components/organisms/profile/ProfilePage.tsx:189
 msgid "Use your current password to set a new one for this account."
 msgstr ""
 
@@ -886,8 +998,17 @@ msgstr ""
 msgid "We sent a verification code to your email."
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:344
+#: src/components/organisms/profile/GameHistoryPage.tsx:186
+msgid "When you finish your first Survade session, it will appear here."
+msgstr ""
+
+#: src/components/organisms/profile/LeaderboardPage.tsx:56
+#: src/components/organisms/profile/ProfilePage.tsx:339
 msgid "Win rate"
+msgstr ""
+
+#: src/components/organisms/profile/LeaderboardPage.tsx:55
+msgid "Wins"
 msgstr ""
 
 #: src/components/molecules/modals/CreateGameModal.tsx:60
@@ -923,10 +1044,10 @@ msgstr ""
 msgid "Your name in game"
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:299
+#: src/components/organisms/profile/ProfilePage.tsx:294
 msgid "Your personal survival and saboteur performance."
 msgstr ""
 
-#: src/components/organisms/profile/ProfilePage.tsx:321
+#: src/components/organisms/profile/ProfilePage.tsx:316
 msgid "Your survival conversion rate."
 msgstr ""

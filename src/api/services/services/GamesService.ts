@@ -7,6 +7,8 @@ import type { CountedResponse } from '../models/CountedResponse';
 import type { CreateGameRequest } from '../models/CreateGameRequest';
 import type { CreateGameResponse } from '../models/CreateGameResponse';
 import type { EventsResponse } from '../models/EventsResponse';
+import type { GameHistoryDetailResponse } from '../models/GameHistoryDetailResponse';
+import type { GameHistorySummary } from '../models/GameHistorySummary';
 import type { JoinGameRequest } from '../models/JoinGameRequest';
 import type { JoinGameResponse } from '../models/JoinGameResponse';
 import type { OkResponse } from '../models/OkResponse';
@@ -42,6 +44,18 @@ export class GamesService {
             errors: {
                 422: `Validation Error`,
             },
+        });
+    }
+
+    /**
+     * List Game Histories
+     * @returns GameHistorySummary Successful Response
+     * @throws ApiError
+     */
+    public listGameHistoriesApiGamesHistoryGet(): CancelablePromise<Array<GameHistorySummary>> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/api/games/history',
         });
     }
 
@@ -348,6 +362,28 @@ export class GamesService {
             url: '/api/games/{game_code}/history',
             path: {
                 'game_code': gameCode,
+            },
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+
+    /**
+     * Get History Detail
+     * @returns GameHistoryDetailResponse Successful Response
+     * @throws ApiError
+     */
+    public getHistoryDetailApiGamesHistoryGameIdGet({
+        gameId,
+    }: {
+        gameId: string,
+    }): CancelablePromise<GameHistoryDetailResponse> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/api/games/history/{game_id}',
+            path: {
+                'game_id': gameId,
             },
             errors: {
                 422: `Validation Error`,

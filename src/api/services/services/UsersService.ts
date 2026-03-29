@@ -2,8 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { ClassicLeaderboardEntry } from '../models/ClassicLeaderboardEntry';
 import type { DeleteAccountRequest } from '../models/DeleteAccountRequest';
-import type { LeaderboardEntry } from '../models/LeaderboardEntry';
+import type { SaboteurLeaderboardEntry } from '../models/SaboteurLeaderboardEntry';
 import type { UserPublicProfile } from '../models/UserPublicProfile';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -72,18 +73,18 @@ export class UsersService {
     }
 
     /**
-     * Leaderboard Survival
-     * @returns LeaderboardEntry Successful Response
+     * Leaderboard Classic
+     * @returns ClassicLeaderboardEntry Successful Response
      * @throws ApiError
      */
-    public leaderboardSurvivalApiLeaderboardSurvivalGet({
+    public leaderboardClassicApiLeaderboardClassicGet({
         limit = 50,
     }: {
         limit?: number,
-    }): CancelablePromise<Array<LeaderboardEntry>> {
+    }): CancelablePromise<Array<ClassicLeaderboardEntry>> {
         return this.httpRequest.request({
             method: 'GET',
-            url: '/api/leaderboard/survival',
+            url: '/api/leaderboard/classic',
             query: {
                 'limit': limit,
             },
@@ -95,14 +96,14 @@ export class UsersService {
 
     /**
      * Leaderboard Saboteur
-     * @returns LeaderboardEntry Successful Response
+     * @returns SaboteurLeaderboardEntry Successful Response
      * @throws ApiError
      */
     public leaderboardSaboteurApiLeaderboardSaboteurGet({
         limit = 50,
     }: {
         limit?: number,
-    }): CancelablePromise<Array<LeaderboardEntry>> {
+    }): CancelablePromise<Array<SaboteurLeaderboardEntry>> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/api/leaderboard/saboteur',

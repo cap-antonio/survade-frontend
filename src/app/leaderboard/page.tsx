@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { LeaderboardPage } from "@/components/organisms/profile/LeaderboardPage"
 import { Header } from "@/components/templates/Header"
 import { DEFAULT_LOCALE, SUPPORTED_LOCALES, getLocalizedPath } from "@/i18n"
 import { initLingui } from "@/initLingui"
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function LeaderboardPage(): Promise<React.ReactElement> {
+export default async function LeaderboardRoutePage(): Promise<React.ReactElement> {
   await initLingui(DEFAULT_LOCALE)
 
   return (
@@ -26,7 +27,7 @@ export default async function LeaderboardPage(): Promise<React.ReactElement> {
       <main className="min-h-screen bg-background">
         <Header locale={DEFAULT_LOCALE} />
         <section className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
-          <h1 className="text-4xl font-black tracking-tight">Leaderboard</h1>
+          <LeaderboardPage />
         </section>
       </main>
     </Providers>

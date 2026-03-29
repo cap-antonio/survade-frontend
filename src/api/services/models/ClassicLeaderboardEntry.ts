@@ -3,11 +3,12 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type LeaderboardEntry = {
+export type ClassicLeaderboardEntry = {
     rank: number;
     user_id: string;
     display_name: string;
-    rate: number;
-    games: number;
+    games_played: number;
+    wins: number;
+    win_rate: number;
 };
 

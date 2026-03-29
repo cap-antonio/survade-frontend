@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation"
+import { GameHistoryPage } from "@/components/organisms/profile/GameHistoryPage"
 import { Header } from "@/components/templates/Header"
 import {
   DEFAULT_LOCALE,
@@ -35,7 +36,7 @@ export default async function LocalizedGameHistoryPage({
       <main className="min-h-screen bg-background">
         <Header locale={slug as SupportedLocale} />
         <section className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
-          <h1 className="text-4xl font-black tracking-tight">Game history</h1>
+          <GameHistoryPage locale={slug as SupportedLocale} />
         </section>
       </main>
     </Providers>

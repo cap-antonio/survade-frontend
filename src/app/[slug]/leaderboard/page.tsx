@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation"
+import { LeaderboardPage } from "@/components/organisms/profile/LeaderboardPage"
 import { Header } from "@/components/templates/Header"
 import {
   DEFAULT_LOCALE,
@@ -35,7 +36,7 @@ export default async function LocalizedLeaderboardPage({
       <main className="min-h-screen bg-background">
         <Header locale={slug as SupportedLocale} />
         <section className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
-          <h1 className="text-4xl font-black tracking-tight">Leaderboard</h1>
+          <LeaderboardPage />
         </section>
       </main>
     </Providers>
