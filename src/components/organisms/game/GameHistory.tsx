@@ -1,21 +1,94 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useLingui } from "@lingui/react/macro"
+import type {
+  GameHistoryFieldReveal,
+  GameHistoryPowerUse,
+  GameHistoryRemoval,
+  GameHistoryRound,
+  GameHistoryVote,
+} from "@/api/services"
 import { useGameHistory } from "@/api/hooks/games"
 import { Spinner } from "@/components/atoms/Spinner"
 import { Button } from "@/components/atoms/Button"
-import type { GameEvent } from "@/api/generated/schema"
-import { useLingui } from "@lingui/react/macro"
 
 type GameHistoryProps = {
-  gameId: string
+  gameId?: string
   playerNameMap: Record<number, string>
 }
 
 export function GameHistory({ gameId, playerNameMap }: GameHistoryProps) {
   const { t } = useLingui()
-  const { data, isLoading } = useGameHistory({ gameId })
-  const [currentRound, setCurrentRound] = useState(1)
+  const { data, isLoading } = useGameHistory(
+    { gameId: gameId ?? "" },
+    { enabled: !!gameId },
+  )
+  const [currentRound, setCurrentRound] = useState<number | null>(null)
+
+  const getPlayerName = (playerId?: number | null): string => {
+    if (playerId === undefined || playerId === null) return t`Unknown player`
+    return playerNameMap[playerId] ?? t`Player ${playerId}`
+  }
+
+  const renderReveal = (reveal: GameHistoryFieldReveal): string => {
+    const performedBy = reveal.by_player_id
+      ? t`${getPlayerName(reveal.by_player_id)} triggered it`
+      : null
+
+    return (
+      t`${getPlayerName(reveal.player_id)} revealed ${reveal.field}` +
+      (reveal.power ? ` (${reveal.power})` : "") +
+      (performedBy ? `, ${performedBy}` : "")
+    )
+  }
+
+  const renderPowerUse = (powerUse: GameHistoryPowerUse): string => {
+    const target = powerUse.target_player_id
+      ? t` on ${getPlayerName(powerUse.target_player_id)}`
+      : ""
+    const forcedField = powerUse.forced_field
+      ? t`, forcing ${powerUse.forced_field}`
+      : ""
+
+    return t`${getPlayerName(powerUse.player_id)} used ${powerUse.power}${target}${forcedField}`
+  }
+
+  const renderVote = (vote: GameHistoryVote): string =>
+    t`${getPlayerName(vote.player_id)} voted against ${getPlayerName(vote.target_player_id)}`
+
+  const renderRemoval = (removal: GameHistoryRemoval): string => {
+    const reason = removal.reason ? t` because ${removal.reason}` : ""
+    return t`${getPlayerName(removal.player_id)} was removed by ${removal.removal_type}${reason}`
+  }
+
+  const getRoundEvents = (round: GameHistoryRound): string[] => [
+    ...(round.opened_fields?.map(renderReveal) ?? []),
+    ...(round.powers_used?.map(renderPowerUse) ?? []),
+    ...(round.votes?.map(renderVote) ?? []),
+    ...(round.removed_players?.map(renderRemoval) ?? []),
+    ...round.events.map((event) => {
+      const eventType =
+        typeof event.type === "string" ? event.type.replaceAll("_", " ") : null
+
+      return eventType
+        ? t`Event: ${eventType.toLowerCase()}`
+        : t`Recorded system event`
+    }),
+  ]
+
+  useEffect(() => {
+    if (!data?.rounds.length) return
+    setCurrentRound((value) => value ?? data.rounds[0]!.round)
+  }, [data?.rounds])
+
+  if (!gameId) {
+    return (
+      <p className="py-4 text-center text-sm text-muted">
+        {t`Game history is not available for this match yet.`}
+      </p>
+    )
+  }
 
   if (isLoading) {
     return (
@@ -25,62 +98,17 @@ export function GameHistory({ gameId, playerNameMap }: GameHistoryProps) {
     )
   }
 
-  function eventLabel(
-    event: GameEvent,
-    playerNameMap: Record<number, string>,
-  ): string {
-    const name = (id?: number): string =>
-      id !== undefined ? (playerNameMap[id] ?? t`Player ${id}`) : "?"
-
-    switch (event.type) {
-      case "ROUND_STARTED":
-        return t`Round ${event.round ?? "?"} started`
-      case "CARD_REVEALED":
-        return t`${name(event.player_id)} revealed ${event.field ?? "attribute"}`
-      case "POWER_USED":
-        return t`${name(event.player_id)} used their power`
-      case "VOTE_CAST":
-        return t`${name(event.player_id)} voted against ${name(event.target_player_id)}`
-      case "PLAYER_ELIMINATED":
-        return t`${name(event.eliminated_player_id ?? event.player_id)} was eliminated`
-      case "PLAYER_KICKED":
-        return t`${name(event.player_id)} was removed by host`
-      case "GAME_ENDED":
-        return t`Game ended`
-      case "SABOTEUR_REVEALED":
-        return t`${name(event.player_id)} was the saboteur!`
-      case "SPY_RESULT":
-        return t`${name(event.player_id)} used spy ability`
-      case "SCAN_RESULT":
-        return t`${name(event.player_id)} scanned a player`
-      default:
-        return event.type
-    }
-  }
-
   if (!data) return <></>
 
-  const totalRounds = data.rounds
-  // TODO: check WTF
-  // const roundEvents = data.events.filter((e) =>
-  //   e.type === "ROUND_STARTED" ? (e.round ?? 1) === currentRound : true,
-  // )
-
-  // Group events by round
-  const eventsByRound: Record<number, GameEvent[]> = {}
-  let round = 1
-  for (const event of data.events) {
-    if (event.type === "ROUND_STARTED" && event.round) {
-      round = event.round
-      eventsByRound[round] = eventsByRound[round] ?? []
-      eventsByRound[round]!.push(event)
-    } else {
-      eventsByRound[round] = eventsByRound[round] ?? []
-      eventsByRound[round]!.push(event)
-    }
-  }
-
-  const events = eventsByRound[currentRound] ?? []
+  const totalRounds = data.rounds.length
+  const activeRoundIndex = data.rounds.findIndex((round: GameHistoryRound) => {
+    return round.round === currentRound
+  })
+  const activeRound = data.rounds[activeRoundIndex] ?? data.rounds[0]
+  const events = activeRound ? getRoundEvents(activeRound) : []
+  const canGoPrev = activeRoundIndex > 0
+  const canGoNext =
+    activeRoundIndex >= 0 && activeRoundIndex < data.rounds.length - 1
 
   return (
     <div className="space-y-4">
@@ -89,19 +117,26 @@ export function GameHistory({ gameId, playerNameMap }: GameHistoryProps) {
         <Button
           variant="ghost"
           size="sm"
-          disabled={currentRound <= 1}
-          onClick={() => setCurrentRound((r) => r - 1)}
+          disabled={!canGoPrev}
+          onClick={() =>
+            setCurrentRound(data.rounds[Math.max(activeRoundIndex - 1, 0)]!.round)
+          }
         >
           {`← ${t`Prev`}`}
         </Button>
         <span className="text-sm font-mono flex-1 text-center text-muted">
-          {`${t`Round`} ${currentRound} / ${totalRounds}`}
+          {`${t`Round`} ${activeRound?.round ?? 1} / ${totalRounds}`}
         </span>
         <Button
           variant="ghost"
           size="sm"
-          disabled={currentRound >= totalRounds}
-          onClick={() => setCurrentRound((r) => r + 1)}
+          disabled={!canGoNext}
+          onClick={() =>
+            setCurrentRound(
+              data.rounds[Math.min(activeRoundIndex + 1, data.rounds.length - 1)]!
+                .round,
+            )
+          }
         >
           {`${t`Next`} →`}
         </Button>
@@ -119,9 +154,7 @@ export function GameHistory({ gameId, playerNameMap }: GameHistoryProps) {
             key={i}
             className="flex items-center gap-3 py-2 border-b border-border last:border-0"
           >
-            <span className="text-sm text-muted">
-              {eventLabel(event, playerNameMap)}
-            </span>
+            <span className="text-sm text-muted">{event}</span>
           </div>
         ))}
       </div>

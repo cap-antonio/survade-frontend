@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useLingui } from "@lingui/react/macro"
 import { History } from "lucide-react"
 import { useGameHistoryList } from "@/api/hooks/games"
@@ -62,6 +63,7 @@ export function GameHistoryPage({
   locale,
 }: GameHistoryPageProps): React.ReactElement {
   const { t } = useLingui()
+  const router = useRouter()
   const accessToken = useAuthStore((state) => state.accessToken)
   const { data, isLoading, isError } = useGameHistoryList({
     enabled: !!accessToken,
@@ -176,6 +178,11 @@ export function GameHistoryPage({
           title: t`No games yet`,
           subtitle: t`When you finish your first Survade session, it will appear here.`,
         }}
+        onRowClick={(item) =>
+          router.push(
+            getLocalizedPath(locale, `game-history/details?gameId=${item.game_id}`),
+          )
+        }
         getRowKey={(item) => item.game_id}
       />
     </section>

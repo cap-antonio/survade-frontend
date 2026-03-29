@@ -1,11 +1,12 @@
 "use client"
 
+import { useRouter } from "next/navigation"
 import { useLingui } from "@lingui/react/macro"
 import { History, ShieldAlert } from "lucide-react"
 import { useMyGames } from "@/api/hooks/users"
 import type { GameHistorySummary } from "@/api/services"
 import { Table, type TableColumn } from "@/components/molecules/Table"
-import type { SupportedLocale } from "@/i18n"
+import { getLocalizedPath, type SupportedLocale } from "@/i18n"
 
 type ProfileGamesHistoryProps = {
   locale: SupportedLocale
@@ -59,6 +60,7 @@ export function ProfileGamesHistory({
   locale,
 }: ProfileGamesHistoryProps): React.ReactElement {
   const { t } = useLingui()
+  const router = useRouter()
   const { data, isLoading, isError } = useMyGames({ limit: 50 })
 
   if (isLoading) {
@@ -145,6 +147,11 @@ export function ProfileGamesHistory({
           title: t`No games yet`,
           subtitle: t`When you finish your first Survade session, it will appear here.`,
         }}
+        onRowClick={(item) =>
+          router.push(
+            getLocalizedPath(locale, `game-history/details?gameId=${item.game_id}`),
+          )
+        }
         getRowKey={(item) => item.game_id}
       />
     </section>

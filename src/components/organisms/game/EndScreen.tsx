@@ -28,15 +28,24 @@ export function EndScreen({ code, locale }: EndScreenProps) {
 
   if (!game) return <></>
 
-  const survivors = game.players.filter((p) => !p.is_eliminated)
-  const eliminated = game.players.filter((p) => p.is_eliminated)
-  const saboteur = game.players.find((p) => {
-    const card = p.card as { is_saboteur?: boolean }
+  type EndScreenPlayer = {
+    player_id: number
+    display_name: string
+    is_eliminated: boolean
+    card: { is_saboteur?: boolean }
+  }
+
+  const players = game.players as EndScreenPlayer[]
+  const survivors = players.filter((p) => !p.is_eliminated)
+  const eliminated = players.filter((p) => p.is_eliminated)
+  const historyGameId = (game as { game_id?: string }).game_id
+  const saboteur = players.find((p) => {
+    const card = p.card
     return card.is_saboteur === true
   })
 
   const playerNameMap: Record<number, string> = {}
-  for (const p of game.players) {
+  for (const p of players) {
     playerNameMap[p.player_id] = p.display_name
   }
 
@@ -154,7 +163,7 @@ export function EndScreen({ code, locale }: EndScreenProps) {
           </button>
           {showHistory && (
             <div className="mt-4 bg-surface border border-border rounded-lg p-4">
-              <GameHistory code={code} playerNameMap={playerNameMap} />
+              <GameHistory gameId={historyGameId} playerNameMap={playerNameMap} />
             </div>
           )}
         </div>

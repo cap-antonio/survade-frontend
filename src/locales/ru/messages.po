@@ -11,47 +11,73 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#. placeholder {0}: name(event.player_id)
-#. placeholder {1}: event.field ?? "attribute"
-#: src/components/organisms/game/GameHistory.tsx:39
+#. placeholder {0}: removal.reason
+#: src/components/organisms/game/GameHistory.tsx:61
+msgid " because {0}"
+msgstr ""
+
+#. placeholder {0}: getPlayerName(powerUse.target_player_id)
+#: src/components/organisms/game/GameHistory.tsx:48
+msgid " on {0}"
+msgstr ""
+
+#. placeholder {0}: powerUse.forced_field
+#: src/components/organisms/game/GameHistory.tsx:51
+msgid ", forcing {0}"
+msgstr ""
+
+#. placeholder {0}: getPlayerName(reveal.player_id)
+#. placeholder {1}: reveal.field
+#: src/components/organisms/game/GameHistory.tsx:40
 msgid "{0} revealed {1}"
 msgstr ""
 
-#. placeholder {0}: name(event.player_id)
 #: src/components/organisms/game/GameHistory.tsx:55
-msgid "{0} scanned a player"
+#~ msgid "{0} scanned a player"
+#~ msgstr ""
+
+#. placeholder {0}: getPlayerName(reveal.by_player_id)
+#: src/components/organisms/game/GameHistory.tsx:36
+msgid "{0} triggered it"
 msgstr ""
 
-#. placeholder {0}: name(event.player_id)
+#. placeholder {0}: getPlayerName(powerUse.player_id)
+#. placeholder {1}: powerUse.power
+#: src/components/organisms/game/GameHistory.tsx:54
+msgid "{0} used {1}{target}{forcedField}"
+msgstr ""
+
 #: src/components/organisms/game/GameHistory.tsx:53
-msgid "{0} used spy ability"
-msgstr ""
+#~ msgid "{0} used spy ability"
+#~ msgstr ""
 
-#. placeholder {0}: name(event.player_id)
 #: src/components/organisms/game/GameHistory.tsx:41
-msgid "{0} used their power"
-msgstr ""
+#~ msgid "{0} used their power"
+#~ msgstr ""
 
-#. placeholder {0}: name(event.player_id)
-#. placeholder {1}: name(event.target_player_id)
-#: src/components/organisms/game/GameHistory.tsx:43
+#. placeholder {0}: getPlayerName(vote.player_id)
+#. placeholder {1}: getPlayerName(vote.target_player_id)
+#: src/components/organisms/game/GameHistory.tsx:58
 msgid "{0} voted against {1}"
 msgstr ""
 
-#. placeholder {0}: name(event.eliminated_player_id ?? event.player_id)
 #: src/components/organisms/game/GameHistory.tsx:45
-msgid "{0} was eliminated"
+#~ msgid "{0} was eliminated"
+#~ msgstr ""
+
+#. placeholder {0}: getPlayerName(removal.player_id)
+#. placeholder {1}: removal.removal_type
+#: src/components/organisms/game/GameHistory.tsx:62
+msgid "{0} was removed by {1}{reason}"
 msgstr ""
 
-#. placeholder {0}: name(event.player_id)
 #: src/components/organisms/game/GameHistory.tsx:47
-msgid "{0} was removed by host"
-msgstr ""
+#~ msgid "{0} was removed by host"
+#~ msgstr ""
 
-#. placeholder {0}: name(event.player_id)
 #: src/components/organisms/game/GameHistory.tsx:51
-msgid "{0} was the saboteur!"
-msgstr ""
+#~ msgid "{0} was the saboteur!"
+#~ msgstr ""
 
 #. placeholder {0}: t`Use Power`
 #: src/components/organisms/game/PlayerCard.tsx:192
@@ -79,6 +105,10 @@ msgstr ""
 #~ msgid "Account menu"
 #~ msgstr ""
 
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:537
+msgid "Alive"
+msgstr ""
+
 #: src/components/molecules/modals/CreateGameModal.tsx:63
 msgid "Almost ready..."
 msgstr ""
@@ -95,11 +125,20 @@ msgstr ""
 msgid "Assigning character cards..."
 msgstr ""
 
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:511
+msgid "Attributes"
+msgstr ""
+
 #: src/components/organisms/profile/ProfilePage.tsx:150
 #~ msgid "Back"
 #~ msgstr ""
 
-#: src/components/organisms/profile/GameHistoryPage.tsx:83
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:445
+#: src/components/organisms/profile/GameHistoryDetailRouteContent.tsx:35
+msgid "Back to history"
+msgstr ""
+
+#: src/components/organisms/profile/GameHistoryPage.tsx:85
 #: src/components/organisms/profile/ProfilePage.tsx:42
 msgid "Back to home"
 msgstr ""
@@ -142,14 +181,18 @@ msgstr ""
 msgid "Classic"
 msgstr ""
 
-#: src/components/molecules/profile/ProfileGamesHistory.tsx:90
-#: src/components/organisms/profile/GameHistoryPage.tsx:114
+#: src/components/molecules/profile/ProfileGamesHistory.tsx:92
+#: src/components/organisms/profile/GameHistoryPage.tsx:116
 msgid "Code"
 msgstr ""
 
 #: src/components/molecules/modals/AuthModal.tsx:312
 #: src/components/molecules/modals/PasswordResetModal.tsx:187
 msgid "Code sent to"
+msgstr ""
+
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:515
+msgid "Configured players"
 msgstr ""
 
 #: src/components/molecules/profile/ProfileSettings.tsx:146
@@ -168,7 +211,8 @@ msgstr ""
 msgid "Could not join. The game may be full or already started."
 msgstr ""
 
-#: src/components/organisms/profile/GameHistoryPage.tsx:102
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:393
+#: src/components/organisms/profile/GameHistoryPage.tsx:104
 msgid "Could not load game history"
 msgstr ""
 
@@ -180,11 +224,11 @@ msgstr ""
 msgid "Could not load statistics"
 msgstr ""
 
-#: src/components/molecules/profile/ProfileGamesHistory.tsx:78
+#: src/components/molecules/profile/ProfileGamesHistory.tsx:80
 msgid "Could not load your games"
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:206
+#: src/components/organisms/game/EndScreen.tsx:215
 msgid "Create a new game"
 msgstr ""
 
@@ -240,8 +284,12 @@ msgstr ""
 msgid "Detected"
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:127
+#: src/components/organisms/game/EndScreen.tsx:136
 msgid "Detected!"
+msgstr ""
+
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:504
+msgid "Disabled"
 msgstr ""
 
 #: src/components/molecules/modals/AuthModal.tsx:333
@@ -256,8 +304,12 @@ msgstr ""
 msgid "Each round the group votes to eliminate one person. Who gets kicked out?"
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:96
+#: src/components/organisms/game/EndScreen.tsx:105
 msgid "Eliminated"
+msgstr ""
+
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:540
+msgid "Eliminated in round"
 msgstr ""
 
 #: src/components/molecules/modals/AuthModal.tsx:279
@@ -265,12 +317,17 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:504
+msgid "Enabled"
+msgstr ""
+
 #: src/components/organisms/game/HostControls.tsx:43
 msgid "End Voting"
 msgstr ""
 
-#: src/components/molecules/profile/ProfileGamesHistory.tsx:126
-#: src/components/organisms/profile/GameHistoryPage.tsx:150
+#: src/components/molecules/profile/ProfileGamesHistory.tsx:128
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:457
+#: src/components/organisms/profile/GameHistoryPage.tsx:152
 msgid "Ended"
 msgstr ""
 
@@ -295,6 +352,15 @@ msgstr ""
 
 #: src/components/molecules/modals/CreateGameModal.tsx:309
 msgid "Enter your name"
+msgstr ""
+
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:485
+msgid "Environment"
+msgstr ""
+
+#. placeholder {0}: eventType.toLowerCase()
+#: src/components/organisms/game/GameHistory.tsx:75
+msgid "Event: {0}"
 msgstr ""
 
 #: src/components/molecules/modals/CreateGameModal.tsx:317
@@ -322,29 +388,42 @@ msgid "Game code (e.g. XKTMW)"
 msgstr ""
 
 #: src/components/organisms/game/GameHistory.tsx:49
-msgid "Game ended"
-msgstr ""
+#~ msgid "Game ended"
+#~ msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:173
+#: src/components/organisms/game/EndScreen.tsx:182
 msgid "Game Experience"
 msgstr ""
 
-#: src/components/organisms/profile/GameHistoryPage.tsx:74
-#: src/components/organisms/profile/GameHistoryPage.tsx:166
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:436
+#: src/components/organisms/profile/GameHistoryPage.tsx:76
+#: src/components/organisms/profile/GameHistoryPage.tsx:168
 #: src/components/templates/Header.tsx:24
 msgid "Game history"
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:153
+#: src/components/organisms/game/EndScreen.tsx:162
 msgid "Game History"
+msgstr ""
+
+#: src/components/organisms/game/GameHistory.tsx:88
+msgid "Game history is not available for this match yet."
+msgstr ""
+
+#: src/components/organisms/profile/GameHistoryDetailRouteContent.tsx:26
+msgid "Game history is unavailable"
 msgstr ""
 
 #: src/components/molecules/modals/CreateGameModal.tsx:215
 msgid "Game Mode"
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:65
+#: src/components/organisms/game/EndScreen.tsx:74
 msgid "Game Over"
+msgstr ""
+
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:495
+msgid "Game setup"
 msgstr ""
 
 #: src/components/molecules/profile/ProfileStats.tsx:58
@@ -402,8 +481,8 @@ msgstr ""
 msgid "How to Play"
 msgstr ""
 
-#: src/components/molecules/profile/ProfileGamesHistory.tsx:128
-#: src/components/organisms/profile/GameHistoryPage.tsx:152
+#: src/components/molecules/profile/ProfileGamesHistory.tsx:130
+#: src/components/organisms/profile/GameHistoryPage.tsx:154
 msgid "In progress"
 msgstr ""
 
@@ -432,6 +511,7 @@ msgid "Language"
 msgstr ""
 
 #: src/components/molecules/modals/CreateGameModal.tsx:232
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:507
 msgid "Languages"
 msgstr ""
 
@@ -440,7 +520,8 @@ msgstr ""
 msgid "Leaderboard"
 msgstr ""
 
-#: src/components/organisms/profile/GameHistoryPage.tsx:93
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:384
+#: src/components/organisms/profile/GameHistoryPage.tsx:95
 msgid "Loading game history..."
 msgstr ""
 
@@ -452,8 +533,12 @@ msgstr ""
 msgid "Loading statistics..."
 msgstr ""
 
-#: src/components/molecules/profile/ProfileGamesHistory.tsx:68
+#: src/components/molecules/profile/ProfileGamesHistory.tsx:70
 msgid "Loading your games..."
+msgstr ""
+
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:578
+msgid "logged actions"
 msgstr ""
 
 #: src/components/molecules/modals/CreateGameModal.tsx:27
@@ -468,7 +553,7 @@ msgstr ""
 msgid "Max survivors count"
 msgstr ""
 
-#: src/components/molecules/profile/ProfileGamesHistory.tsx:137
+#: src/components/molecules/profile/ProfileGamesHistory.tsx:139
 #: src/components/organisms/profile/ProfilePage.tsx:86
 msgid "My games"
 msgstr ""
@@ -491,16 +576,16 @@ msgstr ""
 msgid "New passwords do not match."
 msgstr ""
 
-#: src/components/organisms/game/GameHistory.tsx:106
+#: src/components/organisms/game/GameHistory.tsx:141
 msgid "Next"
 msgstr ""
 
-#: src/components/organisms/game/GameHistory.tsx:114
+#: src/components/organisms/game/GameHistory.tsx:149
 msgid "No events this round"
 msgstr ""
 
-#: src/components/molecules/profile/ProfileGamesHistory.tsx:145
-#: src/components/organisms/profile/GameHistoryPage.tsx:176
+#: src/components/molecules/profile/ProfileGamesHistory.tsx:147
+#: src/components/organisms/profile/GameHistoryPage.tsx:178
 msgid "No games yet"
 msgstr ""
 
@@ -509,8 +594,20 @@ msgstr ""
 msgid "No leaderboard data yet"
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:137
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:618
+msgid "No recorded actions in this round."
+msgstr ""
+
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:609
+msgid "No rounds were archived for this game."
+msgstr ""
+
+#: src/components/organisms/game/EndScreen.tsx:146
 msgid "No saboteur in this game"
+msgstr ""
+
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:645
+msgid "No survivors"
 msgstr ""
 
 #: src/components/organisms/profile/LeaderboardPage.tsx:198
@@ -520,6 +617,10 @@ msgstr ""
 
 #: src/components/organisms/landing/HowToPlay.tsx:11
 msgid "One player creates a game and shares the code. Everyone else joins via the link or code."
+msgstr ""
+
+#: src/components/organisms/profile/GameHistoryDetailRouteContent.tsx:29
+msgid "Open a match from the history table to see its details."
 msgstr ""
 
 #: src/components/molecules/profile/ProfileSettings.tsx:219
@@ -534,7 +635,7 @@ msgstr ""
 #~ msgid "Open the account menu on the landing page and sign in to see your stats."
 #~ msgstr ""
 
-#: src/components/organisms/profile/GameHistoryPage.tsx:80
+#: src/components/organisms/profile/GameHistoryPage.tsx:82
 msgid "Open the user menu and sign in to see your recent games."
 msgstr ""
 
@@ -548,6 +649,7 @@ msgid "Orbit"
 msgstr ""
 
 #: src/components/organisms/game/PlayerCard.tsx:94
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:538
 msgid "Out"
 msgstr ""
 
@@ -559,7 +661,7 @@ msgstr ""
 msgid "Overall win rate"
 msgstr ""
 
-#: src/components/organisms/profile/GameHistoryPage.tsx:163
+#: src/components/organisms/profile/GameHistoryPage.tsx:165
 msgid "Overview"
 msgstr ""
 
@@ -595,22 +697,29 @@ msgid "Player"
 msgstr ""
 
 #: src/components/organisms/game/GameHistory.tsx:33
-msgid "Player {id}"
+#~ msgid "Player {id}"
+#~ msgstr ""
+
+#: src/components/organisms/game/GameHistory.tsx:31
+msgid "Player {playerId}"
 msgstr ""
 
 #: src/components/molecules/modals/CreateGameModal.tsx:265
-#: src/components/molecules/profile/ProfileGamesHistory.tsx:108
+#: src/components/molecules/profile/ProfileGamesHistory.tsx:110
 #: src/components/organisms/game/Lobby.tsx:70
-#: src/components/organisms/profile/GameHistoryPage.tsx:132
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:467
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:529
+#: src/components/organisms/profile/GameHistoryPage.tsx:134
 msgid "Players"
 msgstr ""
 
-#: src/components/molecules/profile/ProfileGamesHistory.tsx:81
+#: src/components/molecules/profile/ProfileGamesHistory.tsx:83
 #: src/components/organisms/profile/LeaderboardPage.tsx:188
 msgid "Please refresh the page and try again."
 msgstr ""
 
-#: src/components/organisms/profile/GameHistoryPage.tsx:105
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:396
+#: src/components/organisms/profile/GameHistoryPage.tsx:107
 #: src/components/organisms/profile/ProfilePage.tsx:64
 msgid "Please refresh the page or sign in again."
 msgstr ""
@@ -619,7 +728,15 @@ msgstr ""
 msgid "Portal"
 msgstr ""
 
-#: src/components/organisms/game/GameHistory.tsx:95
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:415
+msgid "Powers"
+msgstr ""
+
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:620
+msgid "Powers used"
+msgstr ""
+
+#: src/components/organisms/game/GameHistory.tsx:125
 msgid "Prev"
 msgstr ""
 
@@ -641,21 +758,37 @@ msgstr ""
 msgid "Rank"
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:165
+#: src/components/organisms/game/EndScreen.tsx:174
 msgid "Rate the Game"
+msgstr ""
+
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:623
+msgid "Raw events"
 msgstr ""
 
 #: src/components/organisms/profile/GameHistoryPage.tsx:128
 #~ msgid "Recent matches you have played in Survade."
 #~ msgstr ""
 
-#: src/components/organisms/profile/GameHistoryPage.tsx:174
+#: src/components/organisms/profile/GameHistoryPage.tsx:176
 msgid "Recent matches."
+msgstr ""
+
+#: src/components/organisms/game/GameHistory.tsx:76
+msgid "Recorded system event"
 msgstr ""
 
 #: src/components/molecules/modals/AuthModal.tsx:124
 #: src/components/molecules/modals/AuthModal.tsx:270
 msgid "Register"
+msgstr ""
+
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:582
+msgid "removals"
+msgstr ""
+
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:423
+msgid "Removals"
 msgstr ""
 
 #: src/components/organisms/game/KickConfirmModal.tsx:39
@@ -672,6 +805,10 @@ msgstr ""
 
 #: src/components/molecules/profile/ProfileSettings.tsx:208
 msgid "Remove profile and statistics"
+msgstr ""
+
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:622
+msgid "Removed players"
 msgstr ""
 
 #: src/components/molecules/profile/ProfileSettings.tsx:150
@@ -707,14 +844,30 @@ msgstr ""
 msgid "Reveal"
 msgstr ""
 
-#: src/components/organisms/game/GameHistory.tsx:98
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:539
+msgid "Revealed"
+msgstr ""
+
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:619
+msgid "Revealed fields"
+msgstr ""
+
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:411
+msgid "Reveals"
+msgstr ""
+
+#: src/components/organisms/game/GameHistory.tsx:128
 #: src/components/organisms/game/ScenarioPanel.tsx:34
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:571
 msgid "Round"
 msgstr ""
 
-#. placeholder {0}: event.round ?? "?"
 #: src/components/organisms/game/GameHistory.tsx:37
-msgid "Round {0} started"
+#~ msgid "Round {0} started"
+#~ msgstr ""
+
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:550
+msgid "Rounds"
 msgstr ""
 
 #: src/components/molecules/profile/ProfileStats.tsx:98
@@ -734,13 +887,17 @@ msgid "Rounds you sabotaged successfully."
 msgstr ""
 
 #: src/components/molecules/profile/ProfileStats.tsx:76
-#: src/components/organisms/game/EndScreen.tsx:115
+#: src/components/organisms/game/EndScreen.tsx:124
 #: src/components/organisms/profile/LeaderboardPage.tsx:168
 msgid "Saboteur"
 msgstr ""
 
 #: src/components/molecules/profile/ProfileStats.tsx:81
 msgid "Saboteur games"
+msgstr ""
+
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:503
+msgid "Saboteur mode"
 msgstr ""
 
 #: src/components/organisms/profile/LeaderboardPage.tsx:133
@@ -761,10 +918,11 @@ msgid "Save new password"
 msgstr ""
 
 #: src/components/molecules/modals/CreateGameModal.tsx:194
-#: src/components/molecules/profile/ProfileGamesHistory.tsx:96
-#: src/components/organisms/game/EndScreen.tsx:168
+#: src/components/molecules/profile/ProfileGamesHistory.tsx:98
+#: src/components/organisms/game/EndScreen.tsx:177
 #: src/components/organisms/game/ScenarioPanel.tsx:27
-#: src/components/organisms/profile/GameHistoryPage.tsx:120
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:475
+#: src/components/organisms/profile/GameHistoryPage.tsx:122
 msgid "Scenario"
 msgstr ""
 
@@ -781,8 +939,9 @@ msgstr ""
 msgid "Send code"
 msgstr ""
 
-#: src/components/molecules/profile/ProfileGamesHistory.tsx:102
-#: src/components/organisms/profile/GameHistoryPage.tsx:126
+#: src/components/molecules/profile/ProfileGamesHistory.tsx:104
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:499
+#: src/components/organisms/profile/GameHistoryPage.tsx:128
 msgid "Setting"
 msgstr ""
 
@@ -812,7 +971,7 @@ msgstr ""
 msgid "Sign in"
 msgstr ""
 
-#: src/components/organisms/profile/GameHistoryPage.tsx:77
+#: src/components/organisms/profile/GameHistoryPage.tsx:79
 #: src/components/organisms/profile/ProfilePage.tsx:36
 msgid "Sign in required"
 msgstr ""
@@ -841,8 +1000,9 @@ msgstr ""
 msgid "Start with your email and we'll send you a verification code."
 msgstr ""
 
-#: src/components/molecules/profile/ProfileGamesHistory.tsx:120
-#: src/components/organisms/profile/GameHistoryPage.tsx:144
+#: src/components/molecules/profile/ProfileGamesHistory.tsx:122
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:452
+#: src/components/organisms/profile/GameHistoryPage.tsx:146
 msgid "Started"
 msgstr ""
 
@@ -850,7 +1010,11 @@ msgstr ""
 msgid "Statistics"
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:192
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:462
+msgid "Status"
+msgstr ""
+
+#: src/components/organisms/game/EndScreen.tsx:201
 msgid "Submit Rating"
 msgstr ""
 
@@ -878,13 +1042,15 @@ msgstr ""
 msgid "Survived"
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:131
+#: src/components/organisms/game/EndScreen.tsx:140
 msgid "Survived!"
 msgstr ""
 
-#: src/components/molecules/profile/ProfileGamesHistory.tsx:114
-#: src/components/organisms/game/EndScreen.tsx:73
-#: src/components/organisms/profile/GameHistoryPage.tsx:138
+#: src/components/molecules/profile/ProfileGamesHistory.tsx:116
+#: src/components/organisms/game/EndScreen.tsx:82
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:519
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:632
+#: src/components/organisms/profile/GameHistoryPage.tsx:140
 msgid "Survivors"
 msgstr ""
 
@@ -892,7 +1058,7 @@ msgstr ""
 msgid "Target (optional)"
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:197
+#: src/components/organisms/game/EndScreen.tsx:206
 msgid "Thanks for rating!"
 msgstr ""
 
@@ -952,6 +1118,10 @@ msgstr ""
 msgid "Trait"
 msgstr ""
 
+#: src/components/organisms/game/GameHistory.tsx:30
+msgid "Unknown player"
+msgstr ""
+
 #: src/components/molecules/modals/RewardedVideoModal.tsx:41
 msgid "Unlock Premium Feature"
 msgstr ""
@@ -985,6 +1155,15 @@ msgstr ""
 msgid "Voted"
 msgstr ""
 
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:581
+msgid "votes"
+msgstr ""
+
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:419
+#: src/components/organisms/profile/GameHistoryDetailPage.tsx:621
+msgid "Votes"
+msgstr ""
+
 #: src/components/organisms/game/HostControls.tsx:48
 msgid "Voting in progress…"
 msgstr ""
@@ -1001,7 +1180,7 @@ msgstr ""
 msgid "Want to see your stats, streaks, and saboteur performance?"
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:123
+#: src/components/organisms/game/EndScreen.tsx:132
 msgid "was the saboteur"
 msgstr ""
 
@@ -1029,8 +1208,8 @@ msgstr ""
 msgid "We sent a verification code to your email."
 msgstr ""
 
-#: src/components/molecules/profile/ProfileGamesHistory.tsx:146
-#: src/components/organisms/profile/GameHistoryPage.tsx:177
+#: src/components/molecules/profile/ProfileGamesHistory.tsx:148
+#: src/components/organisms/profile/GameHistoryPage.tsx:179
 msgid "When you finish your first Survade session, it will appear here."
 msgstr ""
 
@@ -1047,7 +1226,7 @@ msgstr ""
 msgid "With Saboteur"
 msgstr ""
 
-#: src/components/organisms/game/EndScreen.tsx:84
+#: src/components/organisms/game/EndScreen.tsx:93
 msgid "you"
 msgstr ""
 
@@ -1067,7 +1246,7 @@ msgstr ""
 msgid "You will still be able to play Survade afterwards, but your profile history will be gone."
 msgstr ""
 
-#: src/components/molecules/profile/ProfileGamesHistory.tsx:143
+#: src/components/molecules/profile/ProfileGamesHistory.tsx:145
 msgid "Your latest Survade sessions."
 msgstr ""
 

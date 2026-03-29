@@ -6,6 +6,7 @@ import { useLingui } from "@lingui/react/macro"
 import { House } from "lucide-react"
 import { UserMenu } from "@/components/molecules/UserMenu"
 import { getLocalizedPath, type SupportedLocale } from "@/i18n"
+import classNames from "classnames"
 
 type HeaderProps = {
   locale: SupportedLocale
@@ -47,7 +48,13 @@ export function Header({
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm font-medium text-muted transition-colors hover:text-foreground"
+                className={classNames(
+                  "text-sm font-medium text-muted transition-colors hover:text-foreground",
+                  {
+                    // TODO: apply style if active page
+                    "text-primary": true,
+                  },
+                )}
               >
                 {item.label}
               </Link>

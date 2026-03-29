@@ -5,6 +5,8 @@
 
 import type { ArchivedGamePlayer } from './ArchivedGamePlayer';
 import type { GameHistoryRound } from './GameHistoryRound';
+import type { GameSettings } from './GameSettings';
+import type { Scenario } from './Scenario';
 
 export type GameHistoryDetailResponse = {
     game_id: string;
@@ -12,8 +14,8 @@ export type GameHistoryDetailResponse = {
     created_at: string;
     ended_at: (string | null);
     status: string;
-    settings: Record<string, any>;
-    scenario: Record<string, any>;
+    settings: GameSettings;
+    scenario: Scenario;
     survivor_player_ids: Array<number>;
     players: Array<ArchivedGamePlayer>;
     rounds: Array<GameHistoryRound>;

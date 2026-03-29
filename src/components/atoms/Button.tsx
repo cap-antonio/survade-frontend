@@ -64,9 +64,9 @@ export function Button({
     >
       {loading ? (
         <span className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
-      ) : (
+      ) : leftIcon ? (
         <div className="[&>svg]:w-5 [&>svg]:h-5">{leftIcon}</div>
-      )}
+      ) : null}
       {label ?? children}
     </button>
   )

@@ -3,6 +3,8 @@
 /* tslint:disable */
 /* eslint-disable */
 
+import type { Card } from './Card';
+
 export type ArchivedGamePlayer = {
     player_id: number;
     player_type: string;
@@ -13,6 +15,6 @@ export type ArchivedGamePlayer = {
     eliminated_in_round?: (number | null);
     elimination_type?: (string | null);
     revealed_fields?: Array<string>;
-    card: Record<string, any>;
+    card: Card;
 };
 
