@@ -2,8 +2,9 @@
 
 import { useState } from "react"
 import { useLingui } from "@lingui/react/macro"
-import { ShieldAlert, TableProperties, Trophy } from "lucide-react"
+import { ShieldAlert, Trophy } from "lucide-react"
 import { ToggleRow } from "@/components/atoms/ToggleRow"
+import { Table, type TableColumn } from "@/components/molecules/Table"
 import {
   useClassicLeaderboard,
   useSaboteurLeaderboard,
@@ -37,112 +38,6 @@ function RankCell({ rank }: { rank: number }): React.ReactElement {
   )
 }
 
-function ClassicTable({
-  rows,
-}: {
-  rows: ClassicLeaderboardEntry[]
-}): React.ReactElement {
-  const { t } = useLingui()
-
-  return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full divide-y divide-border text-left">
-        <thead>
-          <tr className="text-xs uppercase tracking-[0.22em] text-muted">
-            <th className="px-6 py-4 font-medium">{t`Rank`}</th>
-            <th className="px-6 py-4 font-medium">{t`Player`}</th>
-            <th className="px-6 py-4 font-medium">{t`Games`}</th>
-            <th className="px-6 py-4 font-medium">{t`Wins`}</th>
-            <th className="px-6 py-4 font-medium">{t`Win rate`}</th>
-          </tr>
-        </thead>
-
-        <tbody className="divide-y divide-border">
-          {rows.map((row) => (
-            <tr
-              key={row.user_id}
-              className="transition-colors hover:bg-surface-elevated/60"
-            >
-              <td className="whitespace-nowrap px-6 py-4">
-                <RankCell rank={row.rank} />
-              </td>
-              <td className="px-6 py-4 text-sm text-foreground">
-                {row.display_name}
-              </td>
-              <td className="whitespace-nowrap px-6 py-4 text-sm text-foreground">
-                {row.games_played}
-              </td>
-              <td className="whitespace-nowrap px-6 py-4 text-sm text-foreground">
-                {row.wins}
-              </td>
-              <td className="whitespace-nowrap px-6 py-4 text-sm text-muted">
-                {formatWinRate(row.win_rate)}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  )
-}
-
-function SaboteurTable({
-  rows,
-}: {
-  rows: SaboteurLeaderboardEntry[]
-}): React.ReactElement {
-  const { t } = useLingui()
-
-  return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full divide-y divide-border text-left">
-        <thead>
-          <tr className="text-xs uppercase tracking-[0.22em] text-muted">
-            <th className="px-6 py-4 font-medium">{t`Rank`}</th>
-            <th className="px-6 py-4 font-medium">{t`Player`}</th>
-            <th className="px-6 py-4 font-medium">{t`Games`}</th>
-            <th className="px-6 py-4 font-medium">{t`Overall win rate`}</th>
-            <th className="px-6 py-4 font-medium">{t`Saboteur wins`}</th>
-            <th className="px-6 py-4 font-medium">{t`Saboteur win rate`}</th>
-            <th className="px-6 py-4 font-medium">{t`Civilian win rate`}</th>
-          </tr>
-        </thead>
-
-        <tbody className="divide-y divide-border">
-          {rows.map((row) => (
-            <tr
-              key={row.user_id}
-              className="transition-colors hover:bg-surface-elevated/60"
-            >
-              <td className="whitespace-nowrap px-6 py-4">
-                <RankCell rank={row.rank} />
-              </td>
-              <td className="px-6 py-4 text-sm text-foreground">
-                {row.display_name}
-              </td>
-              <td className="whitespace-nowrap px-6 py-4 text-sm text-foreground">
-                {row.games_played}
-              </td>
-              <td className="whitespace-nowrap px-6 py-4 text-sm text-muted">
-                {formatWinRate(row.win_rate)}
-              </td>
-              <td className="whitespace-nowrap px-6 py-4 text-sm text-foreground">
-                {row.saboteur.wins}
-              </td>
-              <td className="whitespace-nowrap px-6 py-4 text-sm text-muted">
-                {formatWinRate(row.saboteur.win_rate)}
-              </td>
-              <td className="whitespace-nowrap px-6 py-4 text-sm text-muted">
-                {formatWinRate(row.civilian.win_rate)}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  )
-}
-
 export function LeaderboardPage(): React.ReactElement {
   const { t } = useLingui()
   const [activeTab, setActiveTab] = useState<LeaderboardTab>("classic")
@@ -168,6 +63,84 @@ export function LeaderboardPage(): React.ReactElement {
           isLoading: saboteurQuery.isLoading,
           isError: saboteurQuery.isError,
         }
+
+  const classicColumns: TableColumn<ClassicLeaderboardEntry>[] = [
+    {
+      key: "rank",
+      header: t`Rank`,
+      cell: (row) => <RankCell rank={row.rank} />,
+      cellClassName: "whitespace-nowrap",
+    },
+    {
+      key: "player",
+      header: t`Player`,
+      cell: (row) => row.display_name,
+      cellClassName: "text-sm text-foreground",
+    },
+    {
+      key: "games",
+      header: t`Games`,
+      cell: (row) => row.games_played,
+      cellClassName: "whitespace-nowrap text-sm text-foreground",
+    },
+    {
+      key: "wins",
+      header: t`Wins`,
+      cell: (row) => row.wins,
+      cellClassName: "whitespace-nowrap text-sm text-foreground",
+    },
+    {
+      key: "win-rate",
+      header: t`Win rate`,
+      cell: (row) => formatWinRate(row.win_rate),
+      cellClassName: "whitespace-nowrap text-sm text-muted",
+    },
+  ]
+
+  const saboteurColumns: TableColumn<SaboteurLeaderboardEntry>[] = [
+    {
+      key: "rank",
+      header: t`Rank`,
+      cell: (row) => <RankCell rank={row.rank} />,
+      cellClassName: "whitespace-nowrap",
+    },
+    {
+      key: "player",
+      header: t`Player`,
+      cell: (row) => row.display_name,
+      cellClassName: "text-sm text-foreground",
+    },
+    {
+      key: "games",
+      header: t`Games`,
+      cell: (row) => row.games_played,
+      cellClassName: "whitespace-nowrap text-sm text-foreground",
+    },
+    {
+      key: "overall-win-rate",
+      header: t`Overall win rate`,
+      cell: (row) => formatWinRate(row.win_rate),
+      cellClassName: "whitespace-nowrap text-sm text-muted",
+    },
+    {
+      key: "saboteur-wins",
+      header: t`Saboteur wins`,
+      cell: (row) => row.saboteur.wins,
+      cellClassName: "whitespace-nowrap text-sm text-foreground",
+    },
+    {
+      key: "saboteur-win-rate",
+      header: t`Saboteur win rate`,
+      cell: (row) => formatWinRate(row.saboteur.win_rate),
+      cellClassName: "whitespace-nowrap text-sm text-muted",
+    },
+    {
+      key: "civilian-win-rate",
+      header: t`Civilian win rate`,
+      cell: (row) => formatWinRate(row.civilian.win_rate),
+      cellClassName: "whitespace-nowrap text-sm text-muted",
+    },
+  ]
 
   return (
     <section className="space-y-8">
@@ -215,32 +188,28 @@ export function LeaderboardPage(): React.ReactElement {
             {t`Please refresh the page and try again.`}
           </p>
         </div>
-      ) : activeQuery.data?.length ? (
-        <div className="rounded-3xl border border-border bg-surface">
-          <div className="border-b border-border px-6 py-5">
-            <p className="text-sm text-muted">
-              {activeTab === "classic"
-                ? t`Best players by overall classic performance.`
-                : t`Best saboteur specialists based on role-specific results.`}
-            </p>
-          </div>
-
-          {activeTab === "classic" ? (
-            <ClassicTable rows={classicQuery.data ?? []} />
-          ) : (
-            <SaboteurTable rows={saboteurQuery.data ?? []} />
-          )}
-        </div>
+      ) : activeTab === "classic" ? (
+        <Table
+          data={classicQuery.data ?? []}
+          columns={classicColumns}
+          title={t`Best players by overall classic performance.`}
+          noDataMessages={{
+            title: t`No leaderboard data yet`,
+            subtitle: t`Once enough matches are played, the best players will appear here.`,
+          }}
+          getRowKey={(row) => row.user_id}
+        />
       ) : (
-        <div className="rounded-3xl border border-border bg-surface p-10 text-center">
-          <TableProperties className="mx-auto h-10 w-10 text-accent" />
-          <h2 className="mt-5 text-2xl font-black tracking-tight">
-            {t`No leaderboard data yet`}
-          </h2>
-          <p className="mt-3 text-sm text-muted">
-            {t`Once enough matches are played, the best players will appear here.`}
-          </p>
-        </div>
+        <Table
+          data={saboteurQuery.data ?? []}
+          columns={saboteurColumns}
+          title={t`Best saboteur specialists based on role-specific results.`}
+          noDataMessages={{
+            title: t`No leaderboard data yet`,
+            subtitle: t`Once enough matches are played, the best players will appear here.`,
+          }}
+          getRowKey={(row) => row.user_id}
+        />
       )}
     </section>
   )

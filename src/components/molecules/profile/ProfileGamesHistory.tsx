@@ -1,9 +1,10 @@
 "use client"
 
 import { useLingui } from "@lingui/react/macro"
-import { History, ShieldAlert, TableProperties } from "lucide-react"
+import { History, ShieldAlert } from "lucide-react"
 import { useMyGames } from "@/api/hooks/users"
 import type { GameHistorySummary } from "@/api/services"
+import { Table, type TableColumn } from "@/components/molecules/Table"
 import type { SupportedLocale } from "@/i18n"
 
 type ProfileGamesHistoryProps = {
@@ -83,76 +84,69 @@ export function ProfileGamesHistory({
     )
   }
 
+  const columns: TableColumn<GameHistorySummary>[] = [
+    {
+      key: "code",
+      header: t`Code`,
+      cell: (item) => item.game_code,
+      cellClassName: "whitespace-nowrap font-mono text-sm text-foreground",
+    },
+    {
+      key: "scenario",
+      header: t`Scenario`,
+      cell: (item) => formatScenarioTitle(item.scenario_title, locale),
+      cellClassName: "text-sm text-foreground",
+    },
+    {
+      key: "setting",
+      header: t`Setting`,
+      cell: (item) => formatSetting(item.setting_key),
+      cellClassName: "whitespace-nowrap text-sm text-muted",
+    },
+    {
+      key: "players",
+      header: t`Players`,
+      cell: (item) => item.players_count,
+      cellClassName: "whitespace-nowrap text-sm text-foreground",
+    },
+    {
+      key: "survivors",
+      header: t`Survivors`,
+      cell: (item) => item.survivors_count,
+      cellClassName: "whitespace-nowrap text-sm text-foreground",
+    },
+    {
+      key: "started",
+      header: t`Started`,
+      cell: (item) => formatDate(item.created_at, locale),
+      cellClassName: "whitespace-nowrap text-sm text-muted",
+    },
+    {
+      key: "ended",
+      header: t`Ended`,
+      cell: (item) =>
+        item.ended_at ? formatDate(item.ended_at, locale) : t`In progress`,
+      cellClassName: "whitespace-nowrap text-sm text-muted",
+    },
+  ]
+
   return (
     <section id="games" className="space-y-4">
       <div className="flex items-center gap-3 pl-2">
         <History className="h-8 w-8 text-accent" />
         <h2 className="text-2xl font-bold tracking-tight">{t`My games`}</h2>
       </div>
-      <p className="pb-4 text-sm text-muted">
-        {t`Your latest Survade sessions.`}
-      </p>
 
-      {data?.length ? (
-        <div className="rounded-3xl border border-border bg-surface">
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-border text-left">
-              <thead>
-                <tr className="text-xs uppercase tracking-[0.22em] text-muted">
-                  <th className="px-6 py-4 font-medium">{t`Code`}</th>
-                  <th className="px-6 py-4 font-medium">{t`Scenario`}</th>
-                  <th className="px-6 py-4 font-medium">{t`Setting`}</th>
-                  <th className="px-6 py-4 font-medium">{t`Players`}</th>
-                  <th className="px-6 py-4 font-medium">{t`Survivors`}</th>
-                  <th className="px-6 py-4 font-medium">{t`Started`}</th>
-                  <th className="px-6 py-4 font-medium">{t`Ended`}</th>
-                </tr>
-              </thead>
-
-              <tbody className="divide-y divide-border">
-                {data.map((item) => (
-                  <tr
-                    key={item.game_id}
-                    className="transition-colors hover:bg-surface-elevated/60"
-                  >
-                    <td className="whitespace-nowrap px-6 py-4 font-mono text-sm text-foreground">
-                      {item.game_code}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-foreground">
-                      {formatScenarioTitle(item.scenario_title, locale)}
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-4 text-sm text-muted">
-                      {formatSetting(item.setting_key)}
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-4 text-sm text-foreground">
-                      {item.players_count}
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-4 text-sm text-foreground">
-                      {item.survivors_count}
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-4 text-sm text-muted">
-                      {formatDate(item.created_at, locale)}
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-4 text-sm text-muted">
-                      {item.ended_at ? formatDate(item.ended_at, locale) : t`In progress`}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      ) : (
-        <div className="rounded-3xl border border-border bg-surface p-10 text-center">
-          <TableProperties className="mx-auto h-10 w-10 text-accent" />
-          <h3 className="mt-5 text-2xl font-black tracking-tight">
-            {t`No games yet`}
-          </h3>
-          <p className="mt-3 text-sm text-muted">
-            {t`When you finish your first Survade session, it will appear here.`}
-          </p>
-        </div>
-      )}
+      <Table
+        data={data ?? []}
+        columns={columns}
+        title={t`Your latest Survade sessions.`}
+        noDataMessages={{
+          title: t`No games yet`,
+          subtitle: t`When you finish your first Survade session, it will appear here.`,
+        }}
+        getRowKey={(item) => item.game_id}
+      />
     </section>
   )
 }
