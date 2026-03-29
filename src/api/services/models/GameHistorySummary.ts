@@ -6,6 +6,7 @@
 export type GameHistorySummary = {
     game_id: string;
     game_code: string;
+    status: string;
     created_at: string;
     ended_at: (string | null);
     setting_key: string;

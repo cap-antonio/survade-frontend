@@ -4,6 +4,7 @@ import { CACHE_KEYS } from "../CACHE_KEYS"
 import { queryClient } from "../query"
 import { ApiParams, TQueryProps } from "@/api/hooks/api.types"
 import type {
+  GameHistorySummary,
   ClassicLeaderboardEntry,
   SaboteurLeaderboardEntry,
 } from "@/api/services"
@@ -14,6 +15,24 @@ export const useMe = (options?: TQueryProps<any>) =>
     queryKey: CACHE_KEYS.user.profile,
     queryFn: ({ signal }) => {
       const promise = api.users.getMeApiUsersMeGet()
+
+      signal?.addEventListener("abort", () => {
+        promise.cancel()
+      })
+
+      return promise
+    },
+    ...options,
+  })
+
+export const useMyGames = (
+  payload: ApiParams<typeof api.users.getMyGamesApiUsersMeGamesGet> = {},
+  options?: TQueryProps<GameHistorySummary[]>,
+) =>
+  useQuery({
+    queryKey: [...CACHE_KEYS.user.games, payload],
+    queryFn: ({ signal }) => {
+      const promise = api.users.getMyGamesApiUsersMeGamesGet(payload)
 
       signal?.addEventListener("abort", () => {
         promise.cancel()

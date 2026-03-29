@@ -4,6 +4,7 @@
 /* eslint-disable */
 import type { ClassicLeaderboardEntry } from '../models/ClassicLeaderboardEntry';
 import type { DeleteAccountRequest } from '../models/DeleteAccountRequest';
+import type { GameHistorySummary } from '../models/GameHistorySummary';
 import type { SaboteurLeaderboardEntry } from '../models/SaboteurLeaderboardEntry';
 import type { UserPublicProfile } from '../models/UserPublicProfile';
 
@@ -44,6 +45,28 @@ export class UsersService {
             url: '/api/users/me',
             body: requestBody,
             mediaType: 'application/json',
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+
+    /**
+     * Get My Games
+     * @returns GameHistorySummary Successful Response
+     * @throws ApiError
+     */
+    public getMyGamesApiUsersMeGamesGet({
+        limit = 50,
+    }: {
+        limit?: number,
+    }): CancelablePromise<Array<GameHistorySummary>> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/api/users/me/games',
+            query: {
+                'limit': limit,
+            },
             errors: {
                 422: `Validation Error`,
             },

@@ -11,5 +11,6 @@ export const CACHE_KEYS = {
   },
   user: {
     profile: ["user"] as const,
+    games: ["user", "games"] as const,
   },
 } as const
