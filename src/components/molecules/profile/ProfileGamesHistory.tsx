@@ -138,18 +138,23 @@ export function ProfileGamesHistory({
         <History className="h-8 w-8 text-accent" />
         <h2 className="text-2xl font-bold tracking-tight">{t`My games`}</h2>
       </div>
+      <p className="pb-4 text-sm text-muted">
+        {t`Your latest Survade sessions.`}
+      </p>
 
       <Table
         data={data ?? []}
         columns={columns}
-        title={t`Your latest Survade sessions.`}
         noDataMessages={{
           title: t`No games yet`,
           subtitle: t`When you finish your first Survade session, it will appear here.`,
         }}
         onRowClick={(item) =>
           router.push(
-            getLocalizedPath(locale, `game-history/details?gameId=${item.game_id}`),
+            getLocalizedPath(
+              locale,
+              `game-history/details?gameId=${item.game_id}`,
+            ),
           )
         }
         getRowKey={(item) => item.game_id}

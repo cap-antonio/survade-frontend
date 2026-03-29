@@ -1,12 +1,12 @@
 "use client"
 
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import cn from "classnames"
 import { useLingui } from "@lingui/react/macro"
 import { House } from "lucide-react"
 import { UserMenu } from "@/components/molecules/UserMenu"
 import { getLocalizedPath, type SupportedLocale } from "@/i18n"
-import classNames from "classnames"
 
 type HeaderProps = {
   locale: SupportedLocale
@@ -18,6 +18,7 @@ export function Header({
   floating = false,
 }: HeaderProps): React.ReactElement {
   const { t } = useLingui()
+  const pathname = usePathname()
 
   const navigationItems = [
     {
@@ -29,6 +30,29 @@ export function Header({
       label: t`Leaderboard`,
     },
   ]
+
+  const normalizePath = (value: string): string => {
+    if (value.length > 1 && value.endsWith("/")) {
+      return value.slice(0, -1)
+    }
+
+    return value
+  }
+
+  const currentPath = normalizePath(pathname)
+
+  const isActivePath = (href: string): boolean => {
+    const normalizedHref = normalizePath(href)
+
+    if (normalizedHref === "/") {
+      return currentPath === "/"
+    }
+
+    return (
+      currentPath === normalizedHref ||
+      currentPath.startsWith(`${normalizedHref}/`)
+    )
+  }
 
   return (
     <header
@@ -48,11 +72,10 @@ export function Header({
               <Link
                 key={item.href}
                 href={item.href}
-                className={classNames(
+                className={cn(
                   "text-sm font-medium text-muted transition-colors hover:text-foreground",
                   {
-                    // TODO: apply style if active page
-                    "text-primary": true,
+                    "text-primary": isActivePath(item.href),
                   },
                 )}
               >

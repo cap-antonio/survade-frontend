@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useState } from "react"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useLingui } from "@lingui/react/macro"
 import { useMe } from "@/api/hooks/users"
 import { Button } from "@/components/atoms/Button"
@@ -18,13 +18,39 @@ type ProfilePageProps = {
 
 type ProfileTab = "settings" | "statistics" | "games"
 
+const PROFILE_TABS: ProfileTab[] = ["settings", "statistics", "games"]
+
+function getProfileTab(value: string | null): ProfileTab {
+  return PROFILE_TABS.includes(value as ProfileTab)
+    ? (value as ProfileTab)
+    : "settings"
+}
+
 export function ProfilePage({ locale }: ProfilePageProps) {
   const { t } = useLingui()
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
   const accessToken = useAuthStore((state) => state.accessToken)
-  const [activeTab, setActiveTab] = useState<ProfileTab>("settings")
   const { data, isLoading, isError } = useMe({
     enabled: !!accessToken,
   })
+  const activeTab = getProfileTab(searchParams.get("tab"))
+
+  const setActiveTab = (tab: ProfileTab): void => {
+    const nextSearchParams = new URLSearchParams(searchParams.toString())
+
+    if (tab === "settings") {
+      nextSearchParams.delete("tab")
+    } else {
+      nextSearchParams.set("tab", tab)
+    }
+
+    const nextQuery = nextSearchParams.toString()
+    router.replace(nextQuery ? `${pathname}?${nextQuery}` : pathname, {
+      scroll: false,
+    })
+  }
 
   if (!accessToken) {
     return (
