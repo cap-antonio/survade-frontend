@@ -3,10 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type RegisterRequest = {
-    email: string;
-    code: string;
+export type DeleteAccountRequest = {
     password: string;
-    display_name: string;
 };
 

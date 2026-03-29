@@ -2,13 +2,18 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { BannerImpressionRequest } from '../models/BannerImpressionRequest';
+import type { CountedResponse } from '../models/CountedResponse';
 import type { CreateGameRequest } from '../models/CreateGameRequest';
 import type { CreateGameResponse } from '../models/CreateGameResponse';
+import type { EventsResponse } from '../models/EventsResponse';
 import type { JoinGameRequest } from '../models/JoinGameRequest';
 import type { JoinGameResponse } from '../models/JoinGameResponse';
+import type { OkResponse } from '../models/OkResponse';
 import type { RateGameRequest } from '../models/RateGameRequest';
 import type { RevealCardRequest } from '../models/RevealCardRequest';
 import type { UnlockRewardedRequest } from '../models/UnlockRewardedRequest';
+import type { UnlockRewardedResponse } from '../models/UnlockRewardedResponse';
 import type { UsePowerRequest } from '../models/UsePowerRequest';
 import type { VoteRequest } from '../models/VoteRequest';
 
@@ -95,7 +100,7 @@ export class GamesService {
 
     /**
      * Start Game
-     * @returns any Successful Response
+     * @returns OkResponse Successful Response
      * @throws ApiError
      */
     public startGameApiGamesGameCodeStartPost({
@@ -104,10 +109,37 @@ export class GamesService {
     }: {
         gameCode: string,
         xHostToken: string,
-    }): CancelablePromise<any> {
+    }): CancelablePromise<OkResponse> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/games/{game_code}/start',
+            path: {
+                'game_code': gameCode,
+            },
+            headers: {
+                'x-host-token': xHostToken,
+            },
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+
+    /**
+     * Next Round
+     * @returns EventsResponse Successful Response
+     * @throws ApiError
+     */
+    public nextRoundApiGamesGameCodeNextRoundPost({
+        gameCode,
+        xHostToken,
+    }: {
+        gameCode: string,
+        xHostToken: string,
+    }): CancelablePromise<EventsResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/api/games/{game_code}/next-round',
             path: {
                 'game_code': gameCode,
             },
@@ -215,7 +247,7 @@ export class GamesService {
 
     /**
      * End Voting
-     * @returns any Successful Response
+     * @returns EventsResponse Successful Response
      * @throws ApiError
      */
     public endVotingApiGamesGameCodeEndVotingPost({
@@ -224,7 +256,7 @@ export class GamesService {
     }: {
         gameCode: string,
         xHostToken: string,
-    }): CancelablePromise<any> {
+    }): CancelablePromise<EventsResponse> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/games/{game_code}/end-voting',
@@ -242,7 +274,7 @@ export class GamesService {
 
     /**
      * Kick Player
-     * @returns any Successful Response
+     * @returns EventsResponse Successful Response
      * @throws ApiError
      */
     public kickPlayerApiGamesGameCodeKickPlayerIdPost({
@@ -253,7 +285,7 @@ export class GamesService {
         gameCode: string,
         playerId: number,
         xHostToken: string,
-    }): CancelablePromise<any> {
+    }): CancelablePromise<EventsResponse> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/games/{game_code}/kick/{player_id}',
@@ -325,7 +357,7 @@ export class GamesService {
 
     /**
      * Unlock Rewarded
-     * @returns any Successful Response
+     * @returns UnlockRewardedResponse Successful Response
      * @throws ApiError
      */
     public unlockRewardedApiGamesGameCodeUnlockRewardedPost({
@@ -336,7 +368,7 @@ export class GamesService {
         gameCode: string,
         xHostToken: string,
         requestBody: UnlockRewardedRequest,
-    }): CancelablePromise<any> {
+    }): CancelablePromise<UnlockRewardedResponse> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/games/{game_code}/unlock-rewarded',
@@ -345,6 +377,37 @@ export class GamesService {
             },
             headers: {
                 'x-host-token': xHostToken,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+
+    /**
+     * Report Banner Impression
+     * @returns CountedResponse Successful Response
+     * @throws ApiError
+     */
+    public reportBannerImpressionApiGamesGameCodeAdsBannerImpressionPost({
+        gameCode,
+        xPlayerToken,
+        requestBody,
+    }: {
+        gameCode: string,
+        xPlayerToken: string,
+        requestBody: BannerImpressionRequest,
+    }): CancelablePromise<CountedResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/api/games/{game_code}/ads/banner-impression',
+            path: {
+                'game_code': gameCode,
+            },
+            headers: {
+                'x-player-token': xPlayerToken,
             },
             body: requestBody,
             mediaType: 'application/json',

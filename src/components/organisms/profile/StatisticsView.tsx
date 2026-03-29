@@ -2,11 +2,18 @@
 
 import Link from "next/link"
 import { useLingui } from "@lingui/react/macro"
-import { ShieldAlert, ShieldCheck, Target, Trophy } from "lucide-react"
+import {
+  ArrowLeftIcon,
+  ShieldAlert,
+  ShieldCheck,
+  Target,
+  Trophy,
+} from "lucide-react"
 import { useMe } from "@/api/hooks/users"
 import { Button } from "@/components/atoms/Button"
 import { getLocalizedPath, type SupportedLocale } from "@/i18n"
 import { useAuthStore } from "@/stores/authStore"
+import { useRouter } from "next/navigation"
 
 type StatisticsViewProps = {
   locale: SupportedLocale
@@ -38,6 +45,7 @@ export function StatisticsView({ locale }: StatisticsViewProps) {
   const { data, isLoading, isError } = useMe({
     enabled: !!accessToken,
   })
+  const router = useRouter()
 
   if (!accessToken) {
     return (
@@ -78,13 +86,19 @@ export function StatisticsView({ locale }: StatisticsViewProps) {
 
   return (
     <div className="space-y-8">
+      <Button
+        leftIcon={<ArrowLeftIcon />}
+        onClick={() => router.back()}
+      >{t`Back`}</Button>
       <div className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] p-8">
         <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-accent)]">
           {t`Profile`}
         </p>
         <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h1 className="text-4xl font-black tracking-tight">{data.display_name}</h1>
+            <h1 className="text-4xl font-black tracking-tight">
+              {data.display_name}
+            </h1>
             <p className="mt-2 text-sm text-[var(--color-muted)]">
               {t`Your personal survival and saboteur performance.`}
             </p>

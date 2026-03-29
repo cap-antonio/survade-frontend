@@ -64,7 +64,7 @@ const initialTokens = readTokensFromSessionStorage()
 export const useAuthStore = create<AuthStore>((set, get) => ({
   accessToken: initialTokens.accessToken,
   refreshToken: initialTokens.refreshToken,
-  isAuth: false,
+  isAuth: !!initialTokens.accessToken,
 
   setTokens: (accessToken, refreshToken) =>
     set(() => {

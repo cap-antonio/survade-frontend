@@ -1,4 +1,5 @@
 import cn from "classnames"
+import { ReactNode } from "react"
 
 type ButtonVariant = "primary" | "secondary" | "ghost" | "danger"
 type ButtonSize = "sm" | "md" | "lg"
@@ -14,6 +15,7 @@ type ButtonProps = {
   loading?: boolean
   className?: string
   fullWidth?: boolean
+  leftIcon?: ReactNode
 }
 
 const variantClasses: Record<ButtonVariant, string> = {
@@ -43,6 +45,7 @@ export function Button({
   loading = false,
   className,
   fullWidth = false,
+  leftIcon,
 }: ButtonProps) {
   return (
     <button
@@ -60,8 +63,10 @@ export function Button({
         className,
       )}
     >
-      {loading && (
-        <span className="w-3.5 h-3.5 border-2 border-current border-t-transparent rounded-full animate-spin" />
+      {loading ? (
+        <span className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
+      ) : (
+        <div className="[&>svg]:w-5 [&>svg]:h-5">{leftIcon}</div>
       )}
       {label ?? children}
     </button>

@@ -3,6 +3,48 @@ import { api } from "../client"
 import { ApiParams } from "@/api/hooks/api.types"
 import { useAuthStore } from "@/stores/authStore"
 
+export const useRequestRegistrationCode = () => {
+  const mutation = useMutation({
+    mutationFn: async (
+      payload: ApiParams<
+        typeof api.auth.requestRegistrationCodeApiAuthRegisterRequestCodePost
+      >,
+    ) => {
+      return await api.auth.requestRegistrationCodeApiAuthRegisterRequestCodePost(
+        payload,
+      )
+    },
+
+    mutationKey: ["requestRegistrationCode"],
+  })
+
+  return {
+    ...mutation,
+    requestRegistrationCode: mutation.mutate,
+  }
+}
+
+export const useResendRegistrationCode = () => {
+  const mutation = useMutation({
+    mutationFn: async (
+      payload: ApiParams<
+        typeof api.auth.resendRegistrationCodeApiAuthRegisterResendCodePost
+      >,
+    ) => {
+      return await api.auth.resendRegistrationCodeApiAuthRegisterResendCodePost(
+        payload,
+      )
+    },
+
+    mutationKey: ["resendRegistrationCode"],
+  })
+
+  return {
+    ...mutation,
+    resendRegistrationCode: mutation.mutate,
+  }
+}
+
 export const useRegister = () => {
   const { setTokens } = useAuthStore()
 

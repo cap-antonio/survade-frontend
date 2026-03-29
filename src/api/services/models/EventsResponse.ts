@@ -3,10 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type RegisterRequest = {
-    email: string;
-    code: string;
-    password: string;
-    display_name: string;
+export type EventsResponse = {
+    events: Array<Record<string, any>>;
 };
 

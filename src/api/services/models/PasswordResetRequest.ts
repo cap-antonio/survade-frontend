@@ -3,10 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type RegisterRequest = {
+export type PasswordResetRequest = {
     email: string;
-    code: string;
-    password: string;
-    display_name: string;
 };
 

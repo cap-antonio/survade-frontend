@@ -70,15 +70,15 @@ msgstr "A lethal virus spreads. The safe place's medical resources are criticall
 msgid "A rift in time opens. Only select individuals can pass through to the other side."
 msgstr "A rift in time opens. Only select individuals can pass through to the other side."
 
-#: src/components/molecules/AuthModal.tsx:96
+#: src/components/molecules/modals/AuthModal.tsx:246
 msgid "Account"
 msgstr "Account"
 
-#: src/components/molecules/AuthMenu.tsx:82
+#: src/components/molecules/AuthMenu.tsx:101
 msgid "Account menu"
 msgstr "Account menu"
 
-#: src/components/organisms/landing/CreateGameModal.tsx:45
+#: src/components/molecules/modals/CreateGameModal.tsx:63
 msgid "Almost ready..."
 msgstr "Almost ready..."
 
@@ -86,11 +86,11 @@ msgstr "Almost ready..."
 msgid "Argue & Reveal"
 msgstr "Argue & Reveal"
 
-#: src/components/organisms/landing/Intro.tsx:61
+#: src/components/organisms/landing/Intro.tsx:60
 msgid "Argue, reveal secrets, vote — and survive."
 msgstr "Argue, reveal secrets, vote — and survive."
 
-#: src/components/organisms/landing/CreateGameModal.tsx:49
+#: src/components/molecules/modals/CreateGameModal.tsx:67
 msgid "Assigning character cards..."
 msgstr "Assigning character cards..."
 
@@ -98,14 +98,14 @@ msgstr "Assigning character cards..."
 msgid "Back to home"
 msgstr "Back to home"
 
-#: src/components/molecules/RewardedVideoModal.tsx:57
+#: src/components/molecules/modals/CreateGameModal.tsx:323
+#: src/components/molecules/modals/RewardedVideoModal.tsx:55
 #: src/components/organisms/game/KickConfirmModal.tsx:31
 #: src/components/organisms/game/PowerModal.tsx:80
-#: src/components/organisms/landing/CreateGameModal.tsx:289
 msgid "Cancel"
 msgstr "Cancel"
 
-#: src/components/organisms/landing/CreateGameModal.tsx:226
+#: src/components/molecules/modals/CreateGameModal.tsx:244
 msgid "Card Attributes"
 msgstr "Card Attributes"
 
@@ -113,11 +113,15 @@ msgstr "Card Attributes"
 msgid "Choose the world your group will fight to survive in."
 msgstr "Choose the world your group will fight to survive in."
 
-#: src/components/organisms/landing/CreateGameModal.tsx:187
+#: src/components/molecules/modals/CreateGameModal.tsx:54
 msgid "Classic"
 msgstr "Classic"
 
-#: src/components/molecules/AuthModal.tsx:103
+#: src/components/molecules/modals/AuthModal.tsx:298
+msgid "Code sent to"
+msgstr "Code sent to"
+
+#: src/components/molecules/modals/AuthModal.tsx:253
 msgid "Continue with your account to track your survival record."
 msgstr "Continue with your account to track your survival record."
 
@@ -137,23 +141,31 @@ msgstr "Could not load statistics"
 msgid "Create a new game"
 msgstr "Create a new game"
 
-#: src/components/molecules/AuthModal.tsx:99
+#: src/components/molecules/modals/AuthModal.tsx:249
 msgid "Create account"
 msgstr "Create account"
 
 #: src/components/molecules/AuthModal.tsx:104
-msgid "Create an account to save your stats and come back later."
-msgstr "Create an account to save your stats and come back later."
+#~ msgid "Create an account to save your stats and come back later."
+#~ msgstr "Create an account to save your stats and come back later."
 
-#: src/components/organisms/landing/CreateGameModal.tsx:151
-#: src/components/organisms/landing/CreateGameModal.tsx:297
-#: src/components/organisms/landing/Intro.tsx:71
+#: src/components/molecules/modals/CreateGameModal.tsx:189
+#: src/components/molecules/modals/CreateGameModal.tsx:331
+#: src/components/organisms/landing/Intro.tsx:70
 msgid "Create Game"
 msgstr "Create Game"
 
 #: src/components/organisms/landing/HowToPlay.tsx:10
 msgid "Create or Join"
 msgstr "Create or Join"
+
+#: src/components/molecules/modals/AuthModal.tsx:314
+msgid "Create password"
+msgstr "Create password"
+
+#: src/components/molecules/modals/CreateGameModal.tsx:43
+msgid "Dark Secret"
+msgstr "Dark Secret"
 
 #: src/components/organisms/profile/StatisticsView.tsx:154
 msgid "Detected"
@@ -163,7 +175,7 @@ msgstr "Detected"
 msgid "Detected!"
 msgstr "Detected!"
 
-#: src/components/molecules/AuthModal.tsx:136
+#: src/components/molecules/modals/AuthModal.tsx:319
 msgid "Display name"
 msgstr "Display name"
 
@@ -179,7 +191,7 @@ msgstr "Each round the group votes to eliminate one person. Who gets kicked out?
 msgid "Eliminated"
 msgstr "Eliminated"
 
-#: src/components/molecules/AuthModal.tsx:145
+#: src/components/molecules/modals/AuthModal.tsx:275
 msgid "Email"
 msgstr "Email"
 
@@ -187,15 +199,23 @@ msgstr "Email"
 msgid "End Voting"
 msgstr "End Voting"
 
-#: src/components/molecules/AuthModal.tsx:158
+#: src/components/molecules/modals/AuthModal.tsx:305
+msgid "Enter code"
+msgstr "Enter code"
+
+#: src/components/molecules/modals/AuthModal.tsx:290
 msgid "Enter password"
 msgstr "Enter password"
 
-#: src/components/organisms/landing/CreateGameModal.tsx:275
+#: src/components/molecules/modals/AuthModal.tsx:234
+msgid "Enter the code from your email, then finish setting up your account."
+msgstr "Enter the code from your email, then finish setting up your account."
+
+#: src/components/molecules/modals/CreateGameModal.tsx:309
 msgid "Enter your name"
 msgstr "Enter your name"
 
-#: src/components/organisms/landing/CreateGameModal.tsx:283
+#: src/components/molecules/modals/CreateGameModal.tsx:317
 msgid "Failed to create game. Please try again."
 msgstr "Failed to create game. Please try again."
 
@@ -211,7 +231,7 @@ msgstr "Free"
 msgid "Game"
 msgstr "Game"
 
-#: src/components/organisms/landing/Intro.tsx:78
+#: src/components/organisms/landing/Intro.tsx:77
 msgid "Game code (e.g. XKTMW)"
 msgstr "Game code (e.g. XKTMW)"
 
@@ -227,7 +247,7 @@ msgstr "Game Experience"
 msgid "Game History"
 msgstr "Game History"
 
-#: src/components/organisms/landing/CreateGameModal.tsx:183
+#: src/components/molecules/modals/CreateGameModal.tsx:215
 msgid "Game Mode"
 msgstr "Game Mode"
 
@@ -239,7 +259,11 @@ msgstr "Game Over"
 msgid "Games"
 msgstr "Games"
 
-#: src/components/organisms/landing/CreateGameModal.tsx:48
+#: src/components/molecules/modals/CreateGameModal.tsx:41
+msgid "Gender"
+msgstr "Gender"
+
+#: src/components/molecules/modals/CreateGameModal.tsx:66
 msgid "Generating scenario..."
 msgstr "Generating scenario..."
 
@@ -247,17 +271,25 @@ msgstr "Generating scenario..."
 msgid "Get Your Card"
 msgstr "Get Your Card"
 
+#: src/components/molecules/modals/CreateGameModal.tsx:42
+msgid "Health"
+msgstr "Health"
+
 #: src/components/organisms/game/PlayerCard.tsx:160
 msgid "hidden"
 msgstr "hidden"
 
-#: src/components/organisms/landing/CreateGameModal.tsx:51
+#: src/components/molecules/modals/CreateGameModal.tsx:69
 msgid "Hiding secrets..."
 msgstr "Hiding secrets..."
 
 #: src/components/organisms/profile/StatisticsView.tsx:168
 msgid "Higher survival rate means the group trusts your arguments. Higher saboteur win rate means you can manipulate the table when the pressure rises."
 msgstr "Higher survival rate means the group trusts your arguments. Higher saboteur win rate means you can manipulate the table when the pressure rises."
+
+#: src/components/molecules/modals/CreateGameModal.tsx:48
+msgid "Hobby"
+msgstr "Hobby"
 
 #: src/components/organisms/game/HostControls.tsx:25
 #: src/components/organisms/game/Lobby.tsx:77
@@ -272,7 +304,11 @@ msgstr "How often your sabotage plan worked."
 msgid "How to Play"
 msgstr "How to Play"
 
-#: src/components/organisms/landing/Intro.tsx:88
+#: src/components/molecules/modals/CreateGameModal.tsx:46
+msgid "Item"
+msgstr "Item"
+
+#: src/components/organisms/landing/Intro.tsx:87
 msgid "Join"
 msgstr "Join"
 
@@ -288,7 +324,11 @@ msgstr "Join the Game"
 msgid "Keep playing"
 msgstr "Keep playing"
 
-#: src/components/organisms/landing/CreateGameModal.tsx:214
+#: src/components/molecules/AuthMenu.tsx:89
+msgid "Language"
+msgstr "Language"
+
+#: src/components/molecules/modals/CreateGameModal.tsx:232
 msgid "Languages"
 msgstr "Languages"
 
@@ -296,9 +336,17 @@ msgstr "Languages"
 msgid "Loading statistics..."
 msgstr "Loading statistics..."
 
+#: src/components/molecules/modals/CreateGameModal.tsx:27
+msgid "Mars"
+msgstr "Mars"
+
 #: src/components/organisms/landing/SettingsGrid.tsx:11
 msgid "Mars Colony"
 msgstr "Mars Colony"
+
+#: src/components/molecules/modals/CreateGameModal.tsx:302
+msgid "Max survivors count"
+msgstr "Max survivors count"
 
 #: src/components/organisms/game/Lobby.tsx:88
 msgid "Need at least 3 players to start"
@@ -324,6 +372,7 @@ msgstr "One player creates a game and shares the code. Everyone else joins via t
 msgid "Open the account menu on the landing page and sign in to see your stats."
 msgstr "Open the account menu on the landing page and sign in to see your stats."
 
+#: src/components/molecules/modals/CreateGameModal.tsx:32
 #: src/components/organisms/landing/SettingsGrid.tsx:18
 msgid "Orbit"
 msgstr "Orbit"
@@ -336,13 +385,19 @@ msgstr "Out"
 msgid "Over several rounds, reveal your attributes to convince others you deserve a spot in the safe place."
 msgstr "Over several rounds, reveal your attributes to convince others you deserve a spot in the safe place."
 
+#: src/components/molecules/modals/CreateGameModal.tsx:35
 #: src/components/organisms/landing/SettingsGrid.tsx:39
 msgid "Pandemic"
 msgstr "Pandemic"
 
-#: src/components/molecules/AuthModal.tsx:154
+#: src/components/molecules/modals/AuthModal.tsx:286
+#: src/components/molecules/modals/AuthModal.tsx:310
 msgid "Password"
 msgstr "Password"
+
+#: src/components/molecules/modals/CreateGameModal.tsx:45
+msgid "Phobia"
+msgstr "Phobia"
 
 #: src/components/organisms/profile/StatisticsView.tsx:178
 msgid "Play more rounds to sharpen your profile and discover your strongest role."
@@ -352,8 +407,8 @@ msgstr "Play more rounds to sharpen your profile and discover your strongest rol
 msgid "Player {id}"
 msgstr "Player {id}"
 
+#: src/components/molecules/modals/CreateGameModal.tsx:265
 #: src/components/organisms/game/Lobby.tsx:70
-#: src/components/organisms/landing/CreateGameModal.tsx:256
 msgid "Players"
 msgstr "Players"
 
@@ -361,9 +416,17 @@ msgstr "Players"
 msgid "Please refresh the page or sign in again."
 msgstr "Please refresh the page or sign in again."
 
+#: src/components/molecules/modals/CreateGameModal.tsx:36
+msgid "Portal"
+msgstr "Portal"
+
 #: src/components/organisms/game/GameHistory.tsx:95
 msgid "Prev"
 msgstr "Prev"
+
+#: src/components/molecules/modals/CreateGameModal.tsx:40
+msgid "Profession"
+msgstr "Profession"
 
 #: src/components/organisms/profile/StatisticsView.tsx:83
 msgid "Profile"
@@ -377,8 +440,8 @@ msgstr "Quick read"
 msgid "Rate the Game"
 msgstr "Rate the Game"
 
-#: src/components/molecules/AuthModal.tsx:129
-#: src/components/molecules/AuthModal.tsx:180
+#: src/components/molecules/modals/AuthModal.tsx:121
+#: src/components/molecules/modals/AuthModal.tsx:266
 msgid "Register"
 msgstr "Register"
 
@@ -393,6 +456,10 @@ msgstr "Remove {playerName} from the game?"
 #: src/components/organisms/game/KickConfirmModal.tsx:25
 msgid "Remove player?"
 msgstr "Remove player?"
+
+#: src/components/molecules/modals/AuthModal.tsx:333
+msgid "Resend code"
+msgstr "Resend code"
 
 #: src/components/organisms/game/PlayerCard.tsx:246
 msgid "Reveal"
@@ -437,9 +504,13 @@ msgstr "Saboteur games"
 msgid "Saboteur wins"
 msgstr "Saboteur wins"
 
+#: src/components/molecules/modals/CreateGameModal.tsx:300
+msgid "Saboteurs in game"
+msgstr "Saboteurs in game"
+
+#: src/components/molecules/modals/CreateGameModal.tsx:194
 #: src/components/organisms/game/EndScreen.tsx:168
 #: src/components/organisms/game/ScenarioPanel.tsx:27
-#: src/components/organisms/landing/CreateGameModal.tsx:156
 msgid "Scenario"
 msgstr "Scenario"
 
@@ -447,23 +518,32 @@ msgstr "Scenario"
 msgid "Scenarios"
 msgstr "Scenarios"
 
-#: src/components/organisms/landing/CreateGameModal.tsx:50
+#: src/components/molecules/modals/CreateGameModal.tsx:68
 msgid "Sealing the safe place..."
 msgstr "Sealing the safe place..."
+
+#: src/components/molecules/modals/AuthModal.tsx:122
+msgid "Send code"
+msgstr "Send code"
+
+#: src/components/molecules/modals/CreateGameModal.tsx:34
+msgid "Ship"
+msgstr "Ship"
 
 #: src/components/organisms/landing/SettingsGrid.tsx:32
 msgid "Shipwreck"
 msgstr "Shipwreck"
 
+#: src/components/molecules/modals/CreateGameModal.tsx:33
 #: src/components/organisms/landing/SettingsGrid.tsx:25
 msgid "Siege"
 msgstr "Siege"
 
-#: src/components/molecules/AuthMenu.tsx:76
 #: src/components/molecules/AuthMenu.tsx:82
-#: src/components/molecules/AuthModal.tsx:99
-#: src/components/molecules/AuthModal.tsx:118
-#: src/components/molecules/AuthModal.tsx:180
+#: src/components/molecules/AuthMenu.tsx:101
+#: src/components/molecules/modals/AuthModal.tsx:119
+#: src/components/molecules/modals/AuthModal.tsx:249
+#: src/components/molecules/modals/AuthModal.tsx:261
 msgid "Sign in"
 msgstr "Sign in"
 
@@ -471,9 +551,17 @@ msgstr "Sign in"
 msgid "Sign in required"
 msgstr "Sign in required"
 
-#: src/components/molecules/AuthMenu.tsx:66
+#: src/components/molecules/AuthMenu.tsx:72
 msgid "Sign out"
 msgstr "Sign out"
+
+#: src/components/organisms/landing/Intro.tsx:102
+msgid "Sign up for free"
+msgstr "Sign up for free"
+
+#: src/components/molecules/modals/CreateGameModal.tsx:44
+msgid "Skill"
+msgstr "Skill"
 
 #: src/components/organisms/game/Lobby.tsx:101
 msgid "Start Game"
@@ -483,7 +571,11 @@ msgstr "Start Game"
 msgid "Start Voting"
 msgstr "Start Voting"
 
-#: src/components/molecules/AuthMenu.tsx:56
+#: src/components/molecules/modals/AuthModal.tsx:235
+msgid "Start with your email and we'll send you a verification code."
+msgstr "Start with your email and we'll send you a verification code."
+
+#: src/components/molecules/AuthMenu.tsx:62
 #: src/components/organisms/profile/StatisticsView.tsx:46
 msgid "Statistics"
 msgstr "Statistics"
@@ -496,11 +588,15 @@ msgstr "Submit Rating"
 msgid "Success rate"
 msgstr "Success rate"
 
+#: src/components/organisms/landing/Intro.tsx:55
+msgid "Survave and parsuade"
+msgstr "Survave and parsuade"
+
 #: src/components/organisms/profile/StatisticsView.tsx:109
 msgid "Survival"
 msgstr "Survival"
 
-#: src/components/organisms/landing/Intro.tsx:51
+#: src/components/organisms/landing/Intro.tsx:46
 msgid "Survival Discussion Game"
 msgstr "Survival Discussion Game"
 
@@ -540,7 +636,7 @@ msgstr "The orbital station is losing altitude. Only the escape pod can hold a f
 msgid "The remaining players make it into the safe place. But beware — there may be a saboteur among you."
 msgstr "The remaining players make it into the safe place. But beware — there may be a saboteur among you."
 
-#: src/components/organisms/landing/Intro.tsx:60
+#: src/components/organisms/landing/Intro.tsx:59
 msgid "The safe place has limited space. Your group must decide who gets in."
 msgstr "The safe place has limited space. Your group must decide who gets in."
 
@@ -556,13 +652,21 @@ msgstr "Time Portal"
 msgid "Total survival rounds played."
 msgstr "Total survival rounds played."
 
-#: src/components/molecules/RewardedVideoModal.tsx:43
+#: src/components/molecules/modals/CreateGameModal.tsx:47
+msgid "Trait"
+msgstr "Trait"
+
+#: src/components/molecules/modals/RewardedVideoModal.tsx:41
 msgid "Unlock Premium Feature"
 msgstr "Unlock Premium Feature"
 
 #: src/components/organisms/game/PowerModal.tsx:88
 msgid "Use Power"
 msgstr "Use Power"
+
+#: src/components/molecules/modals/AuthModal.tsx:302
+msgid "Verification code"
+msgstr "Verification code"
 
 #: src/components/organisms/landing/HowToPlay.tsx:25
 msgid "Vote"
@@ -588,23 +692,35 @@ msgstr "Waiting for host to start the game…"
 msgid "Waiting for players"
 msgstr "Waiting for players"
 
+#: src/components/organisms/landing/Intro.tsx:94
+msgid "Want to see your stats, streaks, and saboteur performance?"
+msgstr "Want to see your stats, streaks, and saboteur performance?"
+
 #: src/components/organisms/game/EndScreen.tsx:123
 msgid "was the saboteur"
 msgstr "was the saboteur"
 
-#: src/components/molecules/RewardedVideoModal.tsx:46
+#: src/components/molecules/modals/RewardedVideoModal.tsx:44
 msgid "Watch a short ad to unlock this feature for this session."
 msgstr "Watch a short ad to unlock this feature for this session."
 
-#: src/components/molecules/RewardedVideoModal.tsx:65
+#: src/components/molecules/modals/RewardedVideoModal.tsx:63
 msgid "Watch Ad"
 msgstr "Watch Ad"
+
+#: src/components/molecules/modals/AuthModal.tsx:169
+msgid "We sent a new verification code to your email."
+msgstr "We sent a new verification code to your email."
+
+#: src/components/molecules/modals/AuthModal.tsx:145
+msgid "We sent a verification code to your email."
+msgstr "We sent a verification code to your email."
 
 #: src/components/organisms/profile/StatisticsView.tsx:149
 msgid "Win rate"
 msgstr "Win rate"
 
-#: src/components/organisms/landing/CreateGameModal.tsx:191
+#: src/components/molecules/modals/CreateGameModal.tsx:60
 msgid "With Saboteur"
 msgstr "With Saboteur"
 
@@ -620,12 +736,12 @@ msgstr "You"
 msgid "You must reveal your dark secret this round!"
 msgstr "You must reveal your dark secret this round!"
 
-#: src/components/molecules/AuthModal.tsx:139
+#: src/components/molecules/modals/AuthModal.tsx:322
 #: src/components/organisms/game/JoinScreen.tsx:57
 msgid "Your name"
 msgstr "Your name"
 
-#: src/components/organisms/landing/CreateGameModal.tsx:277
+#: src/components/molecules/modals/CreateGameModal.tsx:311
 msgid "Your name in game"
 msgstr "Your name in game"
 

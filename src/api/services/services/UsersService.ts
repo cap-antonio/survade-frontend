@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { DeleteAccountRequest } from '../models/DeleteAccountRequest';
 import type { LeaderboardEntry } from '../models/LeaderboardEntry';
 import type { UserPublicProfile } from '../models/UserPublicProfile';
 
@@ -21,6 +22,27 @@ export class UsersService {
         return this.httpRequest.request({
             method: 'GET',
             url: '/api/users/me',
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+
+    /**
+     * Delete Me
+     * @returns void
+     * @throws ApiError
+     */
+    public deleteMeApiUsersMeDelete({
+        requestBody,
+    }: {
+        requestBody: DeleteAccountRequest,
+    }): CancelablePromise<void> {
+        return this.httpRequest.request({
+            method: 'DELETE',
+            url: '/api/users/me',
+            body: requestBody,
+            mediaType: 'application/json',
             errors: {
                 422: `Validation Error`,
             },
