@@ -45,11 +45,11 @@ export function PowerModal({
   return (
     <Modal open={open} onClose={onClose} className="w-full max-w-sm p-6">
       <h2 className="text-lg font-semibold mb-1">⚡ {powerName}</h2>
-      <p className="text-sm text-[var(--color-muted)] mb-5">{powerDesc}</p>
+      <p className="text-sm text-muted mb-5">{powerDesc}</p>
 
       {otherPlayers.length > 0 && (
         <div className="mb-5">
-          <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-2">
+          <p className="text-xs text-muted uppercase tracking-wider mb-2">
             {t`Target (optional)`}
           </p>
           <div className="space-y-1">
@@ -64,8 +64,8 @@ export function PowerModal({
                 }
                 className={`w-full text-left px-3 py-2 rounded border text-sm transition-colors ${
                   targetId === p.player_id
-                    ? "border-[var(--color-accent)] bg-[var(--color-accent-dim)]"
-                    : "border-[var(--color-border)] hover:bg-white/5"
+                    ? "border-accent bg-accent-soft"
+                    : "border-border hover:bg-surface-hover"
                 }`}
               >
                 {p.display_name}

@@ -23,7 +23,7 @@ export default async function StatisticsPage(): Promise<React.ReactElement> {
 
   return (
     <Providers locale={DEFAULT_LOCALE}>
-      <main className="min-h-screen bg-[var(--color-bg)] px-4 py-10 sm:px-6">
+      <main className="min-h-screen bg-background px-4 py-10 sm:px-6">
         <div className="mx-auto max-w-5xl">
           <ProfilePage locale={DEFAULT_LOCALE} />
         </div>

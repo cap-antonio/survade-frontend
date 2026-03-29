@@ -79,11 +79,11 @@ export default async function SlugPage({
 
     return (
       <Providers locale={slug}>
-        <main className="min-h-screen bg-[var(--color-bg)]">
+        <main className="min-h-screen bg-background">
           <Intro />
           <HowToPlay />
           <SettingsGrid />
-          <footer className="border-t border-[var(--color-border)] py-8 text-center text-xs text-[var(--color-muted)] font-mono">
+          <footer className="border-t border-border py-8 text-center text-xs text-muted font-mono">
             survade.io · {new Date().getFullYear()}
           </footer>
         </main>

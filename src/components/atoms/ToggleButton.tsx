@@ -22,8 +22,8 @@ export const ToggleButton = ({
         "px-3 py-1.5 rounded border text-xs transition-colors",
         {
           "cursor-pointer": !!onClick,
-          "border-[var(--color-accent)] bg-[var(--color-accent-dim)]": isActive,
-          "border-[var(--color-border)] bg-[var(--color-surface-2)] text-[var(--color-muted)]":
+          "border-accent bg-accent-soft": isActive,
+          "border-border bg-surface-elevated text-muted":
             !isActive,
         },
         isLocked && "opacity-50 cursor-not-allowed",

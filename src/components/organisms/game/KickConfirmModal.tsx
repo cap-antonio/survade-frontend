@@ -23,7 +23,7 @@ export function KickConfirmModal({
   return (
     <Modal open={open} onClose={onClose} className="w-full max-w-xs p-6">
       <h2 className="font-semibold mb-2">{t`Remove player?`}</h2>
-      <p className="text-sm text-[var(--color-muted)] mb-6">
+      <p className="text-sm text-muted mb-6">
         {t`Remove ${playerName} from the game?`}
       </p>
       <div className="flex gap-3">

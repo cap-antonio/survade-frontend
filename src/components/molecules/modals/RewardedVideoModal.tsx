@@ -40,12 +40,12 @@ export function RewardedVideoModal({
       <h2 className="text-lg font-semibold mb-2">
         {t`Unlock Premium Feature`}
       </h2>
-      <p className="text-sm text-[var(--color-muted)] mb-6">
+      <p className="text-sm text-muted mb-6">
         {t`Watch a short ad to unlock this feature for this session.`}
       </p>
       <div
         data-rewarded-slot={feature}
-        className="w-full h-[200px] mb-6 border border-dashed border-white/10 rounded flex items-center justify-center text-[var(--color-muted)] text-xs font-mono"
+        className="w-full h-[200px] mb-6 border border-dashed border-white/10 rounded flex items-center justify-center text-muted text-xs font-mono"
         aria-hidden="true"
       >
         ad · rewarded

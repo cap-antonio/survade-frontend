@@ -70,7 +70,7 @@ const LOADING_PHRASES = [
   fallbackLoadingPhrase,
 ]
 
-const MIN_PLAYERS = 4
+const MIN_PLAYERS = 6
 const MAX_PLAYERS = 16
 const MIN_LANGS = 1
 const MAX_LANGS = 3
@@ -175,12 +175,12 @@ export function CreateGameModal({ open, onClose }: ModalProps) {
     >
       {isPending ? (
         <div className="flex flex-col items-center justify-center gap-6 p-8 min-h-[360px]">
-          <div className="w-12 h-12 rounded-full border-2 border-[var(--color-accent)] border-t-transparent animate-spin" />
-          <p className="text-sm text-[var(--color-muted)] font-mono animate-pulse">
+          <div className="w-12 h-12 rounded-full border-2 border-accent border-t-transparent animate-spin" />
+          <p className="text-sm text-muted font-mono animate-pulse">
             {i18n._(LOADING_PHRASES[loadingPhraseIdx] ?? fallbackLoadingPhrase)}
           </p>
-          <div className="w-full h-1 bg-[var(--color-surface-2)] rounded-full overflow-hidden">
-            <div className="h-full bg-[var(--color-accent)] animate-[progress_10s_linear_forwards] rounded-full" />
+          <div className="w-full h-1 bg-surface-elevated rounded-full overflow-hidden">
+            <div className="h-full bg-primary animate-[progress_10s_linear_forwards] rounded-full" />
           </div>
           <AdPlaceholder slot="scenario_loading" />
         </div>
@@ -190,7 +190,7 @@ export function CreateGameModal({ open, onClose }: ModalProps) {
 
           {/* Setting */}
           <div>
-            <label className="block text-xs text-[var(--color-muted)] uppercase tracking-wider mb-2">
+            <label className="block text-xs text-muted uppercase tracking-wider mb-2">
               {t`Scenario`}
             </label>
             <div className="grid grid-cols-3 gap-2">
@@ -211,7 +211,7 @@ export function CreateGameModal({ open, onClose }: ModalProps) {
 
           {/* Mode */}
           <div>
-            <label className="block text-xs text-[var(--color-muted)] uppercase tracking-wider mb-2">
+            <label className="block text-xs text-muted uppercase tracking-wider mb-2">
               {t`Game Mode`}
             </label>
             <div className="flex gap-2">
@@ -228,7 +228,7 @@ export function CreateGameModal({ open, onClose }: ModalProps) {
 
           {/* Languages */}
           <div>
-            <label className="block text-xs text-[var(--color-muted)] uppercase tracking-wider mb-2">
+            <label className="block text-xs text-muted uppercase tracking-wider mb-2">
               {t`Languages`}
               <span className="normal-case">(max 3)</span>
             </label>
@@ -240,7 +240,7 @@ export function CreateGameModal({ open, onClose }: ModalProps) {
 
           {/* Attributes */}
           <div>
-            <label className="block text-xs text-[var(--color-muted)] uppercase tracking-wider mb-2">
+            <label className="block text-xs text-muted uppercase tracking-wider mb-2">
               {t`Card Attributes`}
             </label>
             <div className="flex flex-wrap gap-2">
@@ -261,7 +261,7 @@ export function CreateGameModal({ open, onClose }: ModalProps) {
 
           {/* Player count */}
           <div>
-            <label className="block text-xs text-[var(--color-muted)] uppercase tracking-wider mb-2">
+            <label className="block text-xs text-muted uppercase tracking-wider mb-2">
               {t`Players`}
             </label>
             <div className="flex justify-center items-center gap-4">
@@ -278,7 +278,7 @@ export function CreateGameModal({ open, onClose }: ModalProps) {
                   })
                 }
               />
-              <span className="text-[var(--color-accent)] font-bold text-3xl">
+              <span className="text-accent font-bold text-3xl">
                 {playerCount}
               </span>
               <IconButton

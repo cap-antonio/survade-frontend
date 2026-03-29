@@ -36,20 +36,20 @@ export function JoinScreen({ code }: JoinScreenProps) {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[var(--color-bg)] px-4">
+    <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-black tracking-tighter mb-1">
-            <span className="text-[var(--color-text)]">SUR</span>
-            <span className="text-[var(--color-accent)]">VADE</span>
+            <span className="text-foreground">SUR</span>
+            <span className="text-accent">VADE</span>
           </h1>
-          <p className="text-[var(--color-muted)] text-sm">
+          <p className="text-muted text-sm">
             {t`Game`}:{" "}
-            <span className="font-mono text-[var(--color-text)]">{code}</span>
+            <span className="font-mono text-foreground">{code}</span>
           </p>
         </div>
 
-        <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg p-6 space-y-4">
+        <div className="bg-surface border border-border rounded-lg p-6 space-y-4">
           <h2 className="font-semibold">{t`Join the Game`}</h2>
           <Input
             value={name}

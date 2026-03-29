@@ -57,18 +57,18 @@ export function EndScreen({ code, locale }: EndScreenProps) {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--color-bg)] px-4 py-12">
+    <div className="min-h-screen bg-background px-4 py-12">
       <div className="max-w-2xl mx-auto space-y-8">
         {/* Header */}
         <div className="text-center">
-          <p className="text-xs font-mono text-[var(--color-accent)] uppercase tracking-widest mb-2">
+          <p className="text-xs font-mono text-accent uppercase tracking-widest mb-2">
             {t`Game Over`}
           </p>
           <h1 className="text-4xl font-black tracking-tight mb-1">{code}</h1>
         </div>
 
         {/* Survivors */}
-        <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg p-5">
+        <div className="bg-surface border border-border rounded-lg p-5">
           <h2 className="text-sm font-semibold uppercase tracking-wider text-emerald-400 mb-3">
             {`✅  ${t`Survivors`} (${survivors.length})`}
           </h2>
@@ -91,15 +91,15 @@ export function EndScreen({ code, locale }: EndScreenProps) {
 
         {/* Eliminated */}
         {eliminated.length > 0 && (
-          <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg p-5">
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-[var(--color-muted)] mb-3">
+          <div className="bg-surface border border-border rounded-lg p-5">
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-muted mb-3">
               {`☠️ ${t`Eliminated`} (${eliminated.length})`}
             </h2>
             <div className="flex flex-wrap gap-2">
               {eliminated.map((p) => (
                 <span
                   key={p.player_id}
-                  className="px-3 py-1.5 rounded border border-[var(--color-border)] text-[var(--color-muted)] text-sm line-through"
+                  className="px-3 py-1.5 rounded border border-border text-muted text-sm line-through"
                 >
                   {p.display_name}
                 </span>
@@ -110,7 +110,7 @@ export function EndScreen({ code, locale }: EndScreenProps) {
 
         {/* Saboteur reveal */}
         {game.settings.saboteur_mode && (
-          <div className="bg-[var(--color-surface)] border border-red-800/40 rounded-lg p-5">
+          <div className="bg-surface border border-red-800/40 rounded-lg p-5">
             <h2 className="text-sm font-semibold uppercase tracking-wider text-red-400 mb-3">
               {`☠️ ${t`Saboteur`}`}
             </h2>
@@ -119,7 +119,7 @@ export function EndScreen({ code, locale }: EndScreenProps) {
                 <span className="font-semibold text-red-300">
                   {saboteur.display_name}
                 </span>
-                <span className="text-[var(--color-muted)] ml-2">
+                <span className="text-muted ml-2">
                   {t`was the saboteur`}
                 </span>
                 {saboteur.is_eliminated ? (
@@ -133,7 +133,7 @@ export function EndScreen({ code, locale }: EndScreenProps) {
                 )}
               </p>
             ) : (
-              <p className="text-sm text-[var(--color-muted)]">
+              <p className="text-sm text-muted">
                 {t`No saboteur in this game`}
               </p>
             )}
@@ -148,12 +148,12 @@ export function EndScreen({ code, locale }: EndScreenProps) {
           <button
             type="button"
             onClick={() => setShowHistory((s) => !s)}
-            className="w-full py-3 text-sm text-[var(--color-muted)] border border-[var(--color-border)] rounded-lg hover:bg-white/5 transition-colors"
+            className="w-full py-3 text-sm text-muted border border-border rounded-lg hover:bg-surface-hover transition-colors"
           >
             {showHistory ? "▲" : "▼"} {t`Game History`}
           </button>
           {showHistory && (
-            <div className="mt-4 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg p-4">
+            <div className="mt-4 bg-surface border border-border rounded-lg p-4">
               <GameHistory code={code} playerNameMap={playerNameMap} />
             </div>
           )}
@@ -161,7 +161,7 @@ export function EndScreen({ code, locale }: EndScreenProps) {
 
         {/* Rating form */}
         {!rated ? (
-          <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg p-5 space-y-4">
+          <div className="bg-surface border border-border rounded-lg p-5 space-y-4">
             <h2 className="font-semibold">{t`Rate the Game`}</h2>
             <div className="space-y-3">
               <StarRating
@@ -179,7 +179,7 @@ export function EndScreen({ code, locale }: EndScreenProps) {
                 onChange={(e) => setComment(e.target.value)}
                 placeholder="Optional comment…"
                 rows={3}
-                className="w-full bg-[var(--color-surface-2)] border border-[var(--color-border)] rounded px-3 py-2 text-sm text-[var(--color-text)] placeholder:text-[var(--color-muted)] focus:outline-none focus:border-[var(--color-accent)]/50 resize-none"
+                className="w-full bg-surface-elevated border border-border rounded px-3 py-2 text-sm text-foreground placeholder:text-muted focus:outline-none focus:border-accent/50 resize-none"
               />
             </div>
             <Button
@@ -201,7 +201,7 @@ export function EndScreen({ code, locale }: EndScreenProps) {
         <div className="text-center">
           <a
             href={getLocalizedPath(locale)}
-            className="text-sm text-[var(--color-accent)] underline"
+            className="text-sm text-accent underline"
           >
             {t`Create a new game`}
           </a>
@@ -222,7 +222,7 @@ function StarRating({
 }) {
   return (
     <div className="flex items-center gap-3">
-      <span className="text-sm text-[var(--color-muted)] w-32 shrink-0">
+      <span className="text-sm text-muted w-32 shrink-0">
         {label}
       </span>
       <div className="flex gap-1">

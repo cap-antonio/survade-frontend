@@ -34,7 +34,7 @@ export function Intro() {
       <LandingHero>
         {/* Atmospheric background */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[var(--color-accent)]/5 blur-[120px]" />
+          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px]" />
         </div>
 
         <div className="absolute top-5 right-5 z-20">
@@ -42,20 +42,20 @@ export function Intro() {
         </div>
 
         <div className="relative z-10 max-w-3xl mx-auto">
-          <span className="inline-block mb-4 px-3 py-1 text-xs font-mono text-[var(--color-accent)] border border-[var(--color-accent)]/30 rounded-full tracking-wider uppercase">
+          <span className="inline-block mb-4 px-3 py-1 text-xs font-mono text-accent border border-accent/30 rounded-full tracking-wider uppercase">
             {t`Survival Discussion Game`}
           </span>
 
           <h1 className="text-6xl sm:text-8xl font-black tracking-tighter mb-4 leading-none">
-            <span className="text-[var(--color-text)]">SURV</span>
-            <span className="text-[var(--color-accent)]">ADE</span>
+            <span className="text-foreground">SURV</span>
+            <span className="text-accent">ADE</span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-[var(--color-muted)] mb-4 max-w-xl mx-auto leading-relaxed uppercase">
+          <p className="text-lg sm:text-xl text-muted mb-4 max-w-xl mx-auto leading-relaxed uppercase">
             {t`Survave and parsuade`}
           </p>
 
-          <p className="text-lg sm:text-xl text-[var(--color-muted)] mb-10 max-w-xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-muted mb-10 max-w-xl mx-auto leading-relaxed">
             {t`The safe place has limited space. Your group must decide who gets in.`}
             {t`Argue, reveal secrets, vote — and survive.`}
           </p>
@@ -91,7 +91,7 @@ export function Intro() {
 
           {!isAuth && (
             <div className="flex flex-col gap-2 justify-center items-stretch sm:items-center mt-10">
-              <span className="text-sm text-[var(--color-muted)]">{t`Want to see your stats, streaks, and saboteur performance?`}</span>
+              <span className="text-sm text-muted">{t`Want to see your stats, streaks, and saboteur performance?`}</span>
 
               <Button
                 size="sm"

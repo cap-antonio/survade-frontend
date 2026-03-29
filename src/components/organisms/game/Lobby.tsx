@@ -29,21 +29,21 @@ export function Lobby({ code, locale }: LobbyProps) {
   const canStart = activePlayers.length >= 3
 
   return (
-    <div className="min-h-screen bg-[var(--color-bg)] flex flex-col items-center justify-center px-4 py-12">
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center px-4 py-12">
       <div className="w-full max-w-md space-y-6">
         {/* Header */}
         <div className="text-center">
-          <p className="text-xs text-[var(--color-muted)] font-mono uppercase tracking-widest mb-1">
+          <p className="text-xs text-muted font-mono uppercase tracking-widest mb-1">
             {t`Waiting for players`}
           </p>
-          <h1 className="text-5xl font-black font-mono tracking-widest text-[var(--color-accent)]">
+          <h1 className="text-5xl font-black font-mono tracking-widest text-accent">
             {code}
           </h1>
         </div>
 
         {/* QR + invite */}
         {isHost && (
-          <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg p-5 flex flex-col items-center gap-4">
+          <div className="bg-surface border border-border rounded-lg p-5 flex flex-col items-center gap-4">
             <QRCodeSVG
               value={gameUrl}
               size={160}
@@ -51,7 +51,7 @@ export function Lobby({ code, locale }: LobbyProps) {
               fgColor="#e8e8f0"
               level="M"
             />
-            <p className="text-xs text-[var(--color-muted)] font-mono break-all text-center">
+            <p className="text-xs text-muted font-mono break-all text-center">
               {gameUrl}
             </p>
             <Button
@@ -65,8 +65,8 @@ export function Lobby({ code, locale }: LobbyProps) {
         )}
 
         {/* Players list */}
-        <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg p-4 space-y-2">
-          <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-3">
+        <div className="bg-surface border border-border rounded-lg p-4 space-y-2">
+          <p className="text-xs text-muted uppercase tracking-wider mb-3">
             {t`Players`} ({activePlayers.length}/{game.settings.player_count})
           </p>
           {game.players.map((p) => (
@@ -84,7 +84,7 @@ export function Lobby({ code, locale }: LobbyProps) {
         {isHost && (
           <div className="space-y-2">
             {!canStart && (
-              <p className="text-xs text-center text-[var(--color-muted)]">
+              <p className="text-xs text-center text-muted">
                 {t`Need at least 3 players to start`}
               </p>
             )}
@@ -104,7 +104,7 @@ export function Lobby({ code, locale }: LobbyProps) {
         )}
 
         {!isHost && (
-          <p className="text-center text-sm text-[var(--color-muted)]">
+          <p className="text-center text-sm text-muted">
             {t`Waiting for host to start the game…`}
           </p>
         )}

@@ -1,20 +1,35 @@
 @import "tailwindcss";
 
 :root {
-  --color-bg: #0a0a0f;
-  --color-surface: #12121a;
-  --color-surface-2: #1a1a26;
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-accent: #e63946;
-  --color-accent-dim: rgba(230, 57, 70, 0.15);
-  --color-text: #e8e8f0;
-  --color-muted: rgba(232, 232, 240, 0.45);
+  --ui-background: #0a0a0f;
+  --ui-surface: #12121a;
+  --ui-surface-elevated: #1a1a26;
+  --ui-surface-hover: rgba(255, 255, 255, 0.05);
+  --ui-border: rgba(255, 255, 255, 0.08);
+  --ui-primary: #e63946;
+  --ui-primary-soft: rgba(230, 57, 70, 0.15);
+  --ui-foreground: #e8e8f0;
+  --ui-muted: rgba(232, 232, 240, 0.45);
+}
+
+@theme inline {
+  --color-background: var(--ui-background);
+  --color-surface: var(--ui-surface);
+  --color-surface-elevated: var(--ui-surface-elevated);
+  --color-surface-hover: var(--ui-surface-hover);
+  --color-border: var(--ui-border);
+  --color-foreground: var(--ui-foreground);
+  --color-muted: var(--ui-muted);
+  --color-primary: var(--ui-primary);
+  --color-primary-soft: var(--ui-primary-soft);
+  --color-accent: var(--ui-primary);
+  --color-accent-soft: var(--ui-primary-soft);
 }
 
 html,
 body {
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  background-color: var(--ui-background);
+  color: var(--ui-foreground);
   font-family: "Inter", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
 }

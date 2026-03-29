@@ -94,7 +94,7 @@ export function GameHistory({ code, playerNameMap }: GameHistoryProps) {
         >
           {`← ${t`Prev`}`}
         </Button>
-        <span className="text-sm font-mono flex-1 text-center text-[var(--color-muted)]">
+        <span className="text-sm font-mono flex-1 text-center text-muted">
           {`${t`Round`} ${currentRound} / ${totalRounds}`}
         </span>
         <Button
@@ -110,16 +110,16 @@ export function GameHistory({ code, playerNameMap }: GameHistoryProps) {
       {/* Events */}
       <div className="space-y-1">
         {events.length === 0 && (
-          <p className="text-sm text-[var(--color-muted)] text-center py-4">
+          <p className="text-sm text-muted text-center py-4">
             {t`No events this round`}
           </p>
         )}
         {events.map((event, i) => (
           <div
             key={i}
-            className="flex items-center gap-3 py-2 border-b border-[var(--color-border)] last:border-0"
+            className="flex items-center gap-3 py-2 border-b border-border last:border-0"
           >
-            <span className="text-sm text-[var(--color-muted)]">
+            <span className="text-sm text-muted">
               {eventLabel(event, playerNameMap)}
             </span>
           </div>

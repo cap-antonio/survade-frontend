@@ -59,7 +59,7 @@ export function Dropdown({
         {children}
 
         {open ? (
-          <div className="absolute right-0 top-[calc(100%+0.75rem)] z-30 min-w-52 overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)]/95 p-2 shadow-2xl backdrop-blur-md">
+          <div className="absolute right-0 top-[calc(100%+0.75rem)] z-30 min-w-52 overflow-hidden rounded-2xl border border-border bg-surface/95 p-2 shadow-2xl backdrop-blur-md">
             {items}
           </div>
         ) : null}

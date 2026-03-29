@@ -65,10 +65,10 @@ export function DeleteAccountModal({
           <h2 className="text-2xl font-black tracking-tight">
             {t`Delete account`}
           </h2>
-          <p className="text-sm text-[var(--color-muted)]">
+          <p className="text-sm text-muted">
             {t`This will permanently delete your account and all of your saved statistics.`}
           </p>
-          <p className="text-sm text-[var(--color-muted)]">
+          <p className="text-sm text-muted">
             {t`You will still be able to play Survade afterwards, but your profile history will be gone.`}
           </p>
         </div>

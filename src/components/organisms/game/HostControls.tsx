@@ -20,8 +20,8 @@ export function HostControls({
 }: HostControlsProps) {
   const { t } = useLingui()
   return (
-    <div className="flex items-center gap-3 p-3 bg-[var(--color-surface-2)] border border-[var(--color-border)] rounded-lg">
-      <span className="text-xs text-[var(--color-muted)] uppercase tracking-wider shrink-0">
+    <div className="flex items-center gap-3 p-3 bg-surface-elevated border border-border rounded-lg">
+      <span className="text-xs text-muted uppercase tracking-wider shrink-0">
         {t`Host`}
       </span>
       {!votingPhase ? (
@@ -44,7 +44,7 @@ export function HostControls({
         </Button>
       )}
       {votingPhase && (
-        <span className="text-xs text-[var(--color-accent)] animate-pulse">
+        <span className="text-xs text-accent animate-pulse">
           {t`Voting in progress…`}
         </span>
       )}

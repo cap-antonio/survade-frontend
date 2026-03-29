@@ -35,14 +35,12 @@ type StatCardProps = {
 
 function StatCard({ label, value, hint }: StatCardProps) {
   return (
-    <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
-      <p className="text-xs uppercase tracking-[0.25em] text-[var(--color-muted)]">
-        {label}
-      </p>
-      <p className="mt-3 text-3xl font-black tracking-tight text-[var(--color-text)]">
+    <div className="rounded-2xl border border-border bg-surface p-5">
+      <p className="text-xs uppercase tracking-[0.25em] text-muted">{label}</p>
+      <p className="mt-3 text-3xl font-black tracking-tight text-foreground">
         {value}
       </p>
-      <p className="mt-2 text-sm text-[var(--color-muted)]">{hint}</p>
+      <p className="mt-2 text-sm text-muted">{hint}</p>
     </div>
   )
 }
@@ -71,14 +69,14 @@ export function ProfilePage({ locale }: ProfilePageProps) {
 
   if (!accessToken) {
     return (
-      <div className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] p-8 text-center">
-        <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-accent)]">
+      <div className="rounded-3xl border border-border bg-surface p-8 text-center">
+        <p className="text-xs uppercase tracking-[0.3em] text-accent">
           {t`Statistics`}
         </p>
         <h1 className="mt-3 text-3xl font-black tracking-tight">
           {t`Sign in required`}
         </h1>
-        <p className="mt-3 text-[var(--color-muted)]">
+        <p className="mt-3 text-muted">
           {t`Open the account menu on the landing page and sign in to see your stats.`}
         </p>
         <Link href={getLocalizedPath(locale)} className="mt-6 inline-flex">
@@ -90,11 +88,9 @@ export function ProfilePage({ locale }: ProfilePageProps) {
 
   if (isLoading) {
     return (
-      <div className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] p-8 text-center">
-        <div className="mx-auto h-10 w-10 animate-spin rounded-full border-2 border-[var(--color-accent)] border-t-transparent" />
-        <p className="mt-4 text-sm text-[var(--color-muted)]">
-          {t`Loading statistics...`}
-        </p>
+      <div className="rounded-3xl border border-border bg-surface p-8 text-center">
+        <div className="mx-auto h-10 w-10 animate-spin rounded-full border-2 border-accent border-t-transparent" />
+        <p className="mt-4 text-sm text-muted">{t`Loading statistics...`}</p>
       </div>
     )
   }
@@ -150,21 +146,20 @@ export function ProfilePage({ locale }: ProfilePageProps) {
   return (
     <>
       <div className="space-y-8">
-        <Button onClick={() => router.back()}>
-          <ArrowLeftIcon className="h-4 w-4" />
+        <Button onClick={() => router.back()} leftIcon={<ArrowLeftIcon />}>
           {t`Back`}
         </Button>
 
         <div className="flex items-center gap-3 pl-2 ">
-          <UserCog className="h-8 w-8 text-[var(--color-accent)]" />
+          <UserCog className="h-8 w-8 text-accent" />
           <h1 className="text-2xl font-bold tracking-tight">{t`Profile`}</h1>
         </div>
 
         <div
           id="profile"
-          className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] p-8"
+          className="rounded-3xl border border-border bg-surface p-8"
         >
-          <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-accent)]">
+          <p className="text-xs uppercase tracking-[0.3em] text-accent">
             {t`Settings`}
           </p>
           <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -175,11 +170,11 @@ export function ProfilePage({ locale }: ProfilePageProps) {
             </div>
 
             {data.favourite_setting ? (
-              <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface-2)] px-4 py-3 text-sm text-[var(--color-muted)]">
-                <span className="block text-xs uppercase tracking-[0.25em] text-[var(--color-accent)]">
+              <div className="rounded-2xl border border-border bg-surface-elevated px-4 py-3 text-sm text-muted">
+                <span className="block text-xs uppercase tracking-[0.25em] text-accent">
                   {t`Favourite setting`}
                 </span>
-                <span className="mt-1 block text-[var(--color-text)]">
+                <span className="mt-1 block text-foreground">
                   {data.favourite_setting}
                 </span>
               </div>
@@ -188,14 +183,14 @@ export function ProfilePage({ locale }: ProfilePageProps) {
         </div>
 
         <section className="flex flex-col gap-4 lg:flex-row lg:items-stretch">
-          <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 lg:flex-[1.1]">
-            <p className="text-xs uppercase tracking-[0.25em] text-[var(--color-accent)]">
+          <div className="rounded-2xl border border-border bg-surface p-5 lg:flex-[1.1]">
+            <p className="text-xs uppercase tracking-[0.25em] text-accent">
               {t`Current password`}
             </p>
             <h2 className="mt-3 text-xl font-bold tracking-tight">
               {t`Change current password`}
             </h2>
-            <p className="mt-3 text-sm text-[var(--color-muted)]">
+            <p className="mt-3 text-sm text-muted">
               {t`Use your current password to set a new one for this account.`}
             </p>
             <div className="mt-5 space-y-4">
@@ -237,7 +232,7 @@ export function ProfilePage({ locale }: ProfilePageProps) {
               ) : null}
 
               {changePasswordNotice ? (
-                <div className="rounded-lg border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/10 px-3 py-2 text-sm text-[var(--color-text)]">
+                <div className="rounded-lg border border-accent/30 bg-primary/10 px-3 py-2 text-sm text-foreground">
                   {changePasswordNotice}
                 </div>
               ) : null}
@@ -254,14 +249,14 @@ export function ProfilePage({ locale }: ProfilePageProps) {
           </div>
 
           <div className="flex flex-col gap-4 lg:flex-[0.9]">
-            <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
-              <p className="text-xs uppercase tracking-[0.25em] text-[var(--color-accent)]">
+            <div className="rounded-2xl border border-border bg-surface p-5">
+              <p className="text-xs uppercase tracking-[0.25em] text-accent">
                 {t`Reset password`}
               </p>
               <h2 className="mt-3 text-xl font-bold tracking-tight">
                 {t`Reset by email code`}
               </h2>
-              <p className="mt-3 text-sm text-[var(--color-muted)]">
+              <p className="mt-3 text-sm text-muted">
                 {t`Request a code by email, then confirm it with your new password in a separate modal.`}
               </p>
               <Button
@@ -280,7 +275,7 @@ export function ProfilePage({ locale }: ProfilePageProps) {
               <h2 className="mt-3 text-xl font-bold tracking-tight">
                 {t`Remove profile and statistics`}
               </h2>
-              <p className="mt-3 text-sm text-[var(--color-muted)]">
+              <p className="mt-3 text-sm text-muted">
                 {t`Delete your account and wipe all saved profile statistics from Survade.`}
               </p>
 
@@ -297,15 +292,15 @@ export function ProfilePage({ locale }: ProfilePageProps) {
 
         <section className="space-y-4">
           <div className="flex items-center gap-3 pl-2 ">
-            <ChartLine className="h-8 w-8 text-[var(--color-accent)]" />
+            <ChartLine className="h-8 w-8 text-accent" />
             <h1 className="text-2xl font-bold tracking-tight">{t`My statistics`}</h1>
           </div>
-          <p className="mt-2 text-sm text-[var(--color-muted)] pb-4">
+          <p className="mt-2 text-sm text-muted pb-4">
             {t`Your personal survival and saboteur performance.`}
           </p>
 
           <div className="flex items-center gap-3">
-            <ShieldCheck className="h-5 w-5 text-[var(--color-accent)]" />
+            <ShieldCheck className="h-5 w-5 text-accent" />
             <h2 className="text-xl font-bold tracking-tight">{t`Survival`}</h2>
           </div>
 
@@ -330,7 +325,7 @@ export function ProfilePage({ locale }: ProfilePageProps) {
 
         <section className="space-y-4">
           <div className="flex items-center gap-3">
-            <ShieldAlert className="h-5 w-5 text-[var(--color-accent)]" />
+            <ShieldAlert className="h-5 w-5 text-accent" />
             <h2 className="text-xl font-bold tracking-tight">{t`Saboteur`}</h2>
           </div>
 
@@ -359,22 +354,22 @@ export function ProfilePage({ locale }: ProfilePageProps) {
         </section>
 
         <section className="grid gap-4 md:grid-cols-2">
-          <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
+          <div className="rounded-2xl border border-border bg-surface p-5">
             <div className="flex items-center gap-3">
-              <Target className="h-5 w-5 text-[var(--color-accent)]" />
+              <Target className="h-5 w-5 text-accent" />
               <h3 className="text-lg font-bold">{t`Quick read`}</h3>
             </div>
-            <p className="mt-3 text-sm text-[var(--color-muted)]">
+            <p className="mt-3 text-sm text-muted">
               {t`Higher survival rate means the group trusts your arguments. Higher saboteur win rate means you can manipulate the table when the pressure rises.`}
             </p>
           </div>
 
-          <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
+          <div className="rounded-2xl border border-border bg-surface p-5">
             <div className="flex items-center gap-3">
-              <Trophy className="h-5 w-5 text-[var(--color-accent)]" />
+              <Trophy className="h-5 w-5 text-accent" />
               <h3 className="text-lg font-bold">{t`Keep playing`}</h3>
             </div>
-            <p className="mt-3 text-sm text-[var(--color-muted)]">
+            <p className="mt-3 text-sm text-muted">
               {t`Play more rounds to sharpen your profile and discover your strongest role.`}
             </p>
           </div>

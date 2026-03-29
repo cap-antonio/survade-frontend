@@ -55,11 +55,11 @@ export function Input({
   return (
     <div className="flex flex-col gap-2">
       {label && (
-        <label className="block text-xs text-[var(--color-muted)] uppercase tracking-wider">
+        <label className="block text-xs text-muted uppercase tracking-wider">
           {label}
 
           {required ? (
-            <span className="text-[var(--color-accent)] ml-1">*</span>
+            <span className="text-accent ml-1">*</span>
           ) : null}
         </label>
       )}
@@ -75,9 +75,9 @@ export function Input({
         max={max}
         onChange={(e) => onChange(sanitizeInputValue(e.target.value, type))}
         className={cn(
-          "w-full bg-[var(--color-surface-2)] border border-[var(--color-border)] rounded px-3 py-2",
-          "text-sm text-[var(--color-text)] placeholder:text-[var(--color-muted)]",
-          "focus:outline-none focus:border-[var(--color-accent)]/50",
+          "w-full bg-surface-elevated border border-border rounded px-3 py-2",
+          "text-sm text-foreground placeholder:text-muted",
+          "focus:outline-none focus:border-accent/50",
           "disabled:opacity-40",
           className,
         )}

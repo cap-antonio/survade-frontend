@@ -9,12 +9,12 @@ type BadgeProps = {
 }
 
 const variantClasses: Record<BadgeVariant, string> = {
-  default: "bg-white/10 text-[var(--color-text)]",
-  accent: "bg-[var(--color-accent-dim)] text-[var(--color-accent)]",
+  default: "bg-white/10 text-foreground",
+  accent: "bg-accent-soft text-accent",
   green: "bg-emerald-900/40 text-emerald-400",
   yellow: "bg-yellow-900/40 text-yellow-400",
   red: "bg-red-900/40 text-red-400",
-  muted: "bg-white/5 text-[var(--color-muted)]",
+  muted: "bg-surface-hover text-muted",
 }
 
 export function Badge({

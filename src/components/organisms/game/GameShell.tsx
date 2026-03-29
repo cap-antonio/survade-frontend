@@ -54,7 +54,7 @@ export function GameShell({ code, locale }: GameShellProps) {
 
   if (!sessionChecked || isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[var(--color-bg)]">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <Spinner size="lg" />
       </div>
     )
@@ -62,13 +62,13 @@ export function GameShell({ code, locale }: GameShellProps) {
 
   if (isError) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[var(--color-bg)]">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
           <p className="text-2xl font-bold mb-2">404</p>
-          <p className="text-[var(--color-muted)]">Game not found</p>
+          <p className="text-muted">Game not found</p>
           <a
             href={getLocalizedPath(locale)}
-            className="mt-4 inline-block text-sm text-[var(--color-accent)] underline"
+            className="mt-4 inline-block text-sm text-accent underline"
           >
             Back to home
           </a>
@@ -84,7 +84,7 @@ export function GameShell({ code, locale }: GameShellProps) {
 
   if (!game) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[var(--color-bg)]">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <Spinner size="lg" />
       </div>
     )

@@ -89,10 +89,10 @@ export function ActiveGame({ code }: ActiveGameProps) {
   const availableLangs = game.settings.langs
 
   return (
-    <div className="min-h-screen bg-[var(--color-bg)] flex flex-col">
+    <div className="min-h-screen bg-background flex flex-col">
       {/* Top bar */}
-      <div className="border-b border-[var(--color-border)] px-4 py-2 flex items-center gap-4">
-        <span className="text-[var(--color-accent)] font-mono font-bold tracking-widest">
+      <div className="border-b border-border px-4 py-2 flex items-center gap-4">
+        <span className="text-accent font-mono font-bold tracking-widest">
           {code}
         </span>
         {availableLangs.length > 1 && (
@@ -104,8 +104,8 @@ export function ActiveGame({ code }: ActiveGameProps) {
                 onClick={() => setContentLang(lang)}
                 className={`px-2 py-0.5 text-xs font-mono rounded border transition-colors ${
                   contentLang === lang
-                    ? "border-[var(--color-accent)] text-[var(--color-accent)]"
-                    : "border-[var(--color-border)] text-[var(--color-muted)] hover:border-white/20"
+                    ? "border-accent text-accent"
+                    : "border-border text-muted hover:border-white/20"
                 }`}
               >
                 {lang.toUpperCase()}

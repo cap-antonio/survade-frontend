@@ -15,7 +15,7 @@ export const LandingHero = ({
       className={classNames(
         "relative min-h-[100vh] flex flex-col items-center justify-center px-4 text-center overflow-hidden",
         {
-          "bg-[var(--color-surface)]/40": bgInverse,
+          "bg-surface/40": bgInverse,
         },
       )}
     >

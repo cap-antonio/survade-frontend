@@ -32,7 +32,7 @@ export default async function LocalizedStatisticsPage({
 
   return (
     <Providers locale={slug as SupportedLocale}>
-      <main className="min-h-screen bg-[var(--color-bg)] px-4 py-10 sm:px-6">
+      <main className="min-h-screen bg-background px-4 py-10 sm:px-6">
         <div className="mx-auto max-w-5xl">
           <ProfilePage locale={slug as SupportedLocale} />
         </div>

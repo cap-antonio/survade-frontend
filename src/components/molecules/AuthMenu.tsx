@@ -55,10 +55,10 @@ export function AuthMenu() {
               <>
                 <Link
                   href={getLocalizedPath(locale, "statistics")}
-                  className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-[var(--color-text)] transition-colors hover:bg-[var(--color-surface-2)]"
+                  className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-foreground transition-colors hover:bg-surface-elevated"
                   onClick={() => setOpen(false)}
                 >
-                  <ShieldUser className="h-4 w-4 text-[var(--color-accent)]" />
+                  <ShieldUser className="h-4 w-4 text-accent" />
                   <span>{t`Profile`}</span>
                 </Link>
 
@@ -66,9 +66,9 @@ export function AuthMenu() {
                   type="button"
                   onClick={handleSignOut}
                   disabled={isPending}
-                  className="flex w-full cursor-pointer items-center gap-3 rounded-xl px-3 py-2 text-left text-sm text-[var(--color-text)] transition-colors hover:bg-[var(--color-surface-2)] disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="flex w-full cursor-pointer items-center gap-3 rounded-xl px-3 py-2 text-left text-sm text-foreground transition-colors hover:bg-surface-elevated disabled:opacity-40 disabled:cursor-not-allowed"
                 >
-                  <LogOut className="h-4 w-4 text-[var(--color-accent)]" />
+                  <LogOut className="h-4 w-4 text-accent" />
                   <span>{t`Sign out`}</span>
                 </button>
               </>
@@ -76,16 +76,16 @@ export function AuthMenu() {
               <button
                 type="button"
                 onClick={handleOpenAuth}
-                className="flex w-full cursor-pointer items-center gap-3 rounded-xl px-3 py-2 text-left text-sm text-[var(--color-text)] transition-colors hover:bg-[var(--color-surface-2)]"
+                className="flex w-full cursor-pointer items-center gap-3 rounded-xl px-3 py-2 text-left text-sm text-foreground transition-colors hover:bg-surface-elevated"
               >
-                <UserRound className="h-4 w-4 text-[var(--color-accent)]" />
+                <UserRound className="h-4 w-4 text-accent" />
                 <span>{t`Sign in`}</span>
               </button>
             )}
 
-            <div className="border-t border-[var(--color-border)] pt-3">
-              <div className="mb-3 flex items-center gap-2 px-3 text-[11px] font-mono uppercase tracking-[0.22em] text-[var(--color-muted)]">
-                <Globe2 className="h-3.5 w-3.5 text-[var(--color-accent)]" />
+            <div className="border-t border-border pt-3">
+              <div className="mb-3 flex items-center gap-2 px-3 text-[11px] font-mono uppercase tracking-[0.22em] text-muted">
+                <Globe2 className="h-3.5 w-3.5 text-accent" />
                 <span>{t`Language`}</span>
               </div>
               <LocalesButtons

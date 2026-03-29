@@ -54,7 +54,7 @@ export function Modal({ open, onClose, children, className }: Props) {
     >
       <div
         className={cn(
-          "relative bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg shadow-2xl",
+          "relative bg-surface border border-border rounded-lg shadow-2xl",
           "max-h-[90vh] overflow-y-auto",
           className,
         )}

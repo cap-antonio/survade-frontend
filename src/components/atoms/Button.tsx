@@ -19,12 +19,11 @@ type ButtonProps = {
 }
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary:
-    "bg-[var(--color-accent)] hover:bg-red-500 text-white border-transparent",
+  primary: "bg-primary hover:bg-primary/90 text-white border-transparent",
   secondary:
-    "bg-[var(--color-surface-2)] hover:bg-[var(--color-surface)] text-[var(--color-text)] border-[var(--color-border)]",
+    "bg-surface-elevated hover:bg-surface text-foreground border-border",
   ghost:
-    "bg-transparent hover:bg-white/5 text-[var(--color-text)] border-transparent",
+    "bg-transparent hover:bg-surface-hover text-foreground border-transparent",
   danger: "bg-red-900/40 hover:bg-red-800/60 text-red-300 border-red-800/40",
 }
 
@@ -55,7 +54,7 @@ export function Button({
       className={cn(
         "cursor-pointer font-bold",
         "inline-flex items-center justify-center gap-2 font-medium rounded border transition-colors",
-        "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]/50",
+        "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50",
         "disabled:opacity-40 disabled:cursor-not-allowed",
         variantClasses[variant],
         sizeClasses[size],

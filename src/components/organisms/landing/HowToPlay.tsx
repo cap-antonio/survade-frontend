@@ -45,14 +45,14 @@ export function HowToPlay() {
           {STEPS.map((step) => (
             <div
               key={step.number}
-              className="flex gap-6 p-5 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)]"
+              className="flex gap-6 p-5 rounded-lg border border-border bg-surface"
             >
-              <span className="text-3xl font-black text-[var(--color-accent)]/40 font-mono tabular-nums shrink-0 leading-none my-auto">
+              <span className="text-3xl font-black text-accent/40 font-mono tabular-nums shrink-0 leading-none my-auto">
                 {step.number}
               </span>
               <div className="flex flex-col items-start w-full px-4">
                 <h3 className="font-semibold mb-1">{i18n._(step.title)}</h3>
-                <p className="text-sm text-[var(--color-muted)] leading-relaxed">
+                <p className="text-sm text-muted leading-relaxed">
                   {i18n._(step.desc)}
                 </p>
               </div>

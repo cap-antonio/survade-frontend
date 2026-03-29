@@ -58,17 +58,17 @@ export function SettingsGrid() {
         <h2 className="text-3xl font-bold mb-3 text-center tracking-tight">
           {t`Scenarios`}
         </h2>
-        <p className="text-center text-[var(--color-muted)] text-sm mb-12">
+        <p className="text-center text-muted text-sm mb-12">
           {t`Choose the world your group will fight to survive in.`}
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {SETTINGS.map((s) => (
             <div
               key={s.key}
-              className="relative p-5 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-white/15 transition-colors"
+              className="relative p-5 rounded-lg border border-border bg-surface hover:border-white/15 transition-colors"
             >
               {!s.free && (
-                <span className="absolute top-3 right-3 text-xs text-[var(--color-muted)] font-mono">
+                <span className="absolute top-3 right-3 text-xs text-muted font-mono">
                   🔒
                 </span>
               )}
@@ -79,7 +79,7 @@ export function SettingsGrid() {
               )}
               <div className="text-3xl mb-3">{s.emoji}</div>
               <h3 className="font-semibold mb-1">{i18n._(s.title)}</h3>
-              <p className="text-sm text-[var(--color-muted)] leading-relaxed">
+              <p className="text-sm text-muted leading-relaxed">
                 {i18n._(s.desc)}
               </p>
             </div>

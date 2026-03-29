@@ -157,13 +157,13 @@ export function PasswordResetModal({
     >
       <div className="space-y-5 p-6">
         <div className="space-y-2">
-          <p className="text-xs font-mono uppercase tracking-[0.3em] text-[var(--color-accent)]">
+          <p className="text-xs font-mono uppercase tracking-[0.3em] text-accent">
             {t`Account`}
           </p>
           <h2 className="text-2xl font-black tracking-tight">
             {t`Reset password`}
           </h2>
-          <p className="text-sm text-[var(--color-muted)]">
+          <p className="text-sm text-muted">
             {isCodeStepActive
               ? t`Enter the code from your email and choose a new password.`
               : t`Request a reset code and we'll email it to you.`}
@@ -183,7 +183,7 @@ export function PasswordResetModal({
 
           {isCodeStepActive ? (
             <>
-              <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 text-sm text-[var(--color-muted)]">
+              <div className="rounded-lg border border-border bg-surface-elevated px-3 py-2 text-sm text-muted">
                 {t`Code sent to`} {requestedEmail}
               </div>
 
@@ -218,7 +218,7 @@ export function PasswordResetModal({
         </div>
 
         {notice ? (
-          <div className="rounded-lg border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/10 px-3 py-2 text-sm text-[var(--color-text)]">
+          <div className="rounded-lg border border-accent/30 bg-primary/10 px-3 py-2 text-sm text-foreground">
             {notice}
           </div>
         ) : null}
