@@ -4,7 +4,6 @@ import Link from "next/link"
 import { useState } from "react"
 import { useLingui } from "@lingui/react/macro"
 import {
-  ArrowLeftIcon,
   ChartLine,
   ShieldAlert,
   ShieldCheck,
@@ -77,7 +76,7 @@ export function ProfilePage({ locale }: ProfilePageProps) {
           {t`Sign in required`}
         </h1>
         <p className="mt-3 text-muted">
-          {t`Open the account menu on the landing page and sign in to see your stats.`}
+          {t`Open the user menu on the landing page and sign in to see your stats.`}
         </p>
         <Link href={getLocalizedPath(locale)} className="mt-6 inline-flex">
           <Button variant="secondary">{t`Back to home`}</Button>
@@ -146,10 +145,6 @@ export function ProfilePage({ locale }: ProfilePageProps) {
   return (
     <>
       <div className="space-y-8">
-        <Button onClick={() => router.back()} leftIcon={<ArrowLeftIcon />}>
-          {t`Back`}
-        </Button>
-
         <div className="flex items-center gap-3 pl-2 ">
           <UserCog className="h-8 w-8 text-accent" />
           <h1 className="text-2xl font-bold tracking-tight">{t`Profile`}</h1>

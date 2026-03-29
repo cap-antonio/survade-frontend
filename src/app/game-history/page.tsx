@@ -1,34 +1,33 @@
 import type { Metadata } from "next"
-import { ProfilePage } from "@/components/organisms/profile/ProfilePage"
 import { Header } from "@/components/templates/Header"
 import { DEFAULT_LOCALE, SUPPORTED_LOCALES, getLocalizedPath } from "@/i18n"
 import { initLingui } from "@/initLingui"
 import { Providers } from "../providers"
 
 export const metadata: Metadata = {
-  title: "Statistics — Survade",
-  description: "Review your Survade profile and performance statistics.",
+  title: "Game history — Survade",
+  description: "Browse your recent Survade game history.",
   alternates: {
-    canonical: "/statistics",
+    canonical: "/game-history",
     languages: Object.fromEntries(
       SUPPORTED_LOCALES.map((locale) => [
         locale,
-        getLocalizedPath(locale, "statistics"),
+        getLocalizedPath(locale, "game-history"),
       ]),
     ),
   },
 }
 
-export default async function StatisticsPage(): Promise<React.ReactElement> {
+export default async function GameHistoryPage(): Promise<React.ReactElement> {
   await initLingui(DEFAULT_LOCALE)
 
   return (
     <Providers locale={DEFAULT_LOCALE}>
       <main className="min-h-screen bg-background">
         <Header locale={DEFAULT_LOCALE} />
-        <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6">
-          <ProfilePage locale={DEFAULT_LOCALE} />
-        </div>
+        <section className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
+          <h1 className="text-4xl font-black tracking-tight">Game history</h1>
+        </section>
       </main>
     </Providers>
   )

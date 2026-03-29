@@ -13,7 +13,18 @@ import { LocalesButtons } from "./LocalesButtons"
 import { getLocalizedPath, setLocale, type SupportedLocale } from "@/i18n"
 import { Dropdown } from "@/components/atoms/Dropdown"
 
-export function AuthMenu() {
+type NavigationItem = {
+  href: string
+  label: string
+}
+
+type UserMenuProps = {
+  navigationItems?: NavigationItem[]
+}
+
+export function UserMenu({
+  navigationItems = [],
+}: UserMenuProps): React.ReactElement {
   const { t, i18n } = useLingui()
   const router = useRouter()
   const isAuth = useAuthStore((state) => state.isAuth)
@@ -51,6 +62,25 @@ export function AuthMenu() {
         setOpen={setOpen}
         items={
           <div className="space-y-2">
+            {navigationItems.length > 0 ? (
+              <div className="space-y-1 lg:hidden">
+                {navigationItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="flex items-center rounded-xl px-3 py-2 text-sm text-foreground transition-colors hover:bg-surface-elevated"
+                    onClick={() => setOpen(false)}
+                  >
+                    <span>{item.label}</span>
+                  </Link>
+                ))}
+              </div>
+            ) : null}
+
+            {navigationItems.length > 0 ? (
+              <div className="border-t border-border lg:hidden" />
+            ) : null}
+
             {isAuth ? (
               <>
                 <Link
@@ -98,7 +128,7 @@ export function AuthMenu() {
         }
       >
         <IconButton
-          label={isAuth ? t`Account menu` : t`Sign in`}
+          label={isAuth ? t`User menu` : t`Sign in`}
           onClick={() => setOpen((value) => !value)}
           className="backdrop-blur-sm"
           Icon={<UserRound className="h-4 w-4" />}

@@ -6,7 +6,7 @@ import { Button } from "@/components/atoms/Button"
 import { Input } from "@/components/atoms/Input"
 import { CreateGameModal } from "../../molecules/modals/CreateGameModal"
 import { LandingHero } from "@/components/templates/LandingHero"
-import { AuthMenu } from "../../molecules/AuthMenu"
+import { Header } from "@/components/templates/Header"
 import { getLocalizedPath, SupportedLocale } from "@/i18n"
 import { AuthModal } from "@/components/molecules/modals/AuthModal"
 import { useAuthStore } from "@/stores/authStore"
@@ -32,13 +32,11 @@ export function Intro() {
   return (
     <>
       <LandingHero>
+        <Header locale={i18n.locale as SupportedLocale} floating />
+
         {/* Atmospheric background */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px]" />
-        </div>
-
-        <div className="absolute top-5 right-5 z-20">
-          <AuthMenu />
         </div>
 
         <div className="relative z-10 max-w-3xl mx-auto">
@@ -56,8 +54,7 @@ export function Intro() {
           </p>
 
           <p className="text-lg sm:text-xl text-muted mb-10 max-w-xl mx-auto leading-relaxed">
-            {t`The safe place has limited space. Your group must decide who gets in.`}
-            {t`Argue, reveal secrets, vote — and survive.`}
+            {t`The safe place has limited space. Your group must decide who gets in. Argue, reveal secrets, vote — and survive.`}
           </p>
 
           <div className="flex flex-col gap-4 justify-center items-stretch sm:items-center">
@@ -91,7 +88,9 @@ export function Intro() {
 
           {!isAuth && (
             <div className="flex flex-col gap-2 justify-center items-stretch sm:items-center mt-10">
-              <span className="text-sm text-muted">{t`Want to see your stats, streaks, and saboteur performance?`}</span>
+              <span className="text-sm text-muted">
+                {t`Want to see your stats, streaks, and saboteur performance?`}
+              </span>
 
               <Button
                 size="sm"

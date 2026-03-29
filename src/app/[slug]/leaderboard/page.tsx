@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation"
-import { ProfilePage } from "@/components/organisms/profile/ProfilePage"
 import { Header } from "@/components/templates/Header"
 import {
   DEFAULT_LOCALE,
@@ -10,7 +9,7 @@ import {
 import { initLingui } from "@/initLingui"
 import { Providers } from "../../providers"
 
-type LocalizedStatisticsPageProps = {
+type LocalizedLeaderboardPageProps = {
   params: Promise<{ slug: string }>
 }
 
@@ -20,9 +19,9 @@ export function generateStaticParams(): { slug: string }[] {
   )
 }
 
-export default async function LocalizedStatisticsPage({
+export default async function LocalizedLeaderboardPage({
   params,
-}: LocalizedStatisticsPageProps): Promise<React.ReactElement> {
+}: LocalizedLeaderboardPageProps): Promise<React.ReactElement> {
   const { slug } = await params
 
   if (!isSupportedLocale(slug) || slug === DEFAULT_LOCALE) {
@@ -35,9 +34,9 @@ export default async function LocalizedStatisticsPage({
     <Providers locale={slug as SupportedLocale}>
       <main className="min-h-screen bg-background">
         <Header locale={slug as SupportedLocale} />
-        <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6">
-          <ProfilePage locale={slug as SupportedLocale} />
-        </div>
+        <section className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
+          <h1 className="text-4xl font-black tracking-tight">Leaderboard</h1>
+        </section>
       </main>
     </Providers>
   )
