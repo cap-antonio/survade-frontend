@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { AccessTokenResponse } from '../models/AccessTokenResponse';
+import type { ChangePasswordRequest } from '../models/ChangePasswordRequest';
 import type { LoginRequest } from '../models/LoginRequest';
 import type { LogoutRequest } from '../models/LogoutRequest';
 import type { PasswordResetConfirmRequest } from '../models/PasswordResetConfirmRequest';
@@ -137,6 +138,27 @@ export class AuthService {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/auth/logout',
+            body: requestBody,
+            mediaType: 'application/json',
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+
+    /**
+     * Change Password
+     * @returns void
+     * @throws ApiError
+     */
+    public changePasswordApiAuthChangePasswordPost({
+        requestBody,
+    }: {
+        requestBody: ChangePasswordRequest,
+    }): CancelablePromise<void> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/api/auth/change-password',
             body: requestBody,
             mediaType: 'application/json',
             errors: {

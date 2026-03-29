@@ -59,7 +59,7 @@ export function AuthMenu() {
                   onClick={() => setOpen(false)}
                 >
                   <ShieldUser className="h-4 w-4 text-[var(--color-accent)]" />
-                  <span>{t`My statistics`}</span>
+                  <span>{t`Profile`}</span>
                 </Link>
 
                 <button

@@ -1,7 +1,9 @@
-import { useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery } from "@tanstack/react-query"
 import { api } from "../client"
 import { CACHE_KEYS } from "../CACHE_KEYS"
-import { TQueryProps } from "@/api/hooks/api.types"
+import { queryClient } from "../query"
+import { ApiParams, TQueryProps } from "@/api/hooks/api.types"
+import { useAuthStore } from "@/stores/authStore"
 
 export const useMe = (options?: TQueryProps<any>) =>
   useQuery({
@@ -17,3 +19,25 @@ export const useMe = (options?: TQueryProps<any>) =>
     },
     ...options,
   })
+
+export const useDeleteAccount = () => {
+  const { clear } = useAuthStore()
+
+  const mutation = useMutation({
+    mutationFn: async (
+      payload: ApiParams<typeof api.users.deleteMeApiUsersMeDelete>,
+    ) => {
+      return await api.users.deleteMeApiUsersMeDelete(payload)
+    },
+    onSuccess: () => {
+      clear()
+      queryClient.removeQueries({ queryKey: CACHE_KEYS.user.profile })
+    },
+    mutationKey: ["deleteAccount"],
+  })
+
+  return {
+    ...mutation,
+    deleteAccount: mutation.mutate,
+  }
+}

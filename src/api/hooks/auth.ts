@@ -45,6 +45,65 @@ export const useResendRegistrationCode = () => {
   }
 }
 
+export const useRequestPasswordReset = () => {
+  const mutation = useMutation({
+    mutationFn: async (
+      payload: ApiParams<
+        typeof api.auth.requestPasswordResetApiAuthPasswordResetRequestPost
+      >,
+    ) => {
+      return await api.auth.requestPasswordResetApiAuthPasswordResetRequestPost(
+        payload,
+      )
+    },
+
+    mutationKey: ["requestPasswordReset"],
+  })
+
+  return {
+    ...mutation,
+    requestPasswordReset: mutation.mutate,
+  }
+}
+
+export const useConfirmPasswordReset = () => {
+  const mutation = useMutation({
+    mutationFn: async (
+      payload: ApiParams<
+        typeof api.auth.confirmPasswordResetApiAuthPasswordResetConfirmPost
+      >,
+    ) => {
+      return await api.auth.confirmPasswordResetApiAuthPasswordResetConfirmPost(
+        payload,
+      )
+    },
+
+    mutationKey: ["confirmPasswordReset"],
+  })
+
+  return {
+    ...mutation,
+    confirmPasswordReset: mutation.mutate,
+  }
+}
+
+export const useChangePassword = () => {
+  const mutation = useMutation({
+    mutationFn: async (
+      payload: ApiParams<typeof api.auth.changePasswordApiAuthChangePasswordPost>,
+    ) => {
+      return await api.auth.changePasswordApiAuthChangePasswordPost(payload)
+    },
+
+    mutationKey: ["changePassword"],
+  })
+
+  return {
+    ...mutation,
+    changePassword: mutation.mutate,
+  }
+}
+
 export const useRegister = () => {
   const { setTokens } = useAuthStore()
 

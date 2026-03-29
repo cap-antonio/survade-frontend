@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import { StatisticsView } from "@/components/organisms/profile/StatisticsView"
+import { ProfilePage } from "@/components/organisms/profile/ProfilePage"
 import {
   DEFAULT_LOCALE,
   SUPPORTED_LOCALES,
@@ -34,7 +34,7 @@ export default async function LocalizedStatisticsPage({
     <Providers locale={slug as SupportedLocale}>
       <main className="min-h-screen bg-[var(--color-bg)] px-4 py-10 sm:px-6">
         <div className="mx-auto max-w-5xl">
-          <StatisticsView locale={slug as SupportedLocale} />
+          <ProfilePage locale={slug as SupportedLocale} />
         </div>
       </main>
     </Providers>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { StatisticsView } from "@/components/organisms/profile/StatisticsView"
+import { ProfilePage } from "@/components/organisms/profile/ProfilePage"
 import { DEFAULT_LOCALE, SUPPORTED_LOCALES, getLocalizedPath } from "@/i18n"
 import { initLingui } from "@/initLingui"
 import { Providers } from "../providers"
@@ -25,7 +25,7 @@ export default async function StatisticsPage(): Promise<React.ReactElement> {
     <Providers locale={DEFAULT_LOCALE}>
       <main className="min-h-screen bg-[var(--color-bg)] px-4 py-10 sm:px-6">
         <div className="mx-auto max-w-5xl">
-          <StatisticsView locale={DEFAULT_LOCALE} />
+          <ProfilePage locale={DEFAULT_LOCALE} />
         </div>
       </main>
     </Providers>

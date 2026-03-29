@@ -12,6 +12,7 @@ export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { AccessTokenResponse } from './models/AccessTokenResponse';
 export { BannerImpressionRequest } from './models/BannerImpressionRequest';
+export type { ChangePasswordRequest } from './models/ChangePasswordRequest';
 export type { CheckoutResponse } from './models/CheckoutResponse';
 export type { CountedResponse } from './models/CountedResponse';
 export { CreateCheckoutRequest } from './models/CreateCheckoutRequest';
