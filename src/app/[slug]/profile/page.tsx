@@ -10,7 +10,7 @@ import {
 import { initLingui } from "@/initLingui"
 import { Providers } from "../../providers"
 
-type LocalizedStatisticsPageProps = {
+type LocalizedProfilePageProps = {
   params: Promise<{ slug: string }>
 }
 
@@ -20,9 +20,9 @@ export function generateStaticParams(): { slug: string }[] {
   )
 }
 
-export default async function LocalizedStatisticsPage({
+export default async function LocalizedProfilePage({
   params,
-}: LocalizedStatisticsPageProps): Promise<React.ReactElement> {
+}: LocalizedProfilePageProps): Promise<React.ReactElement> {
   const { slug } = await params
 
   if (!isSupportedLocale(slug) || slug === DEFAULT_LOCALE) {

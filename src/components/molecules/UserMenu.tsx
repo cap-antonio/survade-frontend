@@ -84,7 +84,7 @@ export function UserMenu({
             {isAuth ? (
               <>
                 <Link
-                  href={getLocalizedPath(locale, "statistics")}
+                  href={getLocalizedPath(locale, "profile")}
                   className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-foreground transition-colors hover:bg-surface-elevated"
                   onClick={() => setOpen(false)}
                 >

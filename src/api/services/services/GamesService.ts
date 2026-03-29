@@ -348,7 +348,9 @@ export class GamesService {
     }
 
     /**
-     * Get History
+     * @deprecated
+     * Get History (Legacy)
+     * Legacy raw event-log endpoint. Use GET /api/games/history/{game_id} for the structured history DTO.
      * @returns any Successful Response
      * @throws ApiError
      */

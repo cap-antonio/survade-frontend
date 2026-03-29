@@ -8,13 +8,13 @@ import type { GameEvent } from "@/api/generated/schema"
 import { useLingui } from "@lingui/react/macro"
 
 type GameHistoryProps = {
-  code: string
+  gameId: string
   playerNameMap: Record<number, string>
 }
 
-export function GameHistory({ code, playerNameMap }: GameHistoryProps) {
+export function GameHistory({ gameId, playerNameMap }: GameHistoryProps) {
   const { t } = useLingui()
-  const { data, isLoading } = useGameHistory({ gameCode: code })
+  const { data, isLoading } = useGameHistory({ gameId })
   const [currentRound, setCurrentRound] = useState(1)
 
   if (isLoading) {

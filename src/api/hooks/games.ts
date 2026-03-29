@@ -26,13 +26,14 @@ export const useGameQuery = (
   })
 
 export const useGameHistory = (
-  payload: ApiParams<typeof api.games.getHistoryApiGamesGameCodeHistoryGet>,
+  payload: ApiParams<typeof api.games.getHistoryDetailApiGamesHistoryGameIdGet>,
   options?: TQueryProps<any>,
 ) =>
   useQuery({
     queryKey: [...CACHE_KEYS.game.history, payload],
     queryFn: ({ signal }) => {
-      const promise = api.games.getHistoryApiGamesGameCodeHistoryGet(payload)
+      const promise =
+        api.games.getHistoryDetailApiGamesHistoryGameIdGet(payload)
 
       signal?.addEventListener("abort", () => {
         promise.cancel()
