@@ -63,7 +63,7 @@ export function UserMenu({
         items={
           <div className="space-y-2">
             {navigationItems.length > 0 ? (
-              <div className="space-y-1 lg:hidden">
+              <div className="space-y-1 md:hidden">
                 {navigationItems.map((item) => (
                   <Link
                     key={item.href}
@@ -78,7 +78,7 @@ export function UserMenu({
             ) : null}
 
             {navigationItems.length > 0 ? (
-              <div className="border-t border-border lg:hidden" />
+              <div className="border-t border-border md:hidden" />
             ) : null}
 
             {isAuth ? (

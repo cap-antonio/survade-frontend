@@ -42,7 +42,7 @@ export function Header({
             <House className="h-4 w-4 text-accent" />
           </Link>
 
-          <nav className="hidden items-center justify-center gap-8 justify-self-center lg:flex">
+          <nav className="hidden items-center justify-center gap-8 justify-self-center md:flex">
             {navigationItems.map((item) => (
               <Link
                 key={item.href}

@@ -2,13 +2,16 @@
 
 import {
   Dispatch,
+  CSSProperties,
   PropsWithChildren,
   ReactNode,
   SetStateAction,
+  useCallback,
   useEffect,
   useRef,
   useState,
 } from "react"
+import { createPortal } from "react-dom"
 
 type Props = {
   items: ReactNode
@@ -22,18 +25,44 @@ export function Dropdown({
   open: parentOpen,
   setOpen: setParentOpen,
 }: PropsWithChildren<Props>) {
+  const anchorRef = useRef<HTMLDivElement | null>(null)
   const menuRef = useRef<HTMLDivElement | null>(null)
 
   const [localOpen, setOpenLocal] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
+  const [menuStyle, setMenuStyle] = useState<CSSProperties>({})
 
-  const open = parentOpen || localOpen
-  const setOpen = setParentOpen || setOpenLocal
+  const open = parentOpen ?? localOpen
+  const setOpen = setParentOpen ?? setOpenLocal
+
+  const updatePosition = useCallback(() => {
+    if (!anchorRef.current) return
+
+    const rect = anchorRef.current.getBoundingClientRect()
+    const viewportPadding = 16
+
+    setMenuStyle({
+      position: "fixed",
+      top: rect.bottom + 12,
+      right: Math.max(viewportPadding, window.innerWidth - rect.right),
+      maxWidth: `calc(100vw - ${viewportPadding * 2}px)`,
+    })
+  }, [])
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   useEffect(() => {
     if (!open) return
 
     const handleClickOutside = (event: MouseEvent) => {
-      if (!menuRef.current?.contains(event.target as Node)) {
+      const target = event.target as Node
+
+      if (
+        !anchorRef.current?.contains(target) &&
+        !menuRef.current?.contains(target)
+      ) {
         setOpen(false)
       }
     }
@@ -51,19 +80,44 @@ export function Dropdown({
       document.removeEventListener("mousedown", handleClickOutside)
       document.removeEventListener("keydown", handleEscape)
     }
-  }, [open])
+  }, [open, setOpen])
+
+  useEffect(() => {
+    if (!open || !isMounted) return
+
+    updatePosition()
+
+    const handleReposition = () => {
+      updatePosition()
+    }
+
+    window.addEventListener("resize", handleReposition)
+    window.addEventListener("scroll", handleReposition, true)
+
+    return () => {
+      window.removeEventListener("resize", handleReposition)
+      window.removeEventListener("scroll", handleReposition, true)
+    }
+  }, [isMounted, open, updatePosition])
 
   return (
     <>
-      <div ref={menuRef} className="relative">
+      <div ref={anchorRef} className="relative">
         {children}
-
-        {open ? (
-          <div className="absolute right-0 top-[calc(100%+0.75rem)] z-30 min-w-52 overflow-hidden rounded-2xl border border-border bg-surface/95 p-2 shadow-2xl backdrop-blur-md">
-            {items}
-          </div>
-        ) : null}
       </div>
+
+      {open && isMounted
+        ? createPortal(
+            <div
+              ref={menuRef}
+              style={menuStyle}
+              className="z-[1000] min-w-52 overflow-hidden rounded-2xl border border-border bg-surface/95 p-2 shadow-2xl backdrop-blur-md"
+            >
+              {items}
+            </div>,
+            document.body,
+          )
+        : null}
     </>
   )
 }
