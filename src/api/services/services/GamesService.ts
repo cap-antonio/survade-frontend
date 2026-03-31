@@ -7,8 +7,11 @@ import type { CountedResponse } from '../models/CountedResponse';
 import type { CreateGameRequest } from '../models/CreateGameRequest';
 import type { CreateGameResponse } from '../models/CreateGameResponse';
 import type { EventsResponse } from '../models/EventsResponse';
+import type { FillBotsResponse } from '../models/FillBotsResponse';
+import type { GameEventResponse } from '../models/GameEventResponse';
 import type { GameHistoryDetailResponse } from '../models/GameHistoryDetailResponse';
 import type { GameHistorySummary } from '../models/GameHistorySummary';
+import type { GameStateResponse } from '../models/GameStateResponse';
 import type { JoinGameRequest } from '../models/JoinGameRequest';
 import type { JoinGameResponse } from '../models/JoinGameResponse';
 import type { OkResponse } from '../models/OkResponse';
@@ -61,7 +64,7 @@ export class GamesService {
 
     /**
      * Get Game
-     * @returns any Successful Response
+     * @returns GameStateResponse Successful Response
      * @throws ApiError
      */
     public getGameApiGamesGameCodeGet({
@@ -70,7 +73,7 @@ export class GamesService {
     }: {
         gameCode: string,
         xHostToken?: (string | null),
-    }): CancelablePromise<any> {
+    }): CancelablePromise<GameStateResponse> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/api/games/{game_code}',
@@ -113,6 +116,33 @@ export class GamesService {
     }
 
     /**
+     * Fill Bots
+     * @returns FillBotsResponse Successful Response
+     * @throws ApiError
+     */
+    public fillBotsApiGamesGameCodeFillBotsPost({
+        gameCode,
+        xHostToken,
+    }: {
+        gameCode: string,
+        xHostToken: string,
+    }): CancelablePromise<FillBotsResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/api/games/{game_code}/fill-bots',
+            path: {
+                'game_code': gameCode,
+            },
+            headers: {
+                'x-host-token': xHostToken,
+            },
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+
+    /**
      * Start Game
      * @returns OkResponse Successful Response
      * @throws ApiError
@@ -127,6 +157,33 @@ export class GamesService {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/games/{game_code}/start',
+            path: {
+                'game_code': gameCode,
+            },
+            headers: {
+                'x-host-token': xHostToken,
+            },
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+
+    /**
+     * Start Voting
+     * @returns GameEventResponse Successful Response
+     * @throws ApiError
+     */
+    public startVotingApiGamesGameCodeStartVotingPost({
+        gameCode,
+        xHostToken,
+    }: {
+        gameCode: string,
+        xHostToken: string,
+    }): CancelablePromise<GameEventResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/api/games/{game_code}/start-voting',
             path: {
                 'game_code': gameCode,
             },
@@ -167,8 +224,62 @@ export class GamesService {
     }
 
     /**
+     * Abandon Game
+     * @returns GameEventResponse Successful Response
+     * @throws ApiError
+     */
+    public abandonGameApiGamesGameCodeAbandonPost({
+        gameCode,
+        xHostToken,
+    }: {
+        gameCode: string,
+        xHostToken: string,
+    }): CancelablePromise<GameEventResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/api/games/{game_code}/abandon',
+            path: {
+                'game_code': gameCode,
+            },
+            headers: {
+                'x-host-token': xHostToken,
+            },
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+
+    /**
+     * Run Bot Turns
+     * @returns EventsResponse Successful Response
+     * @throws ApiError
+     */
+    public runBotTurnsApiGamesGameCodeRunBotTurnsPost({
+        gameCode,
+        xHostToken,
+    }: {
+        gameCode: string,
+        xHostToken: string,
+    }): CancelablePromise<EventsResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/api/games/{game_code}/run-bot-turns',
+            path: {
+                'game_code': gameCode,
+            },
+            headers: {
+                'x-host-token': xHostToken,
+            },
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+
+    /**
      * Reveal Card
-     * @returns any Successful Response
+     * @returns GameEventResponse Successful Response
      * @throws ApiError
      */
     public revealCardApiGamesGameCodeRevealCardPost({
@@ -179,7 +290,7 @@ export class GamesService {
         gameCode: string,
         xPlayerToken: string,
         requestBody: RevealCardRequest,
-    }): CancelablePromise<any> {
+    }): CancelablePromise<GameEventResponse> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/games/{game_code}/reveal-card',
@@ -199,7 +310,7 @@ export class GamesService {
 
     /**
      * Use Power
-     * @returns any Successful Response
+     * @returns GameEventResponse Successful Response
      * @throws ApiError
      */
     public usePowerApiGamesGameCodeUsePowerPost({
@@ -210,7 +321,7 @@ export class GamesService {
         gameCode: string,
         xPlayerToken: string,
         requestBody: UsePowerRequest,
-    }): CancelablePromise<any> {
+    }): CancelablePromise<GameEventResponse> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/games/{game_code}/use-power',
@@ -230,7 +341,7 @@ export class GamesService {
 
     /**
      * Cast Vote
-     * @returns any Successful Response
+     * @returns GameEventResponse Successful Response
      * @throws ApiError
      */
     public castVoteApiGamesGameCodeVotePost({
@@ -241,7 +352,7 @@ export class GamesService {
         gameCode: string,
         xPlayerToken: string,
         requestBody: VoteRequest,
-    }): CancelablePromise<any> {
+    }): CancelablePromise<GameEventResponse> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/games/{game_code}/vote',
@@ -318,7 +429,7 @@ export class GamesService {
 
     /**
      * Rate Game
-     * @returns any Successful Response
+     * @returns OkResponse Successful Response
      * @throws ApiError
      */
     public rateGameApiGamesGameCodeRatePost({
@@ -329,7 +440,7 @@ export class GamesService {
         gameCode: string,
         xPlayerToken: string,
         requestBody: RateGameRequest,
-    }): CancelablePromise<any> {
+    }): CancelablePromise<OkResponse> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/games/{game_code}/rate',
@@ -341,30 +452,6 @@ export class GamesService {
             },
             body: requestBody,
             mediaType: 'application/json',
-            errors: {
-                422: `Validation Error`,
-            },
-        });
-    }
-
-    /**
-     * @deprecated
-     * Get History (Legacy)
-     * Legacy raw event-log endpoint. Use GET /api/games/history/{game_id} for the structured history DTO.
-     * @returns any Successful Response
-     * @throws ApiError
-     */
-    public getHistoryApiGamesGameCodeHistoryGet({
-        gameCode,
-    }: {
-        gameCode: string,
-    }): CancelablePromise<any> {
-        return this.httpRequest.request({
-            method: 'GET',
-            url: '/api/games/{game_code}/history',
-            path: {
-                'game_code': gameCode,
-            },
             errors: {
                 422: `Validation Error`,
             },

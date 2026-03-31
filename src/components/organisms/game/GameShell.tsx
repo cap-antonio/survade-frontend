@@ -95,7 +95,7 @@ export function GameShell({ code, locale }: GameShellProps) {
   }
 
   if (game.status === "active") {
-    return <ActiveGame code={code} />
+    return <ActiveGame code={code} locale={locale} />
   }
 
   return <EndScreen code={code} locale={locale} />

@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
+import type { GameEventResponse } from './GameEventResponse';
 import type { GameHistoryFieldReveal } from './GameHistoryFieldReveal';
 import type { GameHistoryPowerUse } from './GameHistoryPowerUse';
 import type { GameHistoryRemoval } from './GameHistoryRemoval';
@@ -14,6 +15,6 @@ export type GameHistoryRound = {
     powers_used?: Array<GameHistoryPowerUse>;
     votes?: Array<GameHistoryVote>;
     removed_players?: Array<GameHistoryRemoval>;
-    events: Array<Record<string, any>>;
+    events: Array<GameEventResponse>;
 };
 

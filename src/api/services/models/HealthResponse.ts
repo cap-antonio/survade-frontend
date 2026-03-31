@@ -3,9 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { GameEventResponse } from './GameEventResponse';
-
-export type EventsResponse = {
-    events: Array<GameEventResponse>;
+export type HealthResponse = {
+    status: string;
 };
 

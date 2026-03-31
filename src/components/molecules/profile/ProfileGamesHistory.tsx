@@ -7,53 +7,27 @@ import { useMyGames } from "@/api/hooks/users"
 import type { GameHistorySummary } from "@/api/services"
 import { Table, type TableColumn } from "@/components/molecules/Table"
 import { getLocalizedPath, type SupportedLocale } from "@/i18n"
+import { formatSetting } from "@/utils/string"
+import { formatDate } from "@/utils/date"
 
 type ProfileGamesHistoryProps = {
   locale: SupportedLocale
-}
-
-const EMPTY_STATE = "—"
-
-function formatDate(value: string | null, locale: SupportedLocale): string {
-  if (!value) return EMPTY_STATE
-
-  const date = new Date(value)
-  if (Number.isNaN(date.getTime())) return EMPTY_STATE
-
-  return new Intl.DateTimeFormat(locale, {
-    dateStyle: "medium",
-    timeStyle: "short",
-  }).format(date)
 }
 
 function formatScenarioTitle(
   scenarioTitle: GameHistorySummary["scenario_title"],
   locale: SupportedLocale,
 ): string {
-  if (typeof scenarioTitle === "string" && scenarioTitle.trim()) {
-    return scenarioTitle
+  const localizedTitle =
+    scenarioTitle[locale] ??
+    scenarioTitle["en"] ??
+    Object.values(scenarioTitle)[0]
+
+  if (typeof localizedTitle === "string" && localizedTitle.trim()) {
+    return localizedTitle
   }
 
-  if (scenarioTitle && typeof scenarioTitle === "object") {
-    const localizedTitle =
-      scenarioTitle[locale] ??
-      scenarioTitle["en"] ??
-      Object.values(scenarioTitle)[0]
-
-    if (typeof localizedTitle === "string" && localizedTitle.trim()) {
-      return localizedTitle
-    }
-  }
-
-  return EMPTY_STATE
-}
-
-function formatSetting(settingKey: string): string {
-  return settingKey
-    .split(/[_-]+/g)
-    .filter(Boolean)
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join(" ")
+  return "-"
 }
 
 export function ProfileGamesHistory({

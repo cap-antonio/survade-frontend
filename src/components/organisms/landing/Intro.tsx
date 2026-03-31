@@ -7,7 +7,7 @@ import { Input } from "@/components/atoms/Input"
 import { CreateGameModal } from "../../molecules/modals/CreateGameModal"
 import { LandingHero } from "@/components/templates/LandingHero"
 import { Header } from "@/components/templates/Header"
-import { getLocalizedPath, SupportedLocale } from "@/i18n"
+import { getPlayPath, SupportedLocale } from "@/i18n"
 import { AuthModal } from "@/components/molecules/modals/AuthModal"
 import { useAuthStore } from "@/stores/authStore"
 
@@ -22,10 +22,7 @@ export function Intro() {
   const handleJoin = (): void => {
     const code = codeInput.trim().toUpperCase()
     if (code.length >= 4) {
-      window.location.href = getLocalizedPath(
-        i18n.locale as SupportedLocale,
-        code,
-      )
+      window.location.href = getPlayPath(i18n.locale as SupportedLocale, code)
     }
   }
 

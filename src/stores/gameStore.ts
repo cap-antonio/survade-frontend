@@ -1,14 +1,9 @@
+import { GameStateResponse } from "@/api/services"
 import { create } from "zustand"
-import type {
-  GameDocument,
-  GameEvent,
-  Player,
-  CardWithSaboteur,
-} from "@/api/generated/schema"
 
 type GameStore = {
   // data
-  game: GameDocument | null
+  game: GameStateResponse | null
   myPlayerId: number | null
   myToken: string | null
   hostToken: string | null
@@ -21,7 +16,7 @@ type GameStore = {
   activeTab: "game" | "history"
 
   // actions
-  setGame: (game: GameDocument) => void
+  setGame: (game: GameStateResponse) => void
   setSession: (params: {
     myPlayerId: number
     myToken: string

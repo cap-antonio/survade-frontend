@@ -6,57 +6,29 @@ import { useLingui } from "@lingui/react/macro"
 import { History } from "lucide-react"
 import { useGameHistoryList } from "@/api/hooks/games"
 import type { GameHistorySummary } from "@/api/services"
-import { Button } from "@/components/atoms/Button"
 import { Table, type TableColumn } from "@/components/molecules/Table"
 import { getLocalizedPath, type SupportedLocale } from "@/i18n"
-import { useAuthStore } from "@/stores/authStore"
+import { formatSetting } from "@/utils/string"
+import { formatDate } from "@/utils/date"
 
 type GameHistoryPageProps = {
   locale: SupportedLocale
-}
-
-const EMPTY_STATE = "—"
-
-function formatDate(value: string | null, locale: SupportedLocale): string {
-  if (!value) return EMPTY_STATE
-
-  const date = new Date(value)
-  if (Number.isNaN(date.getTime())) return EMPTY_STATE
-
-  return new Intl.DateTimeFormat(locale, {
-    dateStyle: "medium",
-    timeStyle: "short",
-  }).format(date)
 }
 
 function formatScenarioTitle(
   scenarioTitle: GameHistorySummary["scenario_title"],
   locale: SupportedLocale,
 ): string {
-  if (typeof scenarioTitle === "string" && scenarioTitle.trim()) {
-    return scenarioTitle
+  const localizedTitle =
+    scenarioTitle[locale] ??
+    scenarioTitle["en"] ??
+    Object.values(scenarioTitle)[0]
+
+  if (typeof localizedTitle === "string" && localizedTitle.trim()) {
+    return localizedTitle
   }
 
-  if (scenarioTitle && typeof scenarioTitle === "object") {
-    const localizedTitle =
-      scenarioTitle[locale] ??
-      scenarioTitle["en"] ??
-      Object.values(scenarioTitle)[0]
-
-    if (typeof localizedTitle === "string" && localizedTitle.trim()) {
-      return localizedTitle
-    }
-  }
-
-  return EMPTY_STATE
-}
-
-function formatSetting(settingKey: string): string {
-  return settingKey
-    .split(/[_-]+/g)
-    .filter(Boolean)
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join(" ")
+  return "-"
 }
 
 export function GameHistoryPage({
@@ -64,29 +36,7 @@ export function GameHistoryPage({
 }: GameHistoryPageProps): React.ReactElement {
   const { t } = useLingui()
   const router = useRouter()
-  const accessToken = useAuthStore((state) => state.accessToken)
-  const { data, isLoading, isError } = useGameHistoryList({
-    enabled: !!accessToken,
-  })
-
-  if (!accessToken) {
-    return (
-      <div className="rounded-3xl border border-border bg-surface p-8 text-center">
-        <p className="text-xs uppercase tracking-[0.3em] text-accent">
-          {t`Game history`}
-        </p>
-        <h1 className="mt-3 text-3xl font-black tracking-tight">
-          {t`Sign in required`}
-        </h1>
-        <p className="mt-3 text-muted">
-          {t`Open the user menu and sign in to see your recent games.`}
-        </p>
-        <Link href={getLocalizedPath(locale)} className="mt-6 inline-flex">
-          <Button variant="secondary">{t`Back to home`}</Button>
-        </Link>
-      </div>
-    )
-  }
+  const { data, isLoading, isError } = useGameHistoryList()
 
   if (isLoading) {
     return (
@@ -180,7 +130,10 @@ export function GameHistoryPage({
         }}
         onRowClick={(item) =>
           router.push(
-            getLocalizedPath(locale, `game-history/details?gameId=${item.game_id}`),
+            getLocalizedPath(
+              locale,
+              `game-history/details?gameId=${item.game_id}`,
+            ),
           )
         }
         getRowKey={(item) => item.game_id}

@@ -3,9 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type SpecialPower = {
-    name: string;
-    description: Record<string, string>;
-    used?: boolean;
-};
-
+export enum GameStatus {
+    LOBBY = 'lobby',
+    ACTIVE = 'active',
+    ENDED = 'ended',
+    ABANDONED = 'abandoned',
+}

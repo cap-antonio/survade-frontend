@@ -6,7 +6,7 @@
 import type { DarkSecret } from './DarkSecret';
 import type { SpecialPower } from './SpecialPower';
 
-export type Card = {
+export type CardView = {
     role: Record<string, string>;
     gender: Record<string, string>;
     health: Record<string, string>;
@@ -17,6 +17,6 @@ export type Card = {
     personality_trait?: (Record<string, string> | null);
     hobby?: (Record<string, string> | null);
     special_power: SpecialPower;
-    is_saboteur?: boolean;
+    is_saboteur?: (boolean | null);
 };
 

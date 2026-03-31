@@ -29,6 +29,7 @@ import type {
 import { Button } from "@/components/atoms/Button"
 import { getLocalizedPath, type SupportedLocale } from "@/i18n"
 import { useRouter } from "next/navigation"
+import { formatDate } from "@/utils/date"
 
 type GameHistoryDetailPageProps = {
   gameId: string
@@ -36,18 +37,6 @@ type GameHistoryDetailPageProps = {
 }
 
 const EMPTY_STATE = "—"
-
-function formatDate(value: string | null, locale: SupportedLocale): string {
-  if (!value) return EMPTY_STATE
-
-  const date = new Date(value)
-  if (Number.isNaN(date.getTime())) return EMPTY_STATE
-
-  return new Intl.DateTimeFormat(locale, {
-    dateStyle: "medium",
-    timeStyle: "short",
-  }).format(date)
-}
 
 function localizeText(
   value: string | Record<string, any> | null | undefined,

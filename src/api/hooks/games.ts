@@ -4,11 +4,15 @@ import { queryClient } from "../query"
 import { CACHE_KEYS } from "../CACHE_KEYS"
 
 import { ApiParams, TQueryProps } from "@/api/hooks/api.types"
-import type { GameHistorySummary } from "@/api/services"
+import type {
+  GameHistoryDetailResponse,
+  GameHistorySummary,
+  GameStateResponse,
+} from "@/api/services"
 
 export const useGameQuery = (
   payload: ApiParams<typeof api.games.getGameApiGamesGameCodeGet>,
-  options?: TQueryProps<any>,
+  options?: TQueryProps<GameStateResponse>,
 ) =>
   useQuery({
     queryKey: [...CACHE_KEYS.game.detail, payload],
@@ -27,7 +31,7 @@ export const useGameQuery = (
 
 export const useGameHistory = (
   payload: ApiParams<typeof api.games.getHistoryDetailApiGamesHistoryGameIdGet>,
-  options?: TQueryProps<any>,
+  options?: TQueryProps<GameHistoryDetailResponse>,
 ) =>
   useQuery({
     queryKey: [...CACHE_KEYS.game.history, payload],
@@ -94,6 +98,27 @@ export const useJoinGame = () => {
     joinGame: mutation.mutate,
   }
 }
+export const useAbondonGame = () => {
+  const mutation = useMutation({
+    mutationFn: async (
+      payload: ApiParams<
+        typeof api.games.abandonGameApiGamesGameCodeAbandonPost
+      >,
+    ) => {
+      return await api.games.abandonGameApiGamesGameCodeAbandonPost(payload)
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: CACHE_KEYS.game.detail })
+    },
+
+    mutationKey: ["abondonGame"],
+  })
+
+  return {
+    ...mutation,
+    abondonGame: mutation.mutate,
+  }
+}
 
 export const useStartGame = () => {
   const mutation = useMutation({
@@ -112,6 +137,26 @@ export const useStartGame = () => {
   return {
     ...mutation,
     startGame: mutation.mutate,
+  }
+}
+
+export const useFillBots = () => {
+  const mutation = useMutation({
+    mutationFn: async (
+      payload: ApiParams<typeof api.games.fillBotsApiGamesGameCodeFillBotsPost>,
+    ) => {
+      return await api.games.fillBotsApiGamesGameCodeFillBotsPost(payload)
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: CACHE_KEYS.game.detail })
+    },
+
+    mutationKey: ["fillBots"],
+  })
+
+  return {
+    ...mutation,
+    fillBots: mutation.mutate,
   }
 }
 
@@ -196,6 +241,27 @@ export const useEndVoting = () => {
   return {
     ...mutation,
     endVoting: mutation.mutate,
+  }
+}
+export const useStartVoting = () => {
+  const mutation = useMutation({
+    mutationFn: async (
+      payload: ApiParams<
+        typeof api.games.startVotingApiGamesGameCodeStartVotingPost
+      >,
+    ) => {
+      return await api.games.startVotingApiGamesGameCodeStartVotingPost(payload)
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: CACHE_KEYS.game.detail })
+    },
+
+    mutationKey: ["startVoting"],
+  })
+
+  return {
+    ...mutation,
+    startVoting: mutation.mutate,
   }
 }
 

@@ -4,7 +4,7 @@
 /* eslint-disable */
 
 export type DarkSecret = {
-    content: (string | Record<string, any>);
+    content: Record<string, string>;
     reveal_round?: number;
 };
 

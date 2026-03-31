@@ -43,6 +43,13 @@ export function getLocalizedPath(locale: SupportedLocale, path = ""): string {
   return normalizedPath ? `/${locale}/${normalizedPath}` : `/${locale}`
 }
 
+export function getPlayPath(locale: SupportedLocale, code: string): string {
+  const normalizedCode = code.trim().toUpperCase()
+  const query = new URLSearchParams({ code: normalizedCode }).toString()
+
+  return `${getLocalizedPath(locale, "play")}?${query}`
+}
+
 export function getStoredLocale(): SupportedLocale {
   if (typeof window === "undefined") return DEFAULT_LOCALE
   const stored = localStorage.getItem("ui_locale")

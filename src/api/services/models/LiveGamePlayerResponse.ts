@@ -5,9 +5,14 @@
 
 import type { CardView } from './CardView';
 
-export type JoinGameResponse = {
+export type LiveGamePlayerResponse = {
     player_id: number;
+    player_type: string;
+    user_id?: (string | null);
+    display_name: string;
     player_token: string;
+    is_eliminated?: boolean;
     card: CardView;
+    revealed_fields?: Array<string>;
 };
 

@@ -4,8 +4,8 @@
 /* eslint-disable */
 
 export type Scenario = {
-    title: (string | Record<string, any>);
-    description: (string | Record<string, any>);
-    environment_conditions: (string | Record<string, any>);
+    title: Record<string, string>;
+    description: Record<string, string>;
+    environment_conditions: Record<string, string>;
 };
 

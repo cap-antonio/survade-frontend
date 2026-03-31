@@ -2,6 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { HealthResponse } from '../models/HealthResponse';
+
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 
@@ -11,10 +13,10 @@ export class DefaultService {
 
     /**
      * Health
-     * @returns any Successful Response
+     * @returns HealthResponse Successful Response
      * @throws ApiError
      */
-    public healthHealthGet(): CancelablePromise<any> {
+    public healthHealthGet(): CancelablePromise<HealthResponse> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/health',

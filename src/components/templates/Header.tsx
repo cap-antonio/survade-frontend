@@ -7,6 +7,7 @@ import { useLingui } from "@lingui/react/macro"
 import { House } from "lucide-react"
 import { UserMenu } from "@/components/molecules/UserMenu"
 import { getLocalizedPath, type SupportedLocale } from "@/i18n"
+import { isActivePath, normalizePath } from "@/utils/string"
 
 type HeaderProps = {
   locale: SupportedLocale
@@ -31,29 +32,6 @@ export function Header({
     },
   ]
 
-  const normalizePath = (value: string): string => {
-    if (value.length > 1 && value.endsWith("/")) {
-      return value.slice(0, -1)
-    }
-
-    return value
-  }
-
-  const currentPath = normalizePath(pathname)
-
-  const isActivePath = (href: string): boolean => {
-    const normalizedHref = normalizePath(href)
-
-    if (normalizedHref === "/") {
-      return currentPath === "/"
-    }
-
-    return (
-      currentPath === normalizedHref ||
-      currentPath.startsWith(`${normalizedHref}/`)
-    )
-  }
-
   return (
     <header
       className={cn("w-full", floating ? "absolute inset-x-0 top-0 z-30" : "")}
@@ -73,9 +51,10 @@ export function Header({
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "text-sm font-medium text-muted transition-colors hover:text-foreground",
+                  "text-sm font-medium text-muted transition-colors",
                   {
-                    "text-primary": isActivePath(item.href),
+                    "text-primary": isActivePath(item.href, pathname),
+                    "hover:text-foreground": !isActivePath(item.href, pathname),
                   },
                 )}
               >

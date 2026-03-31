@@ -8,13 +8,14 @@ import { Input } from "@/components/atoms/Input"
 import { AdPlaceholder } from "@/components/atoms/AdPlaceholder"
 import { useCreateGame } from "@/api/hooks/games"
 import { useLingui } from "@lingui/react/macro"
-import { getLocalizedPath, LANGS_DICT, SupportedLocale } from "@/i18n"
+import { getPlayPath, SupportedLocale } from "@/i18n"
 import { LocalesButtons } from "@/components/molecules/LocalesButtons"
 import { msg } from "@lingui/core/macro"
 import { IconButton } from "@/components/atoms/IconButton"
 import { MinusIcon, PlusIcon } from "lucide-react"
 import { ToggleButton } from "@/components/atoms/ToggleButton"
 import { MessageDescriptor } from "@lingui/core"
+import { clearOtherStoredGameSessions } from "@/utils/gameSessionStorage"
 
 type GameParamType = {
   withAd: boolean
@@ -98,9 +99,8 @@ export function CreateGameModal({ open, onClose }: ModalProps) {
 
   const [settingKey, setSettingKey] = useState<GameParamType>(DEFAULT_SCENARIO)
   const [langs, setLangs] = useState<SupportedLocale[]>(["en"])
-  const [attrs, setAttrs] = useState<GameParamType[]>(ATTRS)
   const [gameType, setGameType] = useState<GameParamType>(DEFAUT_TYPE)
-  const [playerCount, setPlayerCount] = useState(4)
+  const [playerCount, setPlayerCount] = useState(MIN_PLAYERS)
   const [hostName, setHostName] = useState("")
   const [loadingPhraseIdx, setLoadingPhraseIdx] = useState(0)
 
@@ -117,14 +117,6 @@ export function CreateGameModal({ open, onClose }: ModalProps) {
     })
   }
 
-  const toggleAttr = (attr: GameParamType): void => {
-    setAttrs((prev) =>
-      prev.includes(attr)
-        ? prev.filter((a) => a.key !== attr.key)
-        : [...prev, attr],
-    )
-  }
-
   const handleSubmit = (): void => {
     if (!hostName.trim()) return
 
@@ -139,7 +131,7 @@ export function CreateGameModal({ open, onClose }: ModalProps) {
           setting_key: settingKey.key,
           saboteur_mode: isSaboteurMode,
           langs,
-          attrs: attrs.map(({ key }) => key),
+          attrs: ATTRS.map(({ key }) => key),
           player_count: playerCount,
           host_display_name: hostName.trim(),
         },
@@ -147,6 +139,7 @@ export function CreateGameModal({ open, onClose }: ModalProps) {
       {
         onSuccess: (data) => {
           clearInterval(phraseInterval)
+          clearOtherStoredGameSessions(data.game_code)
           localStorage.setItem(`host_token_${data.game_code}`, data.host_token)
           localStorage.setItem(
             `player_token_${data.game_code}`,
@@ -156,9 +149,7 @@ export function CreateGameModal({ open, onClose }: ModalProps) {
             `player_id_${data.game_code}`,
             String(data.player_id),
           )
-          router.push(
-            getLocalizedPath(i18n.locale as SupportedLocale, data.game_code),
-          )
+          router.push(getPlayPath(i18n.locale as SupportedLocale, data.game_code))
         },
         onError: () => {
           clearInterval(phraseInterval)

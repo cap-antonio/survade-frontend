@@ -4,6 +4,7 @@
 /* eslint-disable */
 import type { CheckoutResponse } from '../models/CheckoutResponse';
 import type { CreateCheckoutRequest } from '../models/CreateCheckoutRequest';
+import type { ReceivedResponse } from '../models/ReceivedResponse';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
@@ -35,14 +36,14 @@ export class PaymentsService {
 
     /**
      * Stripe Webhook
-     * @returns any Successful Response
+     * @returns ReceivedResponse Successful Response
      * @throws ApiError
      */
     public stripeWebhookApiPaymentsWebhookPost({
         stripeSignature = '',
     }: {
         stripeSignature?: string,
-    }): CancelablePromise<any> {
+    }): CancelablePromise<ReceivedResponse> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/payments/webhook',

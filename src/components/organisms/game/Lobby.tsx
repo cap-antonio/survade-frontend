@@ -2,12 +2,12 @@
 
 import { QRCodeSVG } from "qrcode.react"
 import { useGameStore } from "@/stores/gameStore"
-import { useStartGame } from "@/api/hooks/games"
+import { useFillBots, useStartGame } from "@/api/hooks/games"
 import { Button } from "@/components/atoms/Button"
 import { Badge } from "@/components/atoms/Badge"
 import { AdPlaceholder } from "@/components/atoms/AdPlaceholder"
 import { useLingui } from "@lingui/react/macro"
-import { getLocalizedPath, type SupportedLocale } from "@/i18n"
+import { getPlayPath, type SupportedLocale } from "@/i18n"
 
 type LobbyProps = {
   code: string
@@ -18,14 +18,26 @@ export function Lobby({ code, locale }: LobbyProps) {
   const { t } = useLingui()
   const { game, isHost, hostToken, adsEnabled } = useGameStore()
   const { startGame, isPending } = useStartGame()
+  const { fillBots, isPending: isPendingFillBots } = useFillBots()
 
   if (!game) return <></>
 
+  type LobbyPlayer = {
+    player_id: number
+    display_name: string
+    is_eliminated: boolean
+  }
+
   const gameUrl =
     typeof window !== "undefined"
-      ? `${window.location.origin}${getLocalizedPath(locale, code)}`
-      : `https://survade.io${getLocalizedPath(locale, code)}`
-  const activePlayers = game.players.filter((p) => !p.is_eliminated)
+      ? `${window.location.origin}${getPlayPath(locale, code)}`
+      : `https://survade.io${getPlayPath(locale, code)}`
+  const players = game.players as LobbyPlayer[]
+  const activePlayers = players.filter((p) => !p.is_eliminated)
+  const missingPlayers = Math.max(
+    0,
+    (game.settings.player_count ?? activePlayers.length) - activePlayers.length,
+  )
   const canStart = activePlayers.length >= 3
 
   return (
@@ -69,7 +81,7 @@ export function Lobby({ code, locale }: LobbyProps) {
           <p className="text-xs text-muted uppercase tracking-wider mb-3">
             {t`Players`} ({activePlayers.length}/{game.settings.player_count})
           </p>
-          {game.players.map((p) => (
+          {players.map((p) => (
             <div key={p.player_id} className="flex items-center gap-3 py-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0" />
               <span className="text-sm flex-1">{p.display_name}</span>
@@ -85,9 +97,22 @@ export function Lobby({ code, locale }: LobbyProps) {
           <div className="space-y-2">
             {!canStart && (
               <p className="text-xs text-center text-muted">
-                {t`Need at least 3 players to start`}
+                {t`Waiting for other`}
               </p>
             )}
+            {missingPlayers > 0 ? (
+              <Button
+                variant="secondary"
+                fullWidth
+                size="lg"
+                loading={isPendingFillBots}
+                onClick={() =>
+                  fillBots({ gameCode: code, xHostToken: hostToken ?? "" })
+                }
+              >
+                {t`Fill missing players with bots`} ({missingPlayers})
+              </Button>
+            ) : null}
             <Button
               variant="primary"
               fullWidth

@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import { GameShell } from "@/components/organisms/game/GameShell"
+import { GameRouteContent } from "@/components/organisms/game/GameRouteContent"
 import {
   DEFAULT_LOCALE,
   SUPPORTED_LOCALES,
@@ -9,26 +9,20 @@ import {
 import { initLingui } from "@/initLingui"
 import { Providers } from "../../providers"
 
-type LocalizedGamePageProps = {
-  params: Promise<{ slug: string; code: string }>
+type LocalizedPlayPageProps = {
+  params: Promise<{ slug: string }>
 }
 
-export function generateStaticParams(): {
-  slug: string
-  code: string
-}[] {
+export function generateStaticParams(): { slug: string }[] {
   return SUPPORTED_LOCALES.filter((locale) => locale !== DEFAULT_LOCALE).map(
-    (locale) => ({
-      slug: locale,
-      code: "SHELL",
-    }),
+    (locale) => ({ slug: locale }),
   )
 }
 
-export default async function LocalizedGamePage({
+export default async function LocalizedPlayPage({
   params,
-}: LocalizedGamePageProps): Promise<React.ReactElement> {
-  const { slug, code } = await params
+}: LocalizedPlayPageProps): Promise<React.ReactElement> {
+  const { slug } = await params
 
   if (!isSupportedLocale(slug) || slug === DEFAULT_LOCALE) {
     notFound()
@@ -38,7 +32,7 @@ export default async function LocalizedGamePage({
 
   return (
     <Providers locale={slug as SupportedLocale}>
-      <GameShell code={code.toUpperCase()} locale={slug as SupportedLocale} />
+      <GameRouteContent locale={slug as SupportedLocale} />
     </Providers>
   )
 }

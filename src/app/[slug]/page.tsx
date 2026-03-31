@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { GameShell } from "@/components/organisms/game/GameShell"
 import { HowToPlay } from "@/components/organisms/landing/HowToPlay"
 import { Intro } from "@/components/organisms/landing/Intro"
 import { SettingsGrid } from "@/components/organisms/landing/SettingsGrid"
@@ -23,12 +22,9 @@ function isPublicLocale(locale: string): locale is Exclude<SupportedLocale, "en"
 }
 
 export function generateStaticParams(): { slug: string }[] {
-  return [
-    { slug: "SHELL" },
-    ...SUPPORTED_LOCALES.filter((locale) => locale !== DEFAULT_LOCALE).map(
-      (locale) => ({ slug: locale }),
-    ),
-  ]
+  return SUPPORTED_LOCALES.filter((locale) => locale !== DEFAULT_LOCALE).map(
+    (locale) => ({ slug: locale }),
+  )
 }
 
 export async function generateMetadata({
@@ -53,16 +49,12 @@ export async function generateMetadata({
     }
   }
 
-  if (slug === DEFAULT_LOCALE) {
-    return {
-      robots: {
-        index: false,
-        follow: false,
-      },
-    }
+  return {
+    robots: {
+      index: false,
+      follow: false,
+    },
   }
-
-  return {}
 }
 
 export default async function SlugPage({
@@ -74,28 +66,22 @@ export default async function SlugPage({
     notFound()
   }
 
-  if (isPublicLocale(slug)) {
-    await initLingui(slug)
-
-    return (
-      <Providers locale={slug}>
-        <main className="min-h-screen bg-background">
-          <Intro />
-          <HowToPlay />
-          <SettingsGrid />
-          <footer className="border-t border-border py-8 text-center text-xs text-muted font-mono">
-            survade.io · {new Date().getFullYear()}
-          </footer>
-        </main>
-      </Providers>
-    )
+  if (!isPublicLocale(slug)) {
+    notFound()
   }
 
-  await initLingui(DEFAULT_LOCALE)
+  await initLingui(slug)
 
   return (
-    <Providers locale={DEFAULT_LOCALE}>
-      <GameShell code={slug.toUpperCase()} locale={DEFAULT_LOCALE} />
+    <Providers locale={slug}>
+      <main className="min-h-screen bg-background">
+        <Intro />
+        <HowToPlay />
+        <SettingsGrid />
+        <footer className="border-t border-border py-8 text-center text-xs text-muted font-mono">
+          survade.io · {new Date().getFullYear()}
+        </footer>
+      </main>
     </Providers>
   )
 }

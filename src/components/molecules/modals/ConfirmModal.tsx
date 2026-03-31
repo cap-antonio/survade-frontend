@@ -1,31 +1,34 @@
 "use client"
 
 import { useLingui } from "@lingui/react/macro"
-import { Modal } from "@/components/templates/Modal"
 import { Button } from "@/components/atoms/Button"
+import { Modal } from "@/components/templates/Modal"
 
-type KickConfirmModalProps = {
+type ConfirmModalProps = {
   open: boolean
-  playerName: string
+  title: string
+  body: string
+  actionButtonTitle: string
   onConfirm: () => void
   onClose: () => void
   isLoading?: boolean
 }
 
-export function KickConfirmModal({
+export function ConfirmModal({
   open,
-  playerName,
+  title,
+  body,
+  actionButtonTitle,
   onConfirm,
   onClose,
   isLoading = false,
-}: KickConfirmModalProps) {
+}: ConfirmModalProps): React.ReactElement {
   const { t } = useLingui()
+
   return (
     <Modal open={open} onClose={onClose} className="w-full max-w-xs p-6">
-      <h2 className="font-semibold mb-2">{t`Remove player?`}</h2>
-      <p className="text-sm text-muted mb-6">
-        {t`Remove ${playerName} from the game?`}
-      </p>
+      <h2 className="mb-2 font-semibold">{title}</h2>
+      <p className="mb-6 text-sm text-muted">{body}</p>
       <div className="flex gap-3">
         <Button variant="ghost" onClick={onClose} className="flex-1">
           {t`Cancel`}
@@ -36,7 +39,7 @@ export function KickConfirmModal({
           loading={isLoading}
           className="flex-1"
         >
-          {t`Remove`}
+          {actionButtonTitle}
         </Button>
       </div>
     </Modal>

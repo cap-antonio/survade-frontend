@@ -10,7 +10,7 @@ export type GameHistorySummary = {
     created_at: string;
     ended_at: (string | null);
     setting_key: string;
-    scenario_title: any;
+    scenario_title: Record<string, string>;
     players_count: number;
     survivors_count: number;
 };

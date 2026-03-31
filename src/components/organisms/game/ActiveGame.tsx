@@ -1,25 +1,33 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { useGameStore } from "@/stores/gameStore"
 import {
   useRevealCard,
   useUsePower,
   useVote,
-  useEndVoting,
   useKickPlayer,
+  useAbondonGame,
 } from "@/api/hooks/games"
+import { ConfirmModal } from "@/components/molecules/modals/ConfirmModal"
 import { ScenarioPanel } from "./ScenarioPanel"
 import { PlayerCard } from "./PlayerCard"
 import { HostControls } from "./HostControls"
 import { PowerModal } from "./PowerModal"
-import { KickConfirmModal } from "./KickConfirmModal"
+import { Button } from "@/components/atoms/Button"
+import { useLingui } from "@lingui/react/macro"
+import { getLocalizedPath, SupportedLocale } from "@/i18n"
+import { clearStoredGameSession } from "@/utils/gameSessionStorage"
 
 type ActiveGameProps = {
   code: string
+  locale: SupportedLocale
 }
 
-export function ActiveGame({ code }: ActiveGameProps) {
+export function ActiveGame({ code, locale }: ActiveGameProps) {
+  const { t } = useLingui()
+  const router = useRouter()
   const {
     game,
     myPlayerId,
@@ -30,6 +38,7 @@ export function ActiveGame({ code }: ActiveGameProps) {
     selectedVoteTarget,
     setVoteTarget,
     setVotingPhase,
+    reset,
   } = useGameStore()
 
   const [showPowerModal, setShowPowerModal] = useState(false)
@@ -37,17 +46,18 @@ export function ActiveGame({ code }: ActiveGameProps) {
     id: number
     name: string
   } | null>(null)
+  const [showLeaveConfirm, setShowLeaveConfirm] = useState(false)
   const [contentLang, setContentLang] = useState<string>("en")
 
   const { revealCard } = useRevealCard()
   const { usePower, isPending: isPendingUsePower } = useUsePower()
   const { vote } = useVote()
-  const { endVoting, isPending: isPendingEndVoting } = useEndVoting()
   const { kickPlayer, isPending: isPendingKickPlayer } = useKickPlayer()
+  const { abondonGame, isPending: isPendingAbondonGame } = useAbondonGame()
 
   if (!game) return <></>
 
-  const me = game.players.find((p) => p.player_id === myPlayerId)
+  const me = game.players?.find((p) => p.player_id === myPlayerId)
   const shieldedIds = game.round_effects?.shielded ?? []
 
   const handleVote = (targetId: number): void => {
@@ -67,7 +77,7 @@ export function ActiveGame({ code }: ActiveGameProps) {
     usePower(
       {
         requestBody: {
-          power: me.card.special_power?.name["en"] ?? "power",
+          power: me.card.special_power?.name,
           target_player_id: targetPlayerId,
         },
         gameCode: code,
@@ -85,8 +95,39 @@ export function ActiveGame({ code }: ActiveGameProps) {
     )
   }
 
+  const handleLeaveConfirm = (): void => {
+    const redirectToHome = (): void => {
+      clearStoredGameSession(code)
+      reset()
+      router.push(getLocalizedPath(locale))
+    }
+
+    if (isHost) {
+      abondonGame(
+        {
+          gameCode: code,
+          xHostToken:
+            typeof window !== "undefined"
+              ? (localStorage.getItem(`host_token_${code}`) ?? "")
+              : "",
+        },
+        {
+          onSuccess: () => {
+            setShowLeaveConfirm(false)
+            redirectToHome()
+          },
+        },
+      )
+
+      return
+    }
+
+    setShowLeaveConfirm(false)
+    redirectToHome()
+  }
+
   // Available langs from game settings
-  const availableLangs = game.settings.langs
+  const availableLangs = game.settings.langs || []
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -95,7 +136,7 @@ export function ActiveGame({ code }: ActiveGameProps) {
         <span className="text-accent font-mono font-bold tracking-widest">
           {code}
         </span>
-        {availableLangs.length > 1 && (
+        {availableLangs.length > 0 && (
           <div className="flex gap-1 ml-auto">
             {availableLangs.map((lang) => (
               <button
@@ -117,30 +158,15 @@ export function ActiveGame({ code }: ActiveGameProps) {
 
       <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 max-w-4xl mx-auto w-full">
         {/* Scenario */}
-        {game.scenario && (
-          <ScenarioPanel
-            scenario={game.scenario}
-            currentRound={game.current_round}
-            contentLang={contentLang}
-          />
-        )}
+        <ScenarioPanel contentLang={contentLang} />
 
         {/* Host controls */}
-        {isHost && (
-          <HostControls
-            votingPhase={votingPhase}
-            onStartVoting={() => setVotingPhase(true)}
-            onEndVoting={() =>
-              endVoting({ gameCode: code, xHostToken: hostToken ?? "" })
-            }
-            isEndingVote={isPendingEndVoting}
-          />
-        )}
+        {isHost && <HostControls />}
 
         {/* Player grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {game.players.map((player) => {
-            const voteCount = Object.values(game.votes_this_round).filter(
+          {(game.players || []).map((player) => {
+            const voteCount = Object.values(game.votes_this_round || {}).filter(
               (id) => id === player.player_id,
             ).length
 
@@ -175,6 +201,13 @@ export function ActiveGame({ code }: ActiveGameProps) {
             )
           })}
         </div>
+        <div className="flex mt-10">
+          <Button
+            className="mx-auto"
+            onClick={() => setShowLeaveConfirm(true)}
+            loading={isPendingAbondonGame}
+          >{t`Leave the game`}</Button>
+        </div>
       </div>
 
       {/* Modals */}
@@ -183,19 +216,35 @@ export function ActiveGame({ code }: ActiveGameProps) {
           open={showPowerModal}
           onClose={() => setShowPowerModal(false)}
           player={me}
-          allPlayers={game.players}
+          allPlayers={game.players || []}
           contentLang={contentLang}
           onUsePower={handleUsePower}
           isLoading={isPendingUsePower}
         />
       )}
 
-      <KickConfirmModal
+      <ConfirmModal
         open={!!kickTarget}
-        playerName={kickTarget?.name ?? ""}
+        title={t`Remove player?`}
+        body={t`Remove ${kickTarget?.name ?? ""} from the game?`}
+        actionButtonTitle={t`Remove`}
         onConfirm={handleKickConfirm}
         onClose={() => setKickTarget(null)}
         isLoading={isPendingKickPlayer}
+      />
+
+      <ConfirmModal
+        open={showLeaveConfirm}
+        title={t`Leave the game?`}
+        body={
+          isHost
+            ? t`This will close the current game for everyone.`
+            : t`You will leave this game and return to the home page.`
+        }
+        actionButtonTitle={t`Leave`}
+        onConfirm={handleLeaveConfirm}
+        onClose={() => setShowLeaveConfirm(false)}
+        isLoading={isPendingAbondonGame}
       />
     </div>
   )

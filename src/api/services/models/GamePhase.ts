@@ -3,9 +3,8 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type SpecialPower = {
-    name: string;
-    description: Record<string, string>;
-    used?: boolean;
-};
-
+export enum GamePhase {
+    DISCUSSION = 'discussion',
+    VOTING = 'voting',
+    WAITING_NEXT_ROUND = 'waiting_next_round',
+}

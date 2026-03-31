@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { AcceptedResponse } from '../models/AcceptedResponse';
 import type { AccessTokenResponse } from '../models/AccessTokenResponse';
 import type { ChangePasswordRequest } from '../models/ChangePasswordRequest';
 import type { LoginRequest } from '../models/LoginRequest';
@@ -43,14 +44,14 @@ export class AuthService {
 
     /**
      * Request Registration Code
-     * @returns any Successful Response
+     * @returns AcceptedResponse Successful Response
      * @throws ApiError
      */
     public requestRegistrationCodeApiAuthRegisterRequestCodePost({
         requestBody,
     }: {
         requestBody: RegistrationCodeRequest,
-    }): CancelablePromise<any> {
+    }): CancelablePromise<AcceptedResponse> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/auth/register/request-code',
@@ -64,14 +65,14 @@ export class AuthService {
 
     /**
      * Resend Registration Code
-     * @returns any Successful Response
+     * @returns AcceptedResponse Successful Response
      * @throws ApiError
      */
     public resendRegistrationCodeApiAuthRegisterResendCodePost({
         requestBody,
     }: {
         requestBody: RegistrationCodeRequest,
-    }): CancelablePromise<any> {
+    }): CancelablePromise<AcceptedResponse> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/auth/register/resend-code',
@@ -169,14 +170,14 @@ export class AuthService {
 
     /**
      * Request Password Reset
-     * @returns any Successful Response
+     * @returns AcceptedResponse Successful Response
      * @throws ApiError
      */
     public requestPasswordResetApiAuthPasswordResetRequestPost({
         requestBody,
     }: {
         requestBody: PasswordResetRequest,
-    }): CancelablePromise<any> {
+    }): CancelablePromise<AcceptedResponse> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/auth/password-reset/request',

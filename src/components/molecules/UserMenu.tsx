@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useLingui } from "@lingui/react/macro"
 import { Globe2, LogOut, ShieldUser, UserRound } from "lucide-react"
 import { IconButton } from "@/components/atoms/IconButton"
@@ -10,8 +10,15 @@ import { AuthModal } from "./modals/AuthModal"
 import { useLogout } from "@/api/hooks/auth"
 import { useAuthStore } from "@/stores/authStore"
 import { LocalesButtons } from "./LocalesButtons"
-import { getLocalizedPath, setLocale, type SupportedLocale } from "@/i18n"
+import {
+  getLocalizedPath,
+  getPlayPath,
+  setLocale,
+  type SupportedLocale,
+} from "@/i18n"
 import { Dropdown } from "@/components/atoms/Dropdown"
+import classNames from "classnames"
+import { isActivePath, normalizePath } from "@/utils/string"
 
 type NavigationItem = {
   href: string
@@ -26,6 +33,9 @@ export function UserMenu({
   navigationItems = [],
 }: UserMenuProps): React.ReactElement {
   const { t, i18n } = useLingui()
+  const pathname = usePathname()
+  const currentPath = normalizePath(pathname)
+
   const router = useRouter()
   const isAuth = useAuthStore((state) => state.isAuth)
   const { logout, isPending } = useLogout()
@@ -52,6 +62,17 @@ export function UserMenu({
   const handleLocaleChange = (code: SupportedLocale) => {
     setOpen(false)
     void setLocale(code)
+
+    if (typeof window !== "undefined") {
+      const gameCode = new URLSearchParams(window.location.search).get("code")
+      const currentPlayPath = getLocalizedPath(locale, "play")
+
+      if (window.location.pathname === currentPlayPath && gameCode) {
+        router.push(getPlayPath(code, gameCode))
+        return
+      }
+    }
+
     router.push(getLocalizedPath(code))
   }
 
@@ -68,7 +89,16 @@ export function UserMenu({
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="flex items-center rounded-xl px-3 py-2 text-sm text-foreground transition-colors hover:bg-surface-elevated"
+                    className={classNames(
+                      "flex items-center rounded-xl px-3 py-2 text-sm text-foreground transition-colors hover:bg-surface-elevated",
+                      {
+                        "text-primary": isActivePath(item.href, pathname),
+                        "hover:text-foreground": !isActivePath(
+                          item.href,
+                          pathname,
+                        ),
+                      },
+                    )}
                     onClick={() => setOpen(false)}
                   >
                     <span>{item.label}</span>

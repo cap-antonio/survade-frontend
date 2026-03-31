@@ -11,6 +11,7 @@ type JoinScreenProps = {
   code: string
 }
 
+// TODO: add ads here
 export function JoinScreen({ code }: JoinScreenProps) {
   const { t } = useLingui()
   const [name, setName] = useState("")
@@ -44,8 +45,7 @@ export function JoinScreen({ code }: JoinScreenProps) {
             <span className="text-accent">VADE</span>
           </h1>
           <p className="text-muted text-sm">
-            {t`Game`}:{" "}
-            <span className="font-mono text-foreground">{code}</span>
+            {t`Game`}: <span className="font-mono text-foreground">{code}</span>
           </p>
         </div>
 
