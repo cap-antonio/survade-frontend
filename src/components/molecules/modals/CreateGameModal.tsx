@@ -75,6 +75,7 @@ const MIN_PLAYERS = 6
 const MAX_PLAYERS = 16
 const MIN_LANGS = 1
 const MAX_LANGS = 3
+const MIN_LOADING_DURATION_MS = 1800
 
 const saboteurCountByPlayers: Record<number, number> = {
   4: 1,
@@ -103,8 +104,10 @@ export function CreateGameModal({ open, onClose }: ModalProps) {
   const [playerCount, setPlayerCount] = useState(MIN_PLAYERS)
   const [hostName, setHostName] = useState("")
   const [loadingPhraseIdx, setLoadingPhraseIdx] = useState(0)
+  const [isDelayingTransition, setIsDelayingTransition] = useState(false)
 
   const isSaboteurMode = gameType.key === SABOTEUR_KEY
+  const showLoadingState = isPending || isDelayingTransition
 
   const toggleLang = (code: SupportedLocale): void => {
     setLangs((prev) => {
@@ -119,6 +122,17 @@ export function CreateGameModal({ open, onClose }: ModalProps) {
 
   const handleSubmit = (): void => {
     if (!hostName.trim()) return
+
+    const startedAt = Date.now()
+    const waitForMinimumLoadingState = (callback: () => void): void => {
+      const elapsed = Date.now() - startedAt
+      const remaining = Math.max(MIN_LOADING_DURATION_MS - elapsed, 0)
+
+      window.setTimeout(callback, remaining)
+    }
+
+    setLoadingPhraseIdx(0)
+    setIsDelayingTransition(true)
 
     let phraseInterval: ReturnType<typeof setInterval> | undefined
     phraseInterval = setInterval(() => {
@@ -138,21 +152,29 @@ export function CreateGameModal({ open, onClose }: ModalProps) {
       },
       {
         onSuccess: (data) => {
-          clearInterval(phraseInterval)
-          clearOtherStoredGameSessions(data.game_code)
-          localStorage.setItem(`host_token_${data.game_code}`, data.host_token)
-          localStorage.setItem(
-            `player_token_${data.game_code}`,
-            data.player_token,
-          )
-          localStorage.setItem(
-            `player_id_${data.game_code}`,
-            String(data.player_id),
-          )
-          router.push(getPlayPath(i18n.locale as SupportedLocale, data.game_code))
+          waitForMinimumLoadingState(() => {
+            clearInterval(phraseInterval)
+            clearOtherStoredGameSessions(data.game_code)
+            localStorage.setItem(`host_token_${data.game_code}`, data.host_token)
+            localStorage.setItem(
+              `player_token_${data.game_code}`,
+              data.player_token,
+            )
+            localStorage.setItem(
+              `player_id_${data.game_code}`,
+              String(data.player_id),
+            )
+            router.push(
+              getPlayPath(i18n.locale as SupportedLocale, data.game_code),
+            )
+          })
         },
         onError: () => {
-          clearInterval(phraseInterval)
+          waitForMinimumLoadingState(() => {
+            clearInterval(phraseInterval)
+            setLoadingPhraseIdx(0)
+            setIsDelayingTransition(false)
+          })
         },
       },
     )
@@ -161,10 +183,10 @@ export function CreateGameModal({ open, onClose }: ModalProps) {
   return (
     <Modal
       open={open}
-      onClose={isPending ? () => {} : onClose}
+      onClose={showLoadingState ? () => {} : onClose}
       className="w-full max-w-lg"
     >
-      {isPending ? (
+      {showLoadingState ? (
         <div className="flex flex-col items-center justify-center gap-6 p-8 min-h-[360px]">
           <div className="w-12 h-12 rounded-full border-2 border-accent border-t-transparent animate-spin" />
           <p className="text-sm text-muted font-mono animate-pulse">
